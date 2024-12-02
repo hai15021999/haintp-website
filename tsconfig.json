@@ -58,6 +58,9 @@
       "@common/base": [
         "src/app/common/base/index.ts"
       ],
+      "@common/schemas": [
+        "src/app/common/schemas/index.ts"
+      ],
       "@app-state": [
         "src/app/app.state.ts"
       ],

@@ -1,10 +1,10 @@
 <div
-    class="__app-root-component"
-    [ngClass]="{ '__app-vertical': appState.screenSize === 'small' }">
-    <div class="__app-nav-bar">
+    class="flex w-screen h-screen"
+    [ngClass]="appState.screenSize === 'small' ? 'flex-col' : 'flex-row'">
+    <div class="bg-Purple140 shadow-inner flex">
         <app-nav-bar></app-nav-bar>
     </div>
-    <div class="__app-body-content">
+    <div class="w-full">
         <router-outlet></router-outlet>
     </div>
 </div>

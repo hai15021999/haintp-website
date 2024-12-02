@@ -1,5 +1,5 @@
 import { ApplicationConfig, importProvidersFrom, isDevMode } from '@angular/core';
-import { PreloadAllModules, provideRouter, withPreloading, withRouterConfig } from '@angular/router';
+import { provideRouter, withComponentInputBinding, withRouterConfig, withViewTransitions } from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -15,10 +15,8 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideRouter(
       routes,
-      withPreloading(PreloadAllModules),
-      withRouterConfig({
-        onSameUrlNavigation: 'reload',
-      })
+      withComponentInputBinding(),
+      withViewTransitions()
     ),
     provideStateConfigs({
       initialState: INITIAL_STATE

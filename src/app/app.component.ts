@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
@@ -9,8 +9,8 @@ import { BaseComponent } from '@common/base';
   selector: 'app-root',
   standalone: true,
   imports: [
+    NgClass,
     RouterOutlet,
-    CommonModule,
     TranslocoModule,
     AppNavBarComponent
   ],
