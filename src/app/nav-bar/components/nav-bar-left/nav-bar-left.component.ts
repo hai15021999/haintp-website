@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
+import { MatIconModule } from "@angular/material/icon";
 import { BaseComponent } from "@common/base";
 import { TranslocoModule } from "@jsverse/transloco";
 
@@ -11,7 +12,8 @@ import { TranslocoModule } from "@jsverse/transloco";
     standalone: true,
     imports: [
         CommonModule,
-        TranslocoModule
+        TranslocoModule,
+        MatIconModule
     ]
 })
 export class NavBarLeftComponent extends BaseComponent {

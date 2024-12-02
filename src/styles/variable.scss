@@ -180,3 +180,9 @@
     --base: #424242;
     --primary: #74060e;
 }
+
+.__app-divider {
+    background-color: var(--Grayscale450);
+	min-width: 1px;
+	min-height: 1px;
+}

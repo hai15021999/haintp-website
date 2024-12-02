@@ -18,6 +18,11 @@ import { BaseComponent } from '@common/base';
   styleUrl: './app.component.scss'
 })
 export class AppComponent extends BaseComponent {
+
+
+  ngOnInit(): void {
+    this.registerIcon();
+  }
   
   override registerCoreLayer() {
     

@@ -25,22 +25,20 @@ export abstract class BaseComponent {
 
     appState: IAppState;
 
-    abstract registerCoreLayer()
+    abstract registerCoreLayer();
 
-    ngOnInit() {
+    constructor() {
         this.appState = this.state.currentState;
         this.initWindowSize();
         if (this.registerCoreLayer) {
             this.registerCoreLayer();
         }
-        this.registerIcon();
         this.registerWindowNetworkObserver();
         this.registerWindowResizeObserver();
-
     }
 
     registerIcon() {
-		const PATH_ROOT_LOCAL = "assets/images"
+		const PATH_ROOT_LOCAL = "assets/icons"
 		this.iconRegistry.addSvgIconResolver(
 			(
 				name: string,
