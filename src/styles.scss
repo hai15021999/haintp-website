@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+@import './styles/variable.scss';
+@import './styles/global/nav-bar/nav-bar.scss';
+
+
+html {
+    background-color: var(--Grayscale50);
+}
+html,
+body {
+    margin: 0px;
+}

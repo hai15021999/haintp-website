@@ -1,0 +1,10 @@
+<div
+    class="__app-root-component"
+    [ngClass]="{ '__app-vertical': appState.screenSize === 'small' }">
+    <div class="__app-nav-bar">
+        <app-nav-bar></app-nav-bar>
+    </div>
+    <div class="__app-body-content">
+        <router-outlet></router-outlet>
+    </div>
+</div>

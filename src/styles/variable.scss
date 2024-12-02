@@ -1,0 +1,182 @@
+:root {
+    --Grayscale0:#FFFFFF;
+    --Grayscale25:#FAFAFA;
+    --Grayscale50:#F5F5F5;
+    --Grayscale100:#F0F0F0;
+    --Grayscale150:#EBEBEB;
+    --Grayscale200:#E0E0E0;
+    --Grayscale250:#C7C7C7;
+    --Grayscale300:#B3B3B3;
+    --Grayscale350:#949494;
+    --Grayscale400:#8A8A8A;
+    --Grayscale450:#616161;
+    --Grayscale500:#424242;
+    --Grayscale550:#3D3D3D;
+    --Grayscale600:#333333;
+    --Grayscale700:#292929;
+    --Grayscale800:#1F1F1F;
+    --Grayscale900:#0F0F0F;
+    --Grayscale1000:#000000;
+
+    --Burgundy20:#E3CDCF;
+    --Burgundy40:#C79B9F;
+    --Burgundy60:#AC6A6E;
+    --Burgundy80:#90383E;
+    --Burgundy100:#74060E;
+    --Burgundy120:#5D050B;
+    --Burgundy140:#460408;
+    --Burgundy160:#2E0206;
+    --Burgundy180:#170103;
+
+    --Gold20:#FFEDCE;
+    --Gold40:#FFDFA4;
+    --Gold60:#FFD17C;
+    --Gold80:#FEC44F;
+    --Gold100:#FDB813;
+    --Gold120:#D19A15;
+    --Gold140:#A57B18;
+    --Gold160:#795D1A;
+    --Gold180:#4D3E1D;
+
+    --Carrot20:#F3DDCF;
+    --Carrot40:#E7BA9F;
+    --Carrot60:#DA986E;
+    --Carrot80:#CE753E;
+    --Carrot100:#C2530E;
+    --Carrot120:#A24911;
+    --Carrot140:#823F15;
+    --Carrot160:#613418;
+    --Carrot180:#412A1C;
+
+    --Purple20:#D5C9DD;
+    --Purple40:#B59DC2;
+    --Purple60:#9977AA;
+    --Purple80:#825696;
+    --Purple100:#6D3385;
+    --Purple120:#5C336D;
+    --Purple140:#482F55;
+    --Purple160:#35273D;
+    --Purple180:#211A25;
+
+    --Rasberry20:#EACDC5;
+    --Rasberry40:#DCA499;
+    --Rasberry60:#CF7F74;
+    --Rasberry80:#C35C56;
+    --Rasberry100:#B8323C;
+    --Rasberry120:#8F3537;
+    --Rasberry140:#693030;
+    --Rasberry160:#492726;
+    --Rasberry180:#2A1B1A;
+
+    --Cobalt20:#CCDAEE;
+    --Cobalt40:#99B5DD;
+    --Cobalt60:#6691CD;
+    --Cobalt80:#336CBC;
+    --Cobalt100:#0047AB;
+    --Cobalt120:#003989;
+    --Cobalt140:#002B67;
+    --Cobalt160:#001C44;
+    --Cobalt180:#000E22;
+
+    --Teal20:#CCE6E6;
+    --Teal40:#99CCCC;
+    --Teal60:#66B3B3;
+    --Teal80:#339999;
+    --Teal100:#008080;
+    --Teal120:#006666;
+    --Teal140:#004D4D;
+    --Teal160:#003333;
+    --Teal180:#001A1A;
+
+    --Lime20:#D5EACE;
+    --Lime40:#ACD59D;
+    --Lime60:#82BF6D;
+    --Lime80:#59AA3C;
+    --Lime100:#2F950B;
+    --Lime120:#267709;
+    --Lime140:#1C5907;
+    --Lime160:#133C04;
+    --Lime180:#091E02;
+
+    --Gradient-Primary:linear-gradient(90deg, #8B050F 0%, #74060E 100%);
+    --Gradient-Secondary:linear-gradient(90deg, #FDB813 0%, #EA9A00 100%);
+    --Gradient-Task:linear-gradient(90deg, #0CACAE 0%, #0C8D8F 100%);
+    --Gradient-Bug:linear-gradient(90deg, #DD6114 0%, #C2530E 100%);
+    --Gradient-01:linear-gradient(90deg, #9755D9 0%, #0064C0 100%);
+    --Gradient-02:linear-gradient(90deg, #D95555 0%, #E6AE43 100%);
+    --Gradient-03:linear-gradient(90deg, #D95584 0%, #16A6BA 100%);
+    --Gradient-04:linear-gradient(90deg, #55B9D9 0%, #0496C5 100%);
+    --Gradient-05:linear-gradient(90deg, #2F950B 0%, #065196 100%);
+    --Gradient-06:linear-gradient(90deg, #D95555 0%, #4B16BA 100%);
+
+    --color-theme-light: #FFFFFF;
+    --color-theme-branding-primary:#74060E;
+    --color-theme-branding-primary-80:#90383E;
+    --color-theme-branding-primary-60:#AC6A6E;
+    --color-theme-branding-primary-40:#C79B9F;
+    --color-theme-branding-primary-20:#E3CDCF;
+    --color-theme-branding-primary-hover: #5D050B;
+    --color-theme-branding-secondary: #FDB813;
+    --color-theme-branding-secondary-hover: #D19A15;
+    --color-theme-workitem-task: #0C8D8F;
+    --color-theme-workitem-bug: #C2530E;
+    --color-theme-workitem-issue: #6D3385;
+    --color-theme-state-overdue: #B8323C;
+    --color-theme-state-warning: #F1B312;
+    --color-theme-state-successful: #224599;
+    --color-theme-state-successful-80: #4E6AAD;;
+    --color-theme-state-fail: #950012;
+
+    --color-grayscale-light-gray01: #F3F2F1;
+    --color-grayscale-light-gray02: #D5D4D3;
+    --color-grayscale-light-gray03: #B7B6B5;
+    --color-grayscale-light-gray04: #999897;
+    --color-grayscale-light-gray05: #7A7979;
+    --color-grayscale-light-gray06: #5C5B5B;
+    --color-grayscale-light-gray07: #3E3D3D;
+    --color-grayscale-light-gray08: #201F1F;
+
+    --color-grayscale-dark-gray01: #989796;
+    --color-grayscale-dark-gray02: #5C5B5A;
+    --color-grayscale-dark-gray03: #494847;
+    --color-grayscale-dark-gray04: #3F3E3D;
+    --color-grayscale-dark-gray05: #353433;
+    --color-grayscale-dark-gray06: #2B2A29;
+    --color-grayscale-dark-gray07: #21201F;
+    --color-grayscale-dark-gray08: #141312;
+
+    --color-externalstatus-new: #B7B6B5;
+    --color-externalstatus-active: #509632;
+    --color-externalstatus-resolved: #226622;
+    --color-externalstatus-closed: #FDB813;
+
+    --fontsize-xxxlarge : 54px;
+    --fontsize-xxlarge : 40px;
+    --fontsize-xlarge : 28px;
+    --fontsize-large : 22px;
+    --fontsize-medium : 14px;
+    --fontsize-small : 13px;
+    --fontsize-xsmall : 12px;
+    --fontsize-xxsmall : 10px;
+
+    --font-size-26: 26px;
+    --font-size-22: 22px;
+    --font-size-18: 18px;
+    --font-size-14: 14px;
+    --font-size-12: 12px;
+    --font-size-10: 10px;
+
+    --font-light: 300;
+    --font-semilight: 350;
+    --font-normal: normal;
+    --font-semibold: 600;
+
+    --white: #ffffff;
+    --black: #000000;
+    --gray: #333333;
+    --bgGray: #f0f0f0;
+    --borderGray: #e0e0e0;
+
+    --base: #424242;
+    --primary: #74060e;
+}
