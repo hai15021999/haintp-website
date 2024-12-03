@@ -29,7 +29,7 @@ export abstract class BaseComponent {
 
     constructor() {
         this.appState = this.state.currentState;
-        this.initWindowSize();
+        this.handleWindowSize(window.innerWidth);
         if (this.registerCoreLayer) {
             this.registerCoreLayer();
         }
@@ -72,8 +72,8 @@ export abstract class BaseComponent {
         });
     }
 
-    initWindowSize() {
-        this.appState.screenSize = window.innerWidth > 1024 ? 'large' : 'small';
+    handleWindowSize(size) {
+        this.appState.screenSize = size > 1024 ? 'large' : 'small';
         this.state.commit(this.appState);
     }
 

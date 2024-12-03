@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { BaseComponent } from '@common/base';
 import { TranslocoModule } from '@jsverse/transloco';
 import { NavBarLeftComponent } from './components/nav-bar-left/nav-bar-left.component';
+import { takeUntil } from 'rxjs';
 
 
 @Component({
@@ -17,7 +18,12 @@ import { NavBarLeftComponent } from './components/nav-bar-left/nav-bar-left.comp
     ]
 })
 export class AppNavBarComponent extends BaseComponent {
+
     override registerCoreLayer() {
-        
+        this.appWindowResize$.asObservable().pipe(takeUntil(this.destroy$)).subscribe({
+			next: (size: number) => {
+				this.handleWindowSize(size);
+			}
+		});
     }
 }

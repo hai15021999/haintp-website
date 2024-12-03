@@ -23,21 +23,30 @@
             <a href="https://fb.com/cabsapphire" target="_blank">
                 <mat-icon svgIcon="common:instagram" class="h-[32px] w-[32px]"></mat-icon>
             </a>
+            <a href="https://github.com/hai15021999" target="_blank">
+                <mat-icon svgIcon="common:github" class="h-[32px] w-[32px]"></mat-icon>
+            </a>
         </div>
     </div>
     <div class="__app-divider"></div>
-    <div class="flex justify-center items-center flex-col gap-3 w-full p-3">
-        <div class="flex gap-2 items-center cursor-pointer py-1 px-2 hover:bg-Purple160 rounded-[6px]">
-            <mat-icon svgIcon="common:user" class="h-[20px] w-[20px]"></mat-icon>
-            <span class="text-Grayscale200 font-semibold text-[16px]">About me</span>
-        </div>
-        <div class="flex gap-2 items-center cursor-pointer py-1 px-2 hover:bg-Purple160 rounded-[6px]">
-            <mat-icon svgIcon="common:portfolio" class="h-[20px] w-[20px]"></mat-icon>
-            <span class="text-Grayscale200 font-semibold text-[16px]">Portfolio</span>
-        </div>
-        <div class="flex gap-2 items-center cursor-pointer py-1 px-2 hover:bg-Purple160 rounded-[6px]">
-            <mat-icon svgIcon="common:resume" class="h-[20px] w-[20px]"></mat-icon>
-            <span class="text-Grayscale200 font-semibold text-[16px]">Resume</span>
+    <div class="flex justify-center items-center flex-col w-full p-3">
+        <div class="flex flex-col items-start gap-2">
+            <div class="flex gap-2 items-center cursor-pointer py-1 px-2 hover:bg-Purple160 rounded-[6px]" [ngClass]="{ 'bg-Purple120' : appState.currentPage === 'about-me' }">
+                <mat-icon svgIcon="common:user" class="h-[20px] w-[20px]"></mat-icon>
+                <span class="text-Grayscale200 font-semibold text-[16px]">About me</span>
+            </div>
+            <div class="flex gap-2 items-center cursor-pointer py-1 px-2 hover:bg-Purple160 rounded-[6px]" [ngClass]="{ 'bg-Purple120' : appState.currentPage === 'portfolio' }">
+                <mat-icon svgIcon="common:portfolio" class="h-[20px] w-[20px]"></mat-icon>
+                <span class="text-Grayscale200 font-semibold text-[16px]">Portfolio</span>
+            </div>
+            <div class="flex gap-2 items-center cursor-pointer py-1 px-2 hover:bg-Purple160 rounded-[6px]" [ngClass]="{ 'bg-Purple120' : appState.currentPage === 'resume' }">
+                <mat-icon svgIcon="common:resume" class="h-[20px] w-[20px]"></mat-icon>
+                <span class="text-Grayscale200 font-semibold text-[16px]">Resume</span>
+            </div>
+            <div class="flex gap-2 items-center cursor-pointer py-1 px-2 hover:bg-Purple160 rounded-[6px]" [ngClass]="{ 'bg-Purple120' : appState.currentPage === 'contact' }">
+                <mat-icon svgIcon="common:contact" class="h-[20px] w-[20px]"></mat-icon>
+                <span class="text-Grayscale200 font-semibold text-[16px]">Contact me</span>
+            </div>
         </div>
     </div>
 </div>
