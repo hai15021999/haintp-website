@@ -1,7 +1,7 @@
-import { CommonModule, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { size, TranslocoModule } from '@jsverse/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 import { AppNavBarComponent } from './nav-bar/app-nav-bar.component';
 import { BaseComponent } from '@common/base';
 import { takeUntil } from 'rxjs';
@@ -14,8 +14,10 @@ import { takeUntil } from 'rxjs';
     styleUrl: './app.component.scss',
 })
 export class AppComponent extends BaseComponent {
+
     ngOnInit(): void {
         this.registerIcon();
+        this.registerAppStateChanged();
     }
 
     override registerCoreLayer() {

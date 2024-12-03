@@ -17,7 +17,19 @@ import { TranslocoModule } from "@jsverse/transloco";
     ]
 })
 export class NavBarLeftComponent extends BaseComponent {
-    override registerCoreLayer() {
+
+    ngOnInit() {
+        this.registerAppStateChanged();
+        this.registerCoreLayer();
+    }
+
+    registerCoreLayer() {
         
+    }
+
+    onChangeSession(sesion: 'about-me' | 'portfolio' | 'contact' | 'resume') {
+        this.appState.currentPage = sesion;
+        this.state.commit(this.appState);
+        this.router.navigate([`/${sesion}`]);
     }
 }

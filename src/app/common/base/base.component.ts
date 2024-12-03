@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, inject, NgZone } from "@angular/core";
 import { Router } from "@angular/router";
 import { IAppState } from "@app-state";
-import { StateService } from "@common/state";
+import { Effect, StateService } from "@common/state";
 import { fromEvent, map, merge, of, Subject, takeUntil } from "rxjs";
 import { MatIconRegistry, SafeResourceUrlWithIconOptions } from '@angular/material/icon';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -30,9 +30,6 @@ export abstract class BaseComponent {
     constructor() {
         this.appState = this.state.currentState;
         this.handleWindowSize(window.innerWidth);
-        if (this.registerCoreLayer) {
-            this.registerCoreLayer();
-        }
         this.registerWindowNetworkObserver();
         this.registerWindowResizeObserver();
     }
@@ -69,6 +66,21 @@ export abstract class BaseComponent {
     registerWindowResizeObserver() {
         window.addEventListener('resize', () => {
             this.appWindowResize$.next(window.innerWidth);
+        });
+    }
+
+    registerAppStateChanged(page?: string) {
+        this.state.stateChanges$.pipe(takeUntil(this.destroy$)).subscribe({
+            next: (changes) => {
+                console.log('changes', page);
+                if (changes instanceof Effect) {
+                    this.appState = changes.newState;
+                    this.cdr.detectChanges();
+                } else {
+                    this.appState = changes;
+                    this.cdr.detectChanges();
+                }
+            }
         });
     }
 

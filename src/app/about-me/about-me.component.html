@@ -1,3 +1,70 @@
-<div class="w-full h-full bg-Grayscale100">
-    <span>hello world</span>
+<div class="w-full h-full bg-Grayscale50">
+    <div class="flex flex-col px-10 py-5 scroll-m-1 overflow-y-scroll h-full gap-7">
+        <div class="flex">
+            <div class="flex flex-col w-[60%]">
+                <span class="text-Grayscale500 font-bold text-[3rem]">Hai Nguyen</span>
+                <span class="text-[1.5rem] text-Grayscale500 font-semibold">Front-end Developer</span>
+                <span class="mt-3 text-[1rem]">
+                    Welcome! I'm a passionate front-end software developer dedicated to crafting engaging and user-friendly digital experiences. Explore my work and projects to see
+                    how I bring ideas to life with clean code and creativity!
+                </span>
+                <div class="flex gap-3 mt-4">
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 bg-Purple120 text-Grayscale100 rounded-[4px] font-semibold hover:bg-Purple100"
+                        (click)="redirectTo('portfolio')">
+                        <mat-icon
+                            class="h-[24px] w-[24px]"
+                            svgIcon="common:ic_arrow_right_circle"></mat-icon>
+                        <span>View Portfolio</span>
+                    </button>
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 bg-Lime120 text-Grayscale100 rounded-[4px] font-semibold hover:bg-Lime100"
+                        (click)="redirectTo('resume')">
+                        <mat-icon
+                            class="h-[24px] w-[24px]"
+                            svgIcon="common:resume"></mat-icon>
+                        <span>View Resume</span>
+                    </button>
+                </div>
+            </div>
+            <div class="flex justify-center w-[40%] py-3">
+                <div class="w-[14rem] h-[17rem] bg-pink-700">
+                    <!-- image -->
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-col gap-5">
+            <div class="flex flex-col gap-2">
+                <span class="pl-2 border-l-[6px] border-solid border-Lime100 text-[2rem] font-bold">What I do?</span>
+                <span>
+                    With over 4 years of experience in front-end development, I specialize in crafting user-friendly digital experiences with clean code and creativity. Here's a
+                    brief overview of my primary technical skills and the technologies I utilize.
+                </span>
+            </div>
+            <div class="flex flex-col gap-4">
+                @if (isDataLoading) {
+                <span></span>
+                } @else {
+                <div class="flex flex-wrap gap-[calc((4%)/3)]">
+                    @for (data of skills; track data.title) {
+                    <div class="w-[calc(32%)] flex flex-col p-2 rounded-[4px] bg-Grayscale200 mt-1">
+                        <div class="flex gap-1">
+                            @for (icon of data.icons; track icon) {
+                            <mat-icon
+                                [svgIcon]="icon"
+                                class="h-[32px] w-[32px]"></mat-icon>
+                            }
+                        </div>
+                        <span class="text-Grayscale500 text-[1rem] font-bold">{{ data.title }}</span>
+                        <span class="text-Grayscale500 text-[14px] mt-1">
+                            {{ data.description }}
+                        </span>
+                    </div>
+                    }
+                </div>
+                }
+            </div>
+        </div>
+        <div class="p-0"></div>
+    </div>
 </div>
