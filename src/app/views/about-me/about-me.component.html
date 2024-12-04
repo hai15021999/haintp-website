@@ -48,14 +48,14 @@
                 <div class="flex flex-wrap gap-[calc((4%)/3)]">
                     @for (data of skills; track data.title) {
                     <div class="w-[calc(32%)] flex flex-col p-2 rounded-[4px] bg-Grayscale200 mt-1">
-                        <div class="flex gap-1">
+                        <div class="flex gap-2">
                             @for (icon of data.icons; track icon) {
                             <mat-icon
                                 [svgIcon]="icon"
-                                class="h-[32px] w-[32px]"></mat-icon>
+                                class="h-[32px] w-auto"></mat-icon>
                             }
                         </div>
-                        <span class="text-Grayscale500 text-[1rem] font-bold">{{ data.title }}</span>
+                        <span class="text-Grayscale500 text-[1.25rem] font-bold">{{ data.title }}</span>
                         <span class="text-Grayscale500 text-[14px] mt-1">
                             {{ data.description }}
                         </span>

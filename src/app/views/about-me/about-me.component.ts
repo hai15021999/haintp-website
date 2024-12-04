@@ -71,6 +71,13 @@ export class AboutMeComponent extends BaseComponent {
                             reviews, and I use Git to track changes, revert commits, and maintain a clean and organized codebase.`,
             },
             {
+                icons: ['common:ic_angular_material', 'common:ic_syncfusion'],
+                title: 'UI Frameworks',
+                description: `I have experience with UI frameworks, such as Angular Material and Syncfusion, using them to create responsive and visually appealing user interfaces.
+                            I am proficient in using components, themes, and styles in UI frameworks, and I leverage them to build modern and interactive web applications. I
+                            have experience with theming, customization, and accessibility in UI frameworks, and I use them to create consistent and engaging user experiences.`,
+            },
+            {
                 icons: ['common:ic_npm'],
                 title: 'NPM',
                 description: `I have experience with NPM, using it to manage dependencies, scripts, and packages in JavaScript projects. I am proficient in installing,
@@ -83,7 +90,7 @@ export class AboutMeComponent extends BaseComponent {
                 description: `I have experience with Node.js, using it to build server-side applications and APIs. I am proficient in using Express.js to create RESTful
                             APIs, handle requests, and manage routes. I have experience with middleware, authentication, and error handling in Node.js applications, and I am
                             skilled in working with databases, such as MongoDB and MySQL, to store and retrieve data.`,
-            },
+            }
             
         ];
         this.skills = skills;
