@@ -64,18 +64,25 @@ export class AboutMeComponent extends BaseComponent {
                             proficient in using Flexbox and Grid to create flexible and adaptive layouts, and I have a keen eye for design and detail.`,
             },
             {
-                icons: ['common:ic_git', 'common:ic_github', 'common:ic_azuredevops'],
-                title: 'Version Control',
-                description: `I am proficient in using Git and GitHub to manage version control and collaborate on projects. I have experience with branching, merging, and
-                            resolving conflicts in Git, allowing me to work effectively in a team environment. I am familiar with GitHub workflows, pull requests, and code
-                            reviews, and I use Git to track changes, revert commits, and maintain a clean and organized codebase.`,
-            },
-            {
                 icons: ['common:ic_angular_material', 'common:ic_syncfusion'],
                 title: 'UI Frameworks',
                 description: `I have experience with UI frameworks, such as Angular Material and Syncfusion, using them to create responsive and visually appealing user interfaces.
                             I am proficient in using components, themes, and styles in UI frameworks, and I leverage them to build modern and interactive web applications. I
                             have experience with theming, customization, and accessibility in UI frameworks, and I use them to create consistent and engaging user experiences.`,
+            },
+            {
+                icons: ['common:ic_tailwindcss'],
+                title: 'Tailwind CSS',
+                description: `I have experience with Tailwind CSS, using it to create custom and responsive designs for web applications. I am proficient in using utility classes,
+                            responsive design, and custom configurations in Tailwind CSS, allowing me to style websites quickly and efficiently. I have experience with layout,
+                            typography, and color utilities in Tailwind CSS, and I use it to create modern and visually appealing user interfaces.`,
+            },
+            {
+                icons: ['common:ic_git', 'common:ic_github', 'common:ic_azuredevops'],
+                title: 'Version Control',
+                description: `I am proficient in using Git and GitHub to manage version control and collaborate on projects. I have experience with branching, merging, and
+                            resolving conflicts in Git, allowing me to work effectively in a team environment. I am familiar with GitHub workflows, pull requests, and code
+                            reviews, and I use Git to track changes, revert commits, and maintain a clean and organized codebase.`,
             },
             {
                 icons: ['common:ic_npm'],

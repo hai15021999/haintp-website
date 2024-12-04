@@ -2,7 +2,7 @@ import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
-import { AppNavBarComponent } from './nav-bar/app-nav-bar.component';
+import { AppNavBarComponent } from './common/components/nav-bar/app-nav-bar.component';
 import { BaseComponent } from '@common/base';
 import { takeUntil } from 'rxjs';
 

@@ -69,10 +69,9 @@ export abstract class BaseComponent {
         });
     }
 
-    registerAppStateChanged(page?: string) {
+    registerAppStateChanged() {
         this.state.stateChanges$.pipe(takeUntil(this.destroy$)).subscribe({
             next: (changes) => {
-                console.log('changes', page);
                 if (changes instanceof Effect) {
                     this.appState = changes.newState;
                     this.cdr.detectChanges();
