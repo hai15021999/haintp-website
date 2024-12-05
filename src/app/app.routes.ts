@@ -6,6 +6,10 @@ export const routes: Routes = [
         loadComponent: () => (import('./views/about-me/about-me.component').then((m) => m.AboutMeComponent))
     },
     {
+        path: 'portfolio',
+        loadComponent: () => (import('./views/portfolio/portfolio.component').then((m) => m.PortfolioComponent))
+    },
+    {
         path: '**',
         redirectTo: 'about-me'
     }

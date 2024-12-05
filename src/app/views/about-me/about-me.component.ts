@@ -25,6 +25,7 @@ export class AboutMeComponent extends BaseComponent {
 
     registerCoreLayer() {
         this.bindingData();
+        this.setCurrentPage('about-me');
     }
 
     redirectTo(page: 'portfolio' | 'resume') {

@@ -61,6 +61,15 @@
       "@common/schemas": [
         "src/app/common/schemas/index.ts"
       ],
+      "@common/interfaces": [
+        "src/app/common/interfaces/index.ts"
+      ],
+      "@common/mocks": [
+        "src/app/common/mocks/index.ts"
+      ],
+      "@common/animations": [
+        "src/app/common/animations/index.ts"
+      ],
       "@app-state": [
         "src/app/app.state.ts"
       ],

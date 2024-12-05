@@ -1,8 +1,8 @@
-import { ChangeDetectorRef, Component, inject, NgZone } from "@angular/core";
-import { Router } from "@angular/router";
-import { IAppState } from "@app-state";
-import { Effect, StateService } from "@common/state";
-import { fromEvent, map, merge, of, Subject, takeUntil } from "rxjs";
+import { ChangeDetectorRef, Component, inject, NgZone } from '@angular/core';
+import { Router } from '@angular/router';
+import { IAppState } from '@app-state';
+import { Effect, StateService } from '@common/state';
+import { fromEvent, map, merge, of, Subject, takeUntil } from 'rxjs';
 import { MatIconRegistry, SafeResourceUrlWithIconOptions } from '@angular/material/icon';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
@@ -35,7 +35,7 @@ export abstract class BaseComponent {
     }
 
     registerIcon() {
-		const PATH_ROOT_LOCAL = "assets/icons"
+		const PATH_ROOT_LOCAL = 'assets/icons'
 		this.iconRegistry.addSvgIconResolver(
 			(
 				name: string,
@@ -85,6 +85,11 @@ export abstract class BaseComponent {
 
     handleWindowSize(size) {
         this.appState.screenSize = size > 1024 ? 'large' : 'small';
+        this.state.commit(this.appState);
+    }
+
+    setCurrentPage(page: 'about-me' | 'portfolio' | 'contact' | 'resume') {
+        this.appState.currentPage = page;
         this.state.commit(this.appState);
     }
 
