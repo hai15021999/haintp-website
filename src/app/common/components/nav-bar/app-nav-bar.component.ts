@@ -27,6 +27,10 @@ export class AppNavBarComponent extends BaseComponent {
     }
 
     registerCoreLayer() {
-        
+        this.appWindowResize$.asObservable().pipe(takeUntil(this.destroy$)).subscribe({
+			next: (size: number) => {
+				this.handleWindowSize(size);
+			}
+		});
     }
 }

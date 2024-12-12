@@ -1,8 +1,8 @@
 <div
-    class="flex w-screen min-w-full h-screen"
+    class="flex h-screen"
     [ngClass]="appState.screenSize === 'small' ? 'flex-col' : 'flex-row'">
     <div class="bg-Purple140 shadow-inner flex">
-        <app-nav-bar></app-nav-bar>
+        <app-nav-bar [ngClass]="{ 'w-screen' : appState.screenSize === 'small' }"></app-nav-bar>
     </div>
     <div class="w-full">
         <router-outlet></router-outlet>

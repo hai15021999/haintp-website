@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
+import { MatIconModule } from "@angular/material/icon";
 import { BaseComponent } from "@common/base";
+import { takeUntil } from "rxjs";
 
 
 @Component({
@@ -7,9 +9,13 @@ import { BaseComponent } from "@common/base";
     templateUrl: './nav-bar-header.component.html',
     styleUrls: ['./nav-bar-header.component.scss'],
     standalone: true,
-    imports: [],
+    imports: [
+        MatIconModule
+    ],
 })
 export class NavBarHeaderComponent extends BaseComponent {
+
+    expandedNavbar: boolean = false;
 
     ngOnInit() {
         this.registerAppStateChanged();
@@ -17,6 +23,14 @@ export class NavBarHeaderComponent extends BaseComponent {
     }
 
     registerCoreLayer() {
-        
+        this.appWindowResize$.asObservable().pipe(takeUntil(this.destroy$)).subscribe({
+			next: (size: number) => {
+				this.handleWindowSize(size);
+			}
+		});
+    }
+
+    showHideMenu() {
+        this.expandedNavbar = !this.expandedNavbar;
     }
 }
