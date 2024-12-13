@@ -1,5 +1,7 @@
+import { NgClass } from "@angular/common";
 import { Component } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
+import { getExpandCollapseVerticalTrigger } from "@common/animations";
 import { BaseComponent } from "@common/base";
 import { takeUntil } from "rxjs";
 
@@ -10,8 +12,12 @@ import { takeUntil } from "rxjs";
     styleUrls: ['./nav-bar-header.component.scss'],
     standalone: true,
     imports: [
-        MatIconModule
+        MatIconModule,
+        NgClass
     ],
+    animations: [
+        getExpandCollapseVerticalTrigger('expandCollapse', '__expanded', '__collapsed')
+    ]
 })
 export class NavBarHeaderComponent extends BaseComponent {
 
@@ -32,5 +38,11 @@ export class NavBarHeaderComponent extends BaseComponent {
 
     showHideMenu() {
         this.expandedNavbar = !this.expandedNavbar;
+    }
+
+    onChangeSession(sesion: 'about-me' | 'portfolio' | 'contact' | 'resume') {
+        this.appState.currentPage = sesion;
+        this.state.commit(this.appState);
+        this.router.navigate([`/${sesion}`]);
     }
 }
