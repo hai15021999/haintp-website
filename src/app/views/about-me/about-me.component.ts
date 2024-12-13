@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '@common/base';
 import { MatIconModule } from '@angular/material/icon';
+import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'app-about-me',
     templateUrl: './about-me.component.html',
     styleUrls: ['./about-me.component.scss'],
     standalone: true,
-    imports: [MatIconModule],
+    imports: [MatIconModule, NgClass],
 })
 export class AboutMeComponent extends BaseComponent {
     isDataLoading: boolean = true;

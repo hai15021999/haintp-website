@@ -1,5 +1,5 @@
-<div class="w-full h-full bg-Grayscale50 px-1">
-    <div class="flex flex-col px-9 py-5 scroll-m-1 h-full gap-7 overflow-y-auto w-[calc(100%-10px)]">
+<div class="bg-Grayscale50 px-1">
+    <div class="flex flex-col px-9 py-5 h-full gap-7">
         <div class="flex">
             <div class="flex flex-col w-[60%]">
                 <span class="text-Grayscale500 font-bold text-[3rem]">Hai Nguyen</span>
@@ -45,9 +45,10 @@
                 @if (isDataLoading) {
                 <span></span>
                 } @else {
-                <div class="flex flex-wrap gap-[calc((4%)/3)]">
-                    @for (data of skills; track data.title) {
-                    <div class="w-[calc(32%)] flex flex-col p-2 rounded-[4px] bg-Grayscale200 mt-1">
+                    <div class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 mx-auto max-w-full">
+                    @for (data of skills; track data.title; let i = $index) {
+                    <div class="flex flex-col p-2 rounded-[4px] bg-Grayscale200 mt-1"
+                        [ngClass]="i === skills.length - 1 && skills.length % 2 === 1 ? '' : 'flex-auto'">
                         <div class="flex gap-2">
                             @for (icon of data.icons; track icon) {
                             <mat-icon
@@ -65,6 +66,6 @@
                 }
             </div>
         </div>
-        <div class="p-0"></div>
+        <!-- <div class="p-0"></div> -->
     </div>
 </div>
