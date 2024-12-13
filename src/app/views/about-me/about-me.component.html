@@ -46,9 +46,8 @@
                 <span></span>
                 } @else {
                     <div class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 mx-auto max-w-full">
-                    @for (data of skills; track data.title; let i = $index) {
-                    <div class="flex flex-col p-2 rounded-[4px] bg-Grayscale200 mt-1"
-                        [ngClass]="i === skills.length - 1 && skills.length % 2 === 1 ? '' : 'flex-auto'">
+                    @for (data of skills; track data.title) {
+                    <div class="flex flex-col p-2 rounded-[4px] bg-Grayscale200 mt-1">
                         <div class="flex gap-2">
                             @for (icon of data.icons; track icon) {
                             <mat-icon

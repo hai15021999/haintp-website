@@ -13,8 +13,8 @@
             <div class="flex flex-col gap-2">
                 <span class="pl-2 border-l-[6px] border-solid border-Lime100 text-[1.25rem] font-bold">Professional Projects</span>
                 <div
-                    class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 mx-auto max-w-full"
-                    appCalculateComponentHeight [heighChecking]="160"
+                    class="grid grid-cols-[repeat(auto-fit,minmax(500px,1fr))] gap-4 max-w-full"
+                    appCalculateComponentHeight [heighChecking]="170"
                     (onHeighChecked)="onHeighChecked($event, 'professionalProjects')"
                     [@expandCollapse]="professionalProjectsExpanded['hasExpanded'] ? (professionalProjectsExpanded['isExpanded'] ? '__expanded' : '__collapsed') : null">
                     @for (project of professionalProjects; track project.id) {
@@ -26,8 +26,8 @@
                                 class="w-full h-full object-cover rounded-[4px]" />
                         </div>
                         <div class="flex flex-col gap-1 w-[calc(100%-8rem-1.25rem)]">
-                            <span class="text-Grayscale500 font-bold text-[1.25rem] underline cursor-pointer">{{ project.title }}</span>
-                            <span class="text-Grayscale500 text-[1rem]">{{ project.description }}</span>
+                            <span class="text-Grayscale500 font-bold text-[1.15rem] underline cursor-pointer">{{ project.title }}</span>
+                            <span class="text-Grayscale500 text-[0.85rem]">{{ project.description }}</span>
                         </div>
                     </div>
                     }
@@ -50,9 +50,9 @@
             <div class="flex flex-col gap-2">
                 <span class="pl-2 border-l-[6px] border-solid border-Lime100 text-[1.25rem] font-bold">Personal Projects</span>
                 <div
-                    appCalculateComponentHeight [heighChecking]="160"
+                    class="grid grid-cols-[repeat(auto-fit,minmax(500px,1fr))] gap-4 max-w-full"
+                    appCalculateComponentHeight [heighChecking]="170"
                     (onHeighChecked)="onHeighChecked($event, 'personalProjects')"
-                    class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 mx-auto max-w-full"
                     [@expandCollapse]="personalProjectsExpanded['hasExpanded'] ? (personalProjectsExpanded['isExpanded'] ? '__expanded' : '__collapsed') : null">
                     @for (project of personalProjects; track project.id) {
                     <div class="flex gap-5 p-4 rounded-lg bg-Rasberry20">
@@ -63,8 +63,8 @@
                                 class="w-full h-full object-cover rounded-[4px]" />
                         </div>
                         <div class="flex flex-col gap-1 w-[calc(100%-8rem-1.25rem)]">
-                            <span class="text-Grayscale500 font-bold text-[1.25rem] underline cursor-pointer">{{ project.title }}</span>
-                            <span class="text-Grayscale500 text-[1rem]">{{ project.description }}</span>
+                            <span class="text-Grayscale500 font-bold text-[1.15rem] underline cursor-pointer">{{ project.title }}</span>
+                            <span class="text-Grayscale500 text-[0.85rem]">{{ project.description }}</span>
                         </div>
                     </div>
                     }

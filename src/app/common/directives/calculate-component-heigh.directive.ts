@@ -1,5 +1,4 @@
-import { Directive, ElementRef, EventEmitter, inject, Input, Output, Renderer2 } from "@angular/core";
-
+import { Directive, ElementRef, EventEmitter, HostListener, inject, Input, Output, Renderer2 } from '@angular/core';
 
 @Directive({
     standalone: true,
@@ -13,8 +12,18 @@ export class CalculateComponentHeightDirective {
     elementRef = inject(ElementRef);
     renderer = inject(Renderer2);
 
+    @HostListener('window:resize')
+    onResize(): void {
+        this.checkHeight(); // Recalculate height on window resize
+    }
+
     ngAfterViewInit() {
-        const elementHeight = this.elementRef.nativeElement.offsetHeight ?? this.elementRef.nativeElement.scrollHeight;
+        this.checkHeight();
+    }
+
+    checkHeight() {
+        //do not user offsetHeight as it will return current height of the element
+        const elementHeight = this.elementRef.nativeElement.scrollHeight;
 
         this.onHeighChecked.emit(elementHeight > this.heighChecking);
     }
