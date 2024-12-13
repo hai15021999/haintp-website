@@ -41,6 +41,7 @@ export class NavBarHeaderComponent extends BaseComponent {
     }
 
     onChangeSession(sesion: 'about-me' | 'portfolio' | 'contact' | 'resume') {
+        this.expandedNavbar = false;
         this.appState.currentPage = sesion;
         this.state.commit(this.appState);
         this.router.navigate([`/${sesion}`]);
