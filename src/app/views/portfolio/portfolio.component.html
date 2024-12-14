@@ -13,12 +13,12 @@
             <div class="flex flex-col gap-2">
                 <span class="pl-2 border-l-[6px] border-solid border-Lime100 text-[1.25rem] font-bold">Professional Projects</span>
                 <div
-                    class="grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-4 max-w-full mr-auto"
+                    class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-full mr-auto"
                     appCalculateComponentHeight [heighChecking]="170"
                     (onHeighChecked)="onHeighChecked($event, 'professionalProjects')"
                     [@expandCollapse]="professionalProjectsExpanded['hasExpanded'] ? (professionalProjectsExpanded['isExpanded'] ? '__expanded' : '__collapsed') : null">
                     @for (project of professionalProjects; track project.id) {
-                    <div class="flex gap-5 p-4 rounded-lg bg-Lime20 max-w-[500px]">
+                    <div class="flex gap-5 p-4 rounded-lg bg-Lime20 max-w-full">
                         <div class="w-[8rem] h-[8rem]">
                             <img
                                 src="{{ project.thumbnail }}"
@@ -50,12 +50,12 @@
             <div class="flex flex-col gap-2">
                 <span class="pl-2 border-l-[6px] border-solid border-Lime100 text-[1.25rem] font-bold">Personal Projects</span>
                 <div
-                    class="grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-4 max-w-full mr-auto"
+                    class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-full mr-auto"
                     appCalculateComponentHeight [heighChecking]="170"
                     (onHeighChecked)="onHeighChecked($event, 'personalProjects')"
                     [@expandCollapse]="personalProjectsExpanded['hasExpanded'] ? (personalProjectsExpanded['isExpanded'] ? '__expanded' : '__collapsed') : null">
                     @for (project of personalProjects; track project.id) {
-                    <div class="flex gap-5 p-4 rounded-lg bg-Rasberry20 max-w-[500px]">
+                    <div class="flex gap-5 p-4 rounded-lg bg-Rasberry20 max-w-full">
                         <div class="w-[8rem] h-[8rem]">
                             <img
                                 src="{{ project.thumbnail }}"
