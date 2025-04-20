@@ -323,6 +323,14 @@ export function logError(error: string) {
     });
 }
 
+export function calculateExperience(startDate: Date, endDate: Date): number {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const yearsDiff = end.getFullYear() - start.getFullYear();
+    const monthsDiff = end.getMonth() - start.getMonth();
+    return yearsDiff + (monthsDiff < 0 ? -1 : 0);
+}
+
 function readLogFileContent$() {
     return new Observable((observer) => {
         const defaultContent = `*** eXsync Log File ***\r\n========================\r\n\r\n`;

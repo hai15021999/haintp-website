@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '@common/base';
 import { MatIconModule } from '@angular/material/icon';
+import { calculateExperience } from '@common/functions';
 
 @Component({
     selector: 'app-about-me',
@@ -31,15 +32,7 @@ export class AboutMeComponent extends BaseComponent {
     ngOnInit() {
         this.registerAppStateChanged();
         this.registerCoreLayer();
-        this.yearExperience = this.calculateExperience(this.startDate, new Date());
-    }
-
-    calculateExperience(startDate: Date, endDate: Date): number {
-        const start = new Date(startDate);
-        const end = new Date(endDate);
-        const yearsDiff = end.getFullYear() - start.getFullYear();
-        const monthsDiff = end.getMonth() - start.getMonth();
-        return yearsDiff + (monthsDiff < 0 ? -1 : 0);
+        this.yearExperience = calculateExperience(this.startDate, new Date());
     }
 
     registerCoreLayer() {

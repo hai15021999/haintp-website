@@ -3,6 +3,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { getExpandCollapseVerticalTrigger } from "@common/animations";
 import { BaseComponent } from "@common/base";
 import { CalculateComponentHeightDirective } from "@common/directives";
+import { calculateExperience } from "@common/functions";
 import { IProject } from "@common/interfaces";
 import { PROJECTS } from "@common/mocks";
 
@@ -34,9 +35,13 @@ export class PortfolioComponent extends BaseComponent {
         isExpanded: false,
     };
 
+    yearExperience: number = 0;
+    startDate: Date = new Date('2020-06-01');
+
     registerCoreLayer() {
         this.loadData();
         this.setCurrentPage('portfolio');
+        this.yearExperience = calculateExperience(this.startDate, new Date());
     }
 
     ngOnInit() {

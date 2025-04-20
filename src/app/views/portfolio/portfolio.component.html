@@ -2,11 +2,15 @@
     <div class="flex flex-col px-10 py-5 gap-7 m-0 box-border">
         <div class="flex flex-col gap-2 items-center">
             <span class="text-Grayscale500 font-bold text-[2rem]">Portfolio</span>
-            <span class="text-[1rem] text-Grayscale500 text-center">
-                Welcome to my portfolio! I am a Front-End Developer with over 4 years of experience building high-performance web applications. My expertise includes Angular and
+            <span class="text-[1rem] text-Grayscale500 text-center hidden md:flex">
+                Welcome to my portfolio! I am a Front-End Developer with over {{ yearExperience }} years of experience building high-performance web applications. My expertise includes Angular and
                 React.js, along with skills in HTML, CSS, JavaScript, TypeScript, and Tailwind CSS. I specialize in creating intuitive, scalable, and maintainable user interfaces
                 that deliver exceptional user experiences. I have worked on a variety of projects, from enterprise applications to personal creations, showcasing my problem-solving
                 skills and attention to detail. Feel free to explore my work and see how I bring ideas to life!
+            </span>
+            <span class="text-[1rem] text-Grayscale500 text-center md:hidden">
+                Welcome to my portfolio! My expertise includes Angular and React.js.
+                I specialize in creating intuitive, scalable, and maintainable user interfaces that deliver exceptional user experiences. Feel free to explore my work and see how I bring ideas to life!
             </span>
         </div>
         <div class="flex flex-col gap-5">

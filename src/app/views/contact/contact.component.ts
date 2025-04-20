@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
+import { MatIconModule } from "@angular/material/icon";
+import { MatInputModule } from "@angular/material/input";
 import { BaseComponent } from "@common/base";
-import { UnderDevelopmentComponent } from "@common/components";
 
 
 @Component({
@@ -9,7 +10,8 @@ import { UnderDevelopmentComponent } from "@common/components";
     styleUrls: ['./contact.component.scss'],
     standalone: true,
     imports: [
-        UnderDevelopmentComponent
+        MatIconModule,
+        MatInputModule,
     ]
 })
 export class ContactComponent extends BaseComponent {
