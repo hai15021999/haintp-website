@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { BaseComponent } from '@common/base';
-import { TranslocoModule } from '@jsverse/transloco';
 import { NavBarLeftComponent } from './components/nav-bar-left/nav-bar-left.component';
 import { takeUntil } from 'rxjs';
 import { NavBarHeaderComponent } from './components/nav-bar-header/nav-bar-header.component';
@@ -14,7 +13,6 @@ import { NavBarHeaderComponent } from './components/nav-bar-header/nav-bar-heade
     standalone: true,
     imports: [
         CommonModule,
-        TranslocoModule,
         NavBarLeftComponent,
         NavBarHeaderComponent
     ]

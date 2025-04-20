@@ -1,7 +1,6 @@
 import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TranslocoModule } from '@jsverse/transloco';
 import { AppNavBarComponent } from './common/components/nav-bar/app-nav-bar.component';
 import { BaseComponent } from '@common/base';
 import { takeUntil } from 'rxjs';
@@ -9,7 +8,7 @@ import { takeUntil } from 'rxjs';
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [NgClass, RouterOutlet, TranslocoModule, AppNavBarComponent],
+    imports: [NgClass, RouterOutlet, AppNavBarComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
 })
