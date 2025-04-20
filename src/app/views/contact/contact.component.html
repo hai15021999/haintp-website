@@ -12,10 +12,43 @@
         </div>
     </div>
     <!-- Content -->
-    <div class="flex flex-col gap-2 p-3">
+    <div class="flex flex-col gap-2 p-3 items-center justify-center overflow-y-auto">
         <div class="flex flex-col gap-2 items-center">
             <span class="text-Grayscale500 font-bold text-[1.5rem]">Contact Me</span>
         </div>
-        
+        <div class="flex bg-Grayscale150 gap-[12px] flex-col items-center p-[24px] rounded-[12px] shadow-[4px 4px 12px] w-[300px] md:w-[70%]">
+            <form class="flex flex-col gap-[12px] w-full" [formGroup]="contactForm">
+                <mat-form-field class="w-full" appearance="fill">
+                    <mat-label>Name</mat-label>
+                    <input type="text" matInput formControlName="name" >
+                    @if (contactForm.controls['name'].hasError('required')) {
+                      <mat-error class="text-[12px]">Name is required</mat-error>
+                    }
+                </mat-form-field>
+                <mat-form-field class="w-full" appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input type="text" matInput formControlName="email" >
+                    @if (contactForm.controls['email'].hasError('required')) {
+                      <mat-error class="text-[12px]">Email is required</mat-error>
+                    }
+                    @if (contactForm.controls['email'].hasError('email')) {
+                      <mat-error class="text-[12px]">Email is invalid</mat-error>
+                    }
+                </mat-form-field>
+                <mat-form-field class="w-full" appearance="fill">
+                    <mat-label>Message</mat-label>
+                    <textarea matInput formControlName="message" rows="5"></textarea>
+                    @if (contactForm.controls['message'].hasError('required')) {
+                      <mat-error class="text-[12px]">Message is required</mat-error>
+                    }
+                </mat-form-field>
+                <button
+                    mat-raised-button color="primary"
+                    [disabled]="!contactForm.valid"
+                    (click)="onSubmitForm()">
+                    <span >Submit</span>
+                </button>
+            </form>
+        </div>
     </div>
 </div>
