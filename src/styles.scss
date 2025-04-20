@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+@use "sass:color";
 @import './styles/variable.scss';
 @import './styles/global/nav-bar/nav-bar.scss';
+@import './styles/material/themes.scss';
+
 
 @tailwind base;
 @tailwind components;

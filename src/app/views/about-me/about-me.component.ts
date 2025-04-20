@@ -8,7 +8,9 @@ import { calculateExperience } from '@common/functions';
     templateUrl: './about-me.component.html',
     styleUrls: ['./about-me.component.scss'],
     standalone: true,
-    imports: [MatIconModule],
+    imports: [
+        MatIconModule
+    ]
 })
 export class AboutMeComponent extends BaseComponent {
     isDataLoading: boolean = true;
