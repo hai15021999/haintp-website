@@ -209,19 +209,14 @@ export function generateUUID() {
 };
 
 /**
- * @description Generates a GUID string using version 7. Initialize a random array with crypto.getRandomValues(), get the current timestamp with Date.now(), fill the array from the timestamp, set version and variant.
- * @see https://antonz.org/uuidv7/?fbclid=IwZXh0bgNhZW0CMTAAAR0IcsSf3j63Dqcjik41PKXB9yf7fNHnmgBYGMnq9IrpoYWecqKADXoHHww_aem_Zr28Fcl0idc7m44yd2pycg
+ * @description Generates a GUID string using version 7.
  * @returns {string} A GUID string
  */
 export function generateUUIDv7() {
-    // random bytes
     const value = new Uint8Array(16);
     crypto.getRandomValues(value);
-
-    // current timestamp in ms
     const timestamp = BigInt(Date.now());
 
-    // timestamp
     value[0] = Number((timestamp >> 40n) & 0xffn);
     value[1] = Number((timestamp >> 32n) & 0xffn);
     value[2] = Number((timestamp >> 24n) & 0xffn);
@@ -229,15 +224,10 @@ export function generateUUIDv7() {
     value[4] = Number((timestamp >> 8n) & 0xffn);
     value[5] = Number(timestamp & 0xffn);
 
-    // version and variant
     value[6] = (value[6] & 0x0f) | 0x70;
     value[8] = (value[8] & 0x3f) | 0x80;
 
-    const uuidStr = Array.from(value)
-        .map((b) => b.toString(16).padStart(2, "0"))
-        .join("");
-
-    return uuidStr;
+    return Array.from(value).map(b => b.toString(16).padStart(2, "0")).join("");
 }
 
 export function roundFileSize(sizeInByte: string) {
@@ -337,4 +327,20 @@ function writeLogFileContent$(content: string) {
         observer.next(true);
         observer.complete();
     })
+}
+
+/**
+ * Convert html string to plain text
+ * Remove all value of image and link tag
+ * @param {string} html html string
+ * @returns {string} plain text
+ */
+export function htmlToPlainText(html: string) {
+    const dom = new DOMParser().parseFromString(html, 'text/html');
+    const text = dom.body.textContent || "";
+    return text;
+
+    // use regex to remove all value of image and link tag
+    // const text = html.replace(/<img[^>]*>/g, '').replace(/<a[^>]*>/g, '');
+    // return text.replace(/<[^>]*>/g, '');
 }
