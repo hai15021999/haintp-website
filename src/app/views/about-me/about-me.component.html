@@ -14,16 +14,20 @@
                         (click)="redirectTo('portfolio')">
                         <mat-icon
                             class="h-[24px] w-[24px]"
-                            svgIcon="common:ic_arrow_right_circle"></mat-icon>
-                        <span>View Portfolio</span>
+                            svgIcon="common:ic_arrow_right_circle">
+                        </mat-icon>
+                        <span class="hidden md:flex">View Portfolio</span>
+                        <span class="md:hidden">Portfolio</span>
                     </button>
                     <button
                         class="flex items-center gap-2 px-4 py-2 bg-Lime120 text-Grayscale100 rounded-[4px] font-semibold hover:bg-Lime100"
                         (click)="redirectTo('resume')">
                         <mat-icon
                             class="h-[24px] w-[24px]"
-                            svgIcon="common:resume"></mat-icon>
-                        <span>View Resume</span>
+                            svgIcon="common:resume">
+                        </mat-icon>
+                        <span class="hidden md:flex">View Resume</span>
+                        <span class="md:hidden">Resume</span>
                     </button>
                 </div>
             </div>
@@ -35,36 +39,93 @@
         </div>
         <div class="flex flex-col gap-5">
             <div class="flex flex-col gap-2">
-                <span class="pl-2 border-l-[6px] border-solid border-Lime100 text-[2rem] font-bold">What I do?</span>
+                <span class="pl-2 border-l-[6px] border-solid border-Lime100 text-[2rem] font-bold flex items-center gap-2">
+                    <mat-icon
+                        class="h-[32px] w-[32px]"
+                        svgIcon="common:ic_education">
+                    </mat-icon>
+                    Education
+                </span>
                 <span>
-                    With over 4 years of experience in front-end development, I specialize in crafting user-friendly digital experiences with clean code and creativity. Here's a
+                    Explore my academic journey and qualifications. 
+                </span>
+            </div>
+            <div class="flex flex-col gap-4">
+                @if (isDataLoading) {
+                    <span></span>
+                } @else {
+                    <div class="flex flex-wrap gap-2 mx-5 max-w-full">
+                        <div class="flex flex-col w-[20%] min-w-[220px] max-w-[300px]">
+                            <span class="text-[16px] text-Grayscale500 font-bold">Graduated April 2024</span>
+                        </div>
+                        <div class="flex flex-col gap-3 w-[calc(100%-220px)] min-w-[220px] max-w-[300px]">
+                            <span class="text-[16px] text-Grayscale500 font-bold">
+                                Bachelor of Software Engineering
+                            </span>
+                            <!-- <span class="text-Grayscale500 text-[1rem] mt-1">
+                                FPT University Ho Chi Minh
+                            </span> -->
+                            <mat-icon
+                                class="h-auto w-[180px]"
+                                svgIcon="common:logo_fptu">
+                            </mat-icon>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="flex flex-col gap-5">
+            <div class="flex flex-col gap-2">
+                <span class="pl-2 border-l-[6px] border-solid border-Lime100 text-[2rem] font-bold flex items-center gap-2">
+                    <mat-icon
+                        class="h-[32px] w-[32px]"
+                        svgIcon="common:ic_work_experience">
+                    </mat-icon>
+                    What I do?
+                </span>
+                <span>
+                    With over {{ yearExperience }} years of experience in front-end development, I specialize in crafting user-friendly digital experiences with clean code and creativity. Here's a
                     brief overview of my primary technical skills and the technologies I utilize.
                 </span>
             </div>
             <div class="flex flex-col gap-4">
                 @if (isDataLoading) {
-                <span></span>
+                    <span></span>
                 } @else {
-                    <div class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 mx-auto max-w-full">
-                    @for (data of skills; track data.title) {
-                    <div class="flex flex-col p-2 rounded-[4px] bg-Grayscale200 mt-1">
-                        <div class="flex gap-2">
-                            @for (icon of data.icons; track icon) {
-                            <mat-icon
-                                [svgIcon]="icon"
-                                class="h-[32px] w-auto"></mat-icon>
-                            }
-                        </div>
-                        <span class="text-Grayscale500 text-[1.25rem] font-bold">{{ data.title }}</span>
-                        <span class="text-Grayscale500 text-[14px] mt-1">
-                            {{ data.description }}
-                        </span>
+                    <div class="flex gap-3 md:px-4 px-1 flex-col">
+                        @for (skill of skills; track skill._id) {
+                            <div class="flex flex-col p-2 rounded-[4px] mt-1 w-full border-[1px] border-solid border-Grayscale300 border-l-[6px]">
+                                <div class="flex gap-2">
+                                    <mat-icon
+                                        [svgIcon]="skill.icon"
+                                        class="h-[42px] w-[42px] p-[6px] rounded-[4px]">
+                                    </mat-icon>
+                                    <div class="flex flex-col w-[calc(100%-40px)] justify-center">
+                                        <span class="text-Grayscale500 text-[1.15rem] font-bold">{{ skill.title }}</span>
+                                        <span class="hidden md:flex text-Grayscale500 text-[14px]">
+                                            {{ skill.description }}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col gap-1 md:mt-3 mt-1">
+                                    @for (technical of skill.technicals; track technical) {
+                                        <div class="pl-6 py-1 rounded-[4px] flex items-center gap-3">
+                                            <div class="w-[6px] h-[6px] min-w-[6px] min-h-[6px] rounded-full bg-Grayscale500"></div>
+                                            <mat-icon
+                                                [svgIcon]="technical.icon"
+                                                class="h-[28px] w-[28px] min-w-[28px] min-h-[28px]">
+                                            </mat-icon>
+                                            <span class="text-Grayscale500 text-[14px] font-bold">{{ technical.title }}</span>
+                                            <span class="hidden md:flex text-Grayscale500 text-[14px] font-normal">-</span>
+                                            <span class="hidden md:flex text-Grayscale500 text-[14px] font-normal">{{ technical.description }}</span>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
                     </div>
-                    }
-                </div>
                 }
             </div>
         </div>
-        <!-- <div class="p-0"></div> -->
     </div>
 </div>

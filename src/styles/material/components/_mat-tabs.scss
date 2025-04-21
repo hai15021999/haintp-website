@@ -1,0 +1,18 @@
+.mat-mdc-tab-header {
+    border-bottom: 1px solid var(--grayscale-200) !important;
+}
+
+.mat-mdc-tab-labels,
+.mat-mdc-tab {
+    height: 3rem !important;
+}
+
+.mdc-tab--active {
+    .mdc-tab__text-label {
+        color: var(--burgundy-100) !important;
+    }
+
+    .mdc-tab-indicator__content--underline {
+        border-color: var(--burgundy-100) !important;
+    }
+}

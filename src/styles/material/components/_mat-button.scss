@@ -1,0 +1,21 @@
+// :root {
+//   .mat-mdc-raised-button {
+//     @apply bg-Purple120 text-Grayscale500;
+//     span {
+//         @apply text-Grayscale500;
+//     }
+//   }
+// }
+
+@use '@angular/material' as mat;
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:root {
+  @include mat.button-overrides((
+    protected-container-color: #5c336d,
+    protected-label-text-color: #f5f5f5,
+    outlined-outline-color: #5c336d,
+    filled-container-color: #267709,
+    filled-label-text-color: #f5f5f5,
+  ));
+}

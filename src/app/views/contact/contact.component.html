@@ -1,3 +1,54 @@
 <div class="bg-Grayscale50 h-full w-full">
-    <app-under-development></app-under-development>
+    <!-- design contact me page -->
+    <!-- Header -->
+    <div class="flex w-full h-[8rem] md:h-[10rem] items-center justify-end bg-Teal60 user-select-none">
+        <div class="flex flex-col items-end ">
+            <span class="text-[1.85rem] md:text-[2.25rem] font-semibold text-Grayscale50">ASK A</span>
+            <span class="text-[1.85rem] md:text-[2.25rem] font-semibold text-Grayscale50">QUESTION</span>
+            <span class="text-[0.85rem] md:text-[1rem] font-normal text-Grayscale50 text-right">Please contact me for specific reasons</span>
+        </div>
+        <div class="py-[1rem] px-[0.7rem] md:px-[3rem]">
+            <img src="assets/images/question_mark.png" alt="" class="w-auto h-[6rem] md:h-[8rem] object-cover" />
+        </div>
+    </div>
+    <!-- Content -->
+    <div class="flex flex-col gap-2 p-3 items-center justify-center overflow-y-auto">
+        <div class="flex flex-col gap-2 items-center">
+            <span class="text-Grayscale500 font-bold text-[1.5rem]">Contact Me</span>
+        </div>
+        <div class="flex bg-Grayscale150 gap-[12px] flex-col items-center p-[24px] rounded-[12px] shadow-[4px 4px 12px] w-[300px] md:w-[70%]">
+            <form class="flex flex-col gap-[12px] w-full" [formGroup]="contactForm">
+                <mat-form-field class="w-full" appearance="fill">
+                    <mat-label>Name</mat-label>
+                    <input type="text" matInput formControlName="name" >
+                    @if (contactForm.controls['name'].hasError('required')) {
+                      <mat-error class="text-[12px]">Name is required</mat-error>
+                    }
+                </mat-form-field>
+                <mat-form-field class="w-full" appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input type="text" matInput formControlName="email" >
+                    @if (contactForm.controls['email'].hasError('required')) {
+                      <mat-error class="text-[12px]">Email is required</mat-error>
+                    }
+                    @if (contactForm.controls['email'].hasError('email')) {
+                      <mat-error class="text-[12px]">Email is invalid</mat-error>
+                    }
+                </mat-form-field>
+                <mat-form-field class="w-full" appearance="fill">
+                    <mat-label>Message</mat-label>
+                    <textarea matInput formControlName="message" rows="5"></textarea>
+                    @if (contactForm.controls['message'].hasError('required')) {
+                      <mat-error class="text-[12px]">Message is required</mat-error>
+                    }
+                </mat-form-field>
+                <button
+                    mat-raised-button color="primary"
+                    [disabled]="!contactForm.valid"
+                    (click)="onSubmitForm()">
+                    <span >Submit</span>
+                </button>
+            </form>
+        </div>
+    </div>
 </div>

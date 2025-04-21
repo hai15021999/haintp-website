@@ -1,0 +1,14 @@
+<div class="bg-Rasberry120 p-[4px] rounded-[4px]">
+    <div class="flex items-center">
+        <div class="flex flex-col gap-[2px] items-start p-[12px] w-[320px]">
+            <span class="text-Grayscale50 font-[500] text-[18px]">Error</span>
+            <span class="text-Grayscale50 text-[14px]" [innerHTML]="data.message"></span>
+        </div>
+        <div class="flex p-[8px]">
+            <mat-icon
+                class="cursor-pointer"
+                svgIcon="common:ic_cancel"
+                (click)="closeSnackbar()"></mat-icon>
+        </div>
+    </div>
+</div>

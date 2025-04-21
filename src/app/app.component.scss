@@ -1,0 +1,13 @@
+::ng-deep {
+    .__app-snackbar-container {
+        .mat-mdc-snack-bar-label {
+            padding: 4px;
+            padding-left: 8px;
+            background-color: var(--Grayscale300);
+            border-radius: 4px;
+        }
+        .mdc-snackbar__surface {
+            padding: 0px;
+        }
+    }
+}

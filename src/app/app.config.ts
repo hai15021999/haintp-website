@@ -6,8 +6,6 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideStateConfigs } from '@common/state';
 import { INITIAL_STATE } from '@app-state';
 import { appInterceptor } from './app.interceptor';
-import { provideTransloco } from '@jsverse/transloco';
-import { TranslocoHttpLoader } from '@common/translate';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,15 +18,6 @@ export const appConfig: ApplicationConfig = {
     ),
     provideStateConfigs({
       initialState: INITIAL_STATE
-    }),
-    provideTransloco({
-      config: {
-        availableLangs: ['en', 'vi'],
-        defaultLang: 'en',
-        reRenderOnLangChange: true,
-        prodMode: !isDevMode(),
-      },
-      loader: TranslocoHttpLoader,
     }),
     importProvidersFrom()
   ]

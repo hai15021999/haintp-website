@@ -1,6 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+
 @import './styles/variable.scss';
 @import './styles/global/nav-bar/nav-bar.scss';
+@import './styles/material/themes.scss';
+
+@import './styles/material/components/mat-button';
+@import './styles/material/components/mat-spinner';
+@import './styles/material/components/mat-snackbar';
+
 
 @tailwind base;
 @tailwind components;

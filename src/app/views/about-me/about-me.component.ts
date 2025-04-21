@@ -1,26 +1,40 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '@common/base';
 import { MatIconModule } from '@angular/material/icon';
+import { calculateExperience } from '@common/functions';
 
 @Component({
     selector: 'app-about-me',
     templateUrl: './about-me.component.html',
     styleUrls: ['./about-me.component.scss'],
     standalone: true,
-    imports: [MatIconModule],
+    imports: [
+        MatIconModule
+    ]
 })
 export class AboutMeComponent extends BaseComponent {
     isDataLoading: boolean = true;
 
     skills: {
-        icons: string[];
+        _id: string;
         title: string;
         description: string;
+        icon: string;
+        technicals: {
+            _id: string;
+            title: string;
+            description: string;
+            icon: string;
+        }[];
     }[] = [];
+
+    yearExperience: number = 0;
+    startDate: Date = new Date('2020-06-01');
 
     ngOnInit() {
         this.registerAppStateChanged();
         this.registerCoreLayer();
+        this.yearExperience = calculateExperience(this.startDate, new Date());
     }
 
     registerCoreLayer() {
@@ -35,74 +49,153 @@ export class AboutMeComponent extends BaseComponent {
     }
 
     bindingData() {
-        const skills = [
-            {
-                icons: ['common:ic_javascript'],
-                title: 'JavaScript',
-                description: `I have a strong command of JavaScript, enabling me to build dynamic and interactive web applications with ease. From working with ES6+ features to
-                            handling complex logic and DOM manipulation, I craft efficient and responsive solutions. I specialize in integrating APIs, optimizing performance, and
-                            leveraging modern frameworks and libraries. My focus is on writing clean, maintainable code that powers seamless user experiences.`,
-            },
-            {
-                icons: ['common:ic_react'],
-                title: 'React',
-                description: `I am proficient in React, using it to create scalable, high-performance web applications. I have experience with React hooks, context, and
-                            lifecycle methods, allowing me to build reusable components and manage state effectively. I am skilled in routing, form handling, and data fetching
-                            with React, ensuring that my applications are robust, reliable, and user-friendly.`,
-            },
-            {
-                icons: ['common:ic_angular'],
-                title: 'Angular',
-                description: `I have a solid foundation in Angular, enabling me to develop dynamic and feature-rich web applications. I am well-versed in Angular components,
-                            services, directives, and modules, allowing me to create modular and maintainable codebases. I have experience with Angular CLI, RxJS, and NgRx, and
-                            I am proficient in handling routing, forms, and HTTP requests in Angular applications.`,
-            },
-            {
-                icons: ['common:ic_html', 'common:ic_css'],
-                title: 'HTML & CSS',
-                description: `I am skilled in HTML and CSS, using them to create responsive and visually appealing web pages. I have experience with semantic HTML, CSS
-                            preprocessors, and modern layout techniques, allowing me to build websites that are accessible, responsive, and cross-browser compatible. I am
-                            proficient in using Flexbox and Grid to create flexible and adaptive layouts, and I have a keen eye for design and detail.`,
-            },
-            {
-                icons: ['common:ic_angular_material', 'common:ic_syncfusion'],
-                title: 'UI Frameworks',
-                description: `I have experience with UI frameworks, such as Angular Material and Syncfusion, using them to create responsive and visually appealing user interfaces.
-                            I am proficient in using components, themes, and styles in UI frameworks, and I leverage them to build modern and interactive web applications. I
-                            have experience with theming, customization, and accessibility in UI frameworks, and I use them to create consistent and engaging user experiences.`,
-            },
-            {
-                icons: ['common:ic_tailwindcss'],
-                title: 'Tailwind CSS',
-                description: `I have experience with Tailwind CSS, using it to create custom and responsive designs for web applications. I am proficient in using utility classes,
-                            responsive design, and custom configurations in Tailwind CSS, allowing me to style websites quickly and efficiently. I have experience with layout,
-                            typography, and color utilities in Tailwind CSS, and I use it to create modern and visually appealing user interfaces.`,
-            },
-            {
-                icons: ['common:ic_git', 'common:ic_github', 'common:ic_azuredevops'],
-                title: 'Version Control',
-                description: `I am proficient in using Git and GitHub to manage version control and collaborate on projects. I have experience with branching, merging, and
-                            resolving conflicts in Git, allowing me to work effectively in a team environment. I am familiar with GitHub workflows, pull requests, and code
-                            reviews, and I use Git to track changes, revert commits, and maintain a clean and organized codebase.`,
-            },
-            {
-                icons: ['common:ic_npm'],
-                title: 'NPM',
-                description: `I have experience with NPM, using it to manage dependencies, scripts, and packages in JavaScript projects. I am proficient in installing,
-                            updating, and removing packages with NPM, and I use it to run scripts, manage versions, and handle dependencies in my applications. I am familiar
-                            with NPM commands, configuration, and best practices, and I leverage NPM to streamline my development workflow and optimize project performance.`,
-            },
-            {
-                icons: ['common:ic_nodejs'],
-                title: 'Node.js',
-                description: `I have experience with Node.js, using it to build server-side applications and APIs. I am proficient in using Express.js to create RESTful
-                            APIs, handle requests, and manage routes. I have experience with middleware, authentication, and error handling in Node.js applications, and I am
-                            skilled in working with databases, such as MongoDB and MySQL, to store and retrieve data.`,
-            }
-            
-        ];
-        this.skills = skills;
+        this.skills = skill_experience;
         this.isDataLoading = false;
         this.cdr.detectChanges();
     }
 }
+
+const skill_experience = [
+    {
+        _id: 'core_frontend',
+        title: 'Core Frontend Skills',
+        description: `These are the essential technologies I use to build modern, responsive, and user-friendly web interfaces.`,
+        icon: 'common:ic_laptop',
+        technicals: [
+            {
+                _id: 'angular',
+                title: 'Angular',
+                description: `Component-based architecture and reactive programming`,
+                icon: 'common:ic_angular',
+            },
+            {
+                _id: 'html',
+                title: 'HTML',
+                description: `Structure and semantics of web pages`,
+                icon: 'common:ic_html',
+            },
+            {
+                _id: 'css',
+                title: 'CSS',
+                description: `Styling and layout of web pages`,
+                icon: 'common:ic_css',
+            },
+            {
+                _id: 'javascript',
+                title: 'JavaScript',
+                description: `Logic, DOM manipulation, and web interactions`,
+                icon: 'common:ic_javascript',
+            },
+            {
+                _id: 'typescript',
+                title: 'TypeScript',
+                description: `Type safety and modern JavaScript features`,
+                icon: 'common:ic_typescript',
+            },
+        ]
+    },
+    {
+        _id: 'ui_design',
+        title: 'UI & Design Systems',
+        description: `I use modern UI frameworks to speed up development and ensure consistent design.`,
+        icon: 'common:ic_palette',
+        technicals: [
+            {
+                _id: 'angular_material',
+                title: 'Angular Material',
+                description: `Material Design components for Angular`,
+                icon: 'common:ic_angular_material',
+            },
+            {
+                _id: 'syncfusion',
+                title: 'Syncfusion',
+                description: `UI components and controls for Angular`,
+                icon: 'common:ic_syncfusion',
+            },
+            {
+                _id: 'tailwindcss',
+                title: 'Tailwind CSS',
+                description: `Utility-first CSS framework for rapid UI development`,
+                icon: 'common:ic_tailwindcss',
+            },
+        ]
+    },
+    {
+        _id: `additional_web_technologies`,
+        title: `Additional Web Technologies`,
+        description: `I'm familiar with other tools and libraries in the web ecosystem.`,
+        icon: `common:ic_web_technologies`,
+        technicals: [
+            {
+                _id: `reactjs`,
+                title: `ReactJs`,
+                description: `Component-based architecture and virtual DOM`,
+                icon: `common:ic_react`,
+            },
+            {
+                _id: `nodejs`,
+                title: `Node.js`,
+                description: `JavaScript runtime for server-side development`,
+                icon: `common:ic_nodejs`,
+            },
+            {
+                _id: `npm`,
+                title: `NPM`,
+                description: `Package manager for JavaScript libraries and tools`,
+                icon: `common:ic_npm`,
+            },
+        ]
+    },
+    {
+        _id: `devops_and_deployment_tools`,
+        title: `DevOps & Deployment Tools`,
+        description: `I use various tools to automate deployment and manage CI/CD pipelines.`,
+        icon: `common:ic_devops`,
+        technicals: [
+            {
+                _id: `docker`,
+                title: `Docker`,
+                description: `Containerization platform for consistent environments`,
+                icon: `common:ic_docker`,
+            },
+            {
+                _id: `azure_devops`,
+                title: `Azure DevOps`,
+                description: `CI/CD and project management tools`,
+                icon: `common:ic_azuredevops`,
+            },
+            {
+                _id: `nginx`,
+                title: `Nginx`,
+                description: `Web server and reverse proxy for load balancing`,
+                icon: `common:ic_nginx`,
+            },
+        ]
+    },
+    {
+        _id: `version_control`,
+        title: `Version Control & Collaboration`,
+        description: `I use version control systems to manage code changes and collaborate with others.`,
+        icon: `common:ic_version_control`,
+        technicals: [
+            {
+                _id: `git`,
+                title: `Git`,
+                description: `Distributed version control system`,
+                icon: `common:ic_git`,
+            },
+            {
+                _id: `github`,
+                title: `GitHub`,
+                description: `Web-based platform for version control and collaboration`,
+                icon: `common:ic_github`,
+            },
+            {
+                _id: `azure_devops`,
+                title: `Azure DevOps`,
+                description: `Cloud-based platform for CI/CD and project management`,
+                icon: `common:ic_azuredevops`,
+            },
+        ]
+    },
+];
