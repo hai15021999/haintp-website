@@ -37,11 +37,14 @@ export class PortfolioComponent extends BaseComponent {
 
     yearExperience: number = 0;
     startDate: Date = new Date('2020-06-01');
+    
+    isDataLoading: boolean = false;
 
     registerCoreLayer() {
         this.loadData();
         this.setCurrentPage('portfolio');
         this.yearExperience = calculateExperience(this.startDate, new Date());
+        this.isDataLoading = true;
     }
 
     ngOnInit() {

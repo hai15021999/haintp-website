@@ -1,9 +1,8 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { BaseComponent } from '@common/base';
-import { NavBarLeftComponent } from './components/nav-bar-left/nav-bar-left.component';
-import { takeUntil } from 'rxjs';
-import { NavBarHeaderComponent } from './components/nav-bar-header/nav-bar-header.component';
+import { MatIconModule } from '@angular/material/icon';
+import { NgClass } from '@angular/common';
+import { getExpandCollapseVerticalTrigger } from '@common/animations';
 
 
 @Component({
@@ -12,23 +11,33 @@ import { NavBarHeaderComponent } from './components/nav-bar-header/nav-bar-heade
     styleUrls: ['./app-nav-bar.component.scss'],
     standalone: true,
     imports: [
-        CommonModule,
-        NavBarLeftComponent,
-        NavBarHeaderComponent
+        NgClass,
+        MatIconModule
+    ],
+    animations: [
+        getExpandCollapseVerticalTrigger('expandCollapse', '__expanded', '__collapsed')
     ]
 })
 export class AppNavBarComponent extends BaseComponent {
+
+    expandedNavbar: boolean = false;
 
     ngOnInit() {
         this.registerAppStateChanged();
         this.registerCoreLayer();
     }
 
+    showHideMenu() {
+        this.expandedNavbar = !this.expandedNavbar;
+    }
+
     registerCoreLayer() {
-        this.appWindowResize$.asObservable().pipe(takeUntil(this.destroy$)).subscribe({
-			next: (size: number) => {
-				this.handleWindowSize(size);
-			}
-		});
+        
+    }
+
+    onChangeSession(sesion: 'about-me' | 'portfolio' | 'contact' | 'resume') {
+        this.appState.currentPage = sesion;
+        this.state.commit(this.appState);
+        this.router.navigate([`/${sesion}`]);
     }
 }

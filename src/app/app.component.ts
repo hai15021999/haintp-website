@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AppNavBarComponent } from './common/components/nav-bar/app-nav-bar.component';
@@ -10,7 +9,7 @@ import { SnackbarErrorComponent, SnackbarInfoComponent, SnackbarSuccessComponent
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [NgClass, RouterOutlet, AppNavBarComponent],
+    imports: [RouterOutlet, AppNavBarComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
 })
