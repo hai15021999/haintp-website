@@ -17,15 +17,17 @@ export class SendMailService {
                 time: new Date().toLocaleString(),
             },
             `xtxyuheaEH3B9HIKg`
-        ).then((res) => {
-                observer.next(res);
-                observer.complete();
-            }).catch((err) => {
+        ).then(
+            (res) => {
+            observer.next(res);
+            observer.complete();
+        }).catch(
+            (err) => {
                 observer.next({
                     error: err
                 });
                 observer.complete();
-            })
+            });
         });
     }
 }
