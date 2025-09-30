@@ -352,3 +352,19 @@ export function htmlToPlainText(html: string) {
     // const text = html.replace(/<img[^>]*>/g, '').replace(/<a[^>]*>/g, '');
     // return text.replace(/<[^>]*>/g, '');
 }
+
+/**
+ * Input a hex color string of background and return a text color string that is either black or white
+ * @param {string} hexColor - The hex color string of the background
+ * @returns {string} - The text color string that is either black or white
+ */
+export function getTextColorFromBackground(hexColor: string): string {
+    if (!/^#([0-9A-F]{3}){1,2}$/i.test(hexColor)) {
+        throw new Error('Invalid hex color format');
+    }
+    const r = parseInt(hexColor.slice(1, 3), 16);
+    const g = parseInt(hexColor.slice(3, 5), 16);
+    const b = parseInt(hexColor.slice(5, 7), 16);
+    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+    return brightness > 128 ? '#000000' : '#FFFFFF';
+}

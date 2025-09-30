@@ -1,5 +1,5 @@
-import { ApplicationConfig, importProvidersFrom, isDevMode } from '@angular/core';
-import { provideRouter, withComponentInputBinding, withRouterConfig, withViewTransitions } from '@angular/router';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { provideRouter, withComponentInputBinding, withViewTransitions } from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
