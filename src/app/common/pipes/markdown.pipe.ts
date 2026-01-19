@@ -12,7 +12,7 @@ export class MarkdownPipe implements PipeTransform {
     marked.setOptions({
       breaks: true, // Convert \n to <br>
       gfm: true, // GitHub Flavored Markdown
-      pedantic: true,
+      pedantic: false, // Allow flexible markdown parsing
     });
   }
 

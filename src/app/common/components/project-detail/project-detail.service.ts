@@ -16,7 +16,7 @@ export class ProjectDetailService {
         const path = `${this.__directoryPath}/${projectId}.md`;
         return this.#httpClient.get(path, { responseType: 'text' }).pipe(
             catchError((__) => {
-                return of(`# Cannot load project details`);
+                return of(`# Unable to load project details`);
             })
         );
     }

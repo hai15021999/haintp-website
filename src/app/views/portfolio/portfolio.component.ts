@@ -87,6 +87,6 @@ export class PortfolioComponent extends BaseComponent {
     }
 
     openProjectDetail(projectId: string) {
-        this.router.navigate([`/project/werewolf-moon-light`]);
+        this.router.navigate([`/project/were-wolf-moon-light`]);
     }
 }
