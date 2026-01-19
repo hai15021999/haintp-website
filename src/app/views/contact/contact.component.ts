@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -20,7 +20,8 @@ import { SendMailService } from "@common/services";
         ReactiveFormsModule, 
         FormsModule,
         MatFormFieldModule
-    ]
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContactComponent extends BaseComponent {
     #sendmail = inject(SendMailService);
@@ -32,7 +33,7 @@ export class ContactComponent extends BaseComponent {
     });
 
     registerCoreLayer() {
-        this.setCurrentPage('contact');
+        this.appState.setCurrentPage('contact');
     }
 
     ngOnInit() {

@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
 import { getExpandCollapseVerticalTrigger } from "@common/animations";
 import { BaseComponent } from "@common/base";
@@ -19,7 +19,8 @@ import { PROJECTS } from "@common/mocks";
     ],
     animations: [
         getExpandCollapseVerticalTrigger('expandCollapse', '__expanded', '__collapsed', '10rem'),
-    ]
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PortfolioComponent extends BaseComponent {
 
@@ -42,13 +43,12 @@ export class PortfolioComponent extends BaseComponent {
 
     registerCoreLayer() {
         this.loadData();
-        this.setCurrentPage('portfolio');
+        this.appState.setCurrentPage('portfolio');
         this.yearExperience = calculateExperience(this.startDate, new Date());
         this.isDataLoading = false;
     }
 
     ngOnInit() {
-        this.registerAppStateChanged();
         this.registerCoreLayer();
     }
 

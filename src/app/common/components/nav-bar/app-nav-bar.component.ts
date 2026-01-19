@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BaseComponent } from '@common/base';
 import { MatIconModule } from '@angular/material/icon';
 import { NgClass } from '@angular/common';
@@ -16,14 +16,14 @@ import { getExpandCollapseVerticalTrigger } from '@common/animations';
     ],
     animations: [
         getExpandCollapseVerticalTrigger('expandCollapse', '__expanded', '__collapsed')
-    ]
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppNavBarComponent extends BaseComponent {
 
     expandedNavbar: boolean = false;
 
     ngOnInit() {
-        this.registerAppStateChanged();
         this.registerCoreLayer();
     }
 
@@ -36,8 +36,7 @@ export class AppNavBarComponent extends BaseComponent {
     }
 
     onChangeSession(sesion: 'about-me' | 'portfolio' | 'contact' | 'resume') {
-        this.appState.currentPage = sesion;
-        this.state.commit(this.appState);
+        this.appState.setCurrentPage(sesion);
         this.router.navigate([`/${sesion}`]);
     }
 }

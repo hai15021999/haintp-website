@@ -1,3 +1,4 @@
+import { Injectable, signal, computed, effect } from '@angular/core';
 import { GLOBAL_SETTINGS } from './global-settings';
 
 export interface IAppState {
@@ -6,71 +7,53 @@ export interface IAppState {
     serverUrl: string;
     screenSize: 'small' | 'large';
     currentPage: 'about-me' | 'portfolio' | 'contact' | 'resume';
+    networkOnline: boolean;
 }
 
-export class AppState {
-    production: boolean;
-    version: string;
-    serverUrl: string;
-    screenSize: 'small' | 'large';
-    currentPage: 'about-me' | 'portfolio' | 'contact' | 'resume';
+@Injectable({
+    providedIn: 'root'
+})
+export class AppStateService {
+    private state$ = signal<IAppState>({
+        production: GLOBAL_SETTINGS.production,
+        version: GLOBAL_SETTINGS.version,
+        serverUrl: GLOBAL_SETTINGS.serverUrl,
+        screenSize: 'large',
+        currentPage: 'about-me',
+        networkOnline: true
+    });
 
-    constructor(
-        production = false,
-        version = '1.0.0',
-        serverUrl = 'http://localhost:4200',
-        screenSize: 'small' | 'large' = 'large',
-        currentPage: 'about-me' | 'portfolio' | 'contact' | 'resume' = 'about-me'
-    ) {
-        this.production = production;
-        this.version = version;
-        this.serverUrl = serverUrl;
-        this.screenSize = screenSize;
-        this.currentPage = currentPage;
-    }
-}
+    // Public read-only signals for individual properties
+    production = computed(() => this.state$().production);
+    version = computed(() => this.state$().version);
+    serverUrl = computed(() => this.state$().serverUrl);
+    screenSize = computed(() => this.state$().screenSize);
+    currentPage = computed(() => this.state$().currentPage);
+    networkOnline = computed(() => this.state$().networkOnline);
 
-export class AppStateBuilder {
-    private production: boolean;
-    private version: string;
-    private serverUrl: string;
-    private screenSize: 'small' | 'large';
-    private currentPage: 'about-me' | 'portfolio' | 'contact' | 'resume';
-
-    setProduction(production: boolean) {
-        this.production = production;
-        return this;
+    // Full state access
+    get currentState(): IAppState {
+        return { ...this.state$() };
     }
 
-    setVersion(version: string) {
-        this.version = version;
-        return this;
+    // Update full or partial state
+    updateState(changes: Partial<IAppState>) {
+        this.state$.update(current => ({
+            ...current,
+            ...changes
+        }));
     }
 
-    setServerUrl(serverUrl: string) {
-        this.serverUrl = serverUrl;
-        return this;
-    }
-
+    // Convenience methods for common updates
     setScreenSize(screenSize: 'small' | 'large') {
-        this.screenSize = screenSize;
-        return this;
+        this.updateState({ screenSize });
     }
 
     setCurrentPage(currentPage: 'about-me' | 'portfolio' | 'contact' | 'resume') {
-        this.currentPage = currentPage;
-        return this;
+        this.updateState({ currentPage });
     }
 
-    build() {
-        return new AppState(this.production, this.version, this.serverUrl, this.screenSize, this.currentPage);
+    setNetWorkOnline(networkOnline: boolean) {
+        this.updateState({ networkOnline });
     }
 }
-
-export const INITIAL_STATE = new AppStateBuilder()
-    .setProduction(GLOBAL_SETTINGS.production)
-    .setVersion(GLOBAL_SETTINGS.version)
-    .setServerUrl(GLOBAL_SETTINGS.serverUrl)
-    .setScreenSize('large')
-    .setCurrentPage('about-me')
-    .build();

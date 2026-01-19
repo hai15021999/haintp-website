@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { BaseComponent } from "@common/base";
 import { UnderDevelopmentComponent } from "@common/components";
 
@@ -10,12 +10,13 @@ import { UnderDevelopmentComponent } from "@common/components";
     standalone: true,
     imports: [
         UnderDevelopmentComponent
-    ]
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ResumeComponent extends BaseComponent {
 
     registerCoreLayer() {
-        this.setCurrentPage('resume');
+        this.appState.setCurrentPage('resume');
     }
 
     ngOnInit() {

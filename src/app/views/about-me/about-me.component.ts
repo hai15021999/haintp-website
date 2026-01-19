@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BaseComponent } from '@common/base';
 import { MatIconModule } from '@angular/material/icon';
 import { calculateExperience } from '@common/functions';
@@ -10,7 +10,8 @@ import { calculateExperience } from '@common/functions';
     standalone: true,
     imports: [
         MatIconModule
-    ]
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AboutMeComponent extends BaseComponent {
     isDataLoading: boolean = true;
@@ -32,19 +33,17 @@ export class AboutMeComponent extends BaseComponent {
     startDate: Date = new Date('2020-06-01');
 
     ngOnInit() {
-        this.registerAppStateChanged();
         this.registerCoreLayer();
         this.yearExperience = calculateExperience(this.startDate, new Date());
     }
 
     registerCoreLayer() {
         this.bindingData();
-        this.setCurrentPage('about-me');
+        this.appState.setCurrentPage('about-me');
     }
 
     redirectTo(page: 'portfolio' | 'resume') {
-        this.appState.currentPage = page;
-        this.state.commit(this.appState);
+        this.appState.setCurrentPage(page);
         this.router.navigate([`/${page}`]);
     }
 

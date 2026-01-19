@@ -1,16 +1,14 @@
 import { HttpRequest, HttpHandlerFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { IAppState } from '@app-state';
-import { StateService } from '@common/state';
+import { AppStateService } from '@app-state';
 
 export function appInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn) {
 
     // example for update request
-    // const state = inject(StateService<IAppState>);
-    // const appState: IAppState = state.currentState;
+    // const appState = inject(AppStateService);
     // const clonedRequest = req.clone({
     //     headers: req.headers
-    //         .set('authorization', `Bearer ${appState.crmAccessToken}`)
+    //         .set('authorization', `Bearer ${appState.currentState.someToken}`)
     // });
     // return next(clonedRequest);
 

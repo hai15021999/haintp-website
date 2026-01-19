@@ -73,6 +73,9 @@
       "@common/functions": [
         "src/app/common/functions/index.ts"
       ],
+      "@app-config": [
+        "src/app/configs/index.ts"
+      ],
       "@app-state": [
         "src/app/app.state.ts"
       ],

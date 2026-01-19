@@ -53,7 +53,7 @@
             <div class="flex flex-col items-start gap-2">
                 <div
                     class="flex gap-2 items-center cursor-pointer py-1 px-2 hover:bg-Purple160 rounded-[6px]"
-                    [ngClass]="{ 'bg-Purple120': appState.currentPage === 'about-me' }"
+                    [ngClass]="{ 'bg-Purple120': appState.currentPage() === 'about-me' }"
                     (click)="onChangeSession('about-me')">
                     <mat-icon
                         [svgIcon]="'common:user'"
@@ -62,7 +62,7 @@
                 </div>
                 <div
                     class="flex gap-2 items-center cursor-pointer py-1 px-2 hover:bg-Purple160 rounded-[6px]"
-                    [ngClass]="{ 'bg-Purple120': appState.currentPage === 'portfolio' }"
+                    [ngClass]="{ 'bg-Purple120': appState.currentPage() === 'portfolio' }"
                     (click)="onChangeSession('portfolio')">
                     <mat-icon
                         [svgIcon]="'common:portfolio'"
@@ -71,7 +71,7 @@
                 </div>
                 <div
                     class="flex gap-2 items-center cursor-pointer py-1 px-2 hover:bg-Purple160 rounded-[6px]"
-                    [ngClass]="{ 'bg-Purple120': appState.currentPage === 'resume' }"
+                    [ngClass]="{ 'bg-Purple120': appState.currentPage() === 'resume' }"
                     (click)="onChangeSession('resume')">
                     <mat-icon
                         [svgIcon]="'common:resume'"
@@ -80,7 +80,7 @@
                 </div>
                 <div
                     class="flex gap-2 items-center cursor-pointer py-1 px-2 hover:bg-Purple160 rounded-[6px]"
-                    [ngClass]="{ 'bg-Purple120': appState.currentPage === 'contact' }"
+                    [ngClass]="{ 'bg-Purple120': appState.currentPage() === 'contact' }"
                     (click)="onChangeSession('contact')">
                     <mat-icon
                         [svgIcon]="'common:contact'"
@@ -136,7 +136,7 @@
         <div class="flex flex-col items-start gap-2">
             <div
                 class="flex gap-2 items-center cursor-pointer py-1 px-2 hover:bg-Purple160 rounded-[6px]"
-                [ngClass]="{ 'bg-Purple120': appState.currentPage === 'about-me' }"
+                [ngClass]="{ 'bg-Purple120': appState.currentPage() === 'about-me' }"
                 (click)="onChangeSession('about-me')">
                 <mat-icon
                     [svgIcon]="'common:user'"
@@ -145,7 +145,7 @@
             </div>
             <div
                 class="flex gap-2 items-center cursor-pointer py-1 px-2 hover:bg-Purple160 rounded-[6px]"
-                [ngClass]="{ 'bg-Purple120': appState.currentPage === 'portfolio' }"
+                [ngClass]="{ 'bg-Purple120': appState.currentPage() === 'portfolio' }"
                 (click)="onChangeSession('portfolio')">
                 <mat-icon
                     [svgIcon]="'common:portfolio'"
@@ -154,7 +154,7 @@
             </div>
             <div
                 class="flex gap-2 items-center cursor-pointer py-1 px-2 hover:bg-Purple160 rounded-[6px]"
-                [ngClass]="{ 'bg-Purple120': appState.currentPage === 'resume' }"
+                [ngClass]="{ 'bg-Purple120': appState.currentPage() === 'resume' }"
                 (click)="onChangeSession('resume')">
                 <mat-icon
                     [svgIcon]="'common:resume'"
@@ -163,7 +163,7 @@
             </div>
             <div
                 class="flex gap-2 items-center cursor-pointer py-1 px-2 hover:bg-Purple160 rounded-[6px]"
-                [ngClass]="{ 'bg-Purple120': appState.currentPage === 'contact' }"
+                [ngClass]="{ 'bg-Purple120': appState.currentPage() === 'contact' }"
                 (click)="onChangeSession('contact')">
                 <mat-icon
                     [svgIcon]="'common:contact'"

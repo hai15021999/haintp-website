@@ -1,8 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AppNavBarComponent } from './common/components/nav-bar/app-nav-bar.component';
 import { BaseComponent } from '@common/base';
-import { takeUntil } from 'rxjs';
+import { fromEvent, map, merge, of, takeUntil } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarErrorComponent, SnackbarInfoComponent, SnackbarSuccessComponent } from '@common/components';
 
@@ -11,23 +11,18 @@ import { SnackbarErrorComponent, SnackbarInfoComponent, SnackbarSuccessComponent
     standalone: true,
     imports: [RouterOutlet, AppNavBarComponent],
     templateUrl: './app.component.html',
-    styleUrl: './app.component.scss'
+    styleUrl: './app.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent extends BaseComponent {
     #snackbar = inject(MatSnackBar);
 
     ngOnInit(): void {
-        this.registerIcon();
-        this.registerAppStateChanged();
         this.registerCoreLayer();
     }
 
     override registerCoreLayer() {
-        this.appWindowResize$.asObservable().pipe(takeUntil(this.destroy$)).subscribe({
-			next: (size: number) => {
-				this.handleWindowSize(size);
-			}
-		});
+        this.registerWindowNetworkObserver();
         this.snackbarService
             .registerSnackbarEvent$()
             .pipe(takeUntil(this.destroy$))
@@ -58,5 +53,27 @@ export class AppComponent extends BaseComponent {
             this.#snackbar.openFromComponent(SnackbarSuccessComponent, config);
             return;
         }
+    }
+
+    registerWindowNetworkObserver() {
+        merge(
+            of(null),
+            fromEvent(window, 'online'),
+            fromEvent(window, 'offline')
+        ).pipe(map(() => navigator.onLine), takeUntil(this.destroy$))
+            .subscribe(status => {
+                this.appState.setNetWorkOnline(status);
+            });
+    }
+
+    registerWindowResizeObserver() {
+        window.addEventListener('resize', () => {
+            this.handleWindowSize(window.innerWidth);
+        });
+    }
+
+    handleWindowSize(size: number) {
+        const screenSize = size > 1024 ? 'large' : 'small';
+        this.appState.setScreenSize(screenSize);
     }
 }
