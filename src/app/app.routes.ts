@@ -7,7 +7,7 @@ export const routes: Routes = [
     },
     {
         path: 'portfolio',
-        loadComponent: () => (import('./views/portfolio/portfolio.component').then((m) => m.PortfolioComponent))
+        loadComponent: () => (import('./views/portfolio/portfolio.component').then((m) => m.PortfolioComponent)),
     },
     {
         path: 'resume',
@@ -18,7 +18,12 @@ export const routes: Routes = [
         loadComponent: () => (import('./views/contact/contact.component').then((m) => m.ContactComponent))
     },
     {
+        path: 'project/:id',
+        loadComponent: () => (import('./common/components/project-detail/project-detail.component').then((m) => m.ProjectDetailComponent)),
+    },
+    {
         path: '**',
-        redirectTo: 'about-me'
+        redirectTo: 'about-me',
+        pathMatch: 'full',
     }
 ];

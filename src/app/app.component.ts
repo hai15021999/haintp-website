@@ -2,9 +2,10 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AppNavBarComponent } from './common/components/nav-bar/app-nav-bar.component';
 import { BaseComponent } from '@common/base';
-import { fromEvent, map, merge, of, takeUntil } from 'rxjs';
+import { fromEvent, map, merge, of } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarErrorComponent, SnackbarInfoComponent, SnackbarSuccessComponent } from '@common/components';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-root',
@@ -25,7 +26,7 @@ export class AppComponent extends BaseComponent {
         this.registerWindowNetworkObserver();
         this.snackbarService
             .registerSnackbarEvent$()
-            .pipe(takeUntil(this.destroy$))
+            .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe({
                 next: (res) => {
                     this.bindingSnackbarTemplate(res.type, res.message);
@@ -60,7 +61,7 @@ export class AppComponent extends BaseComponent {
             of(null),
             fromEvent(window, 'online'),
             fromEvent(window, 'offline')
-        ).pipe(map(() => navigator.onLine), takeUntil(this.destroy$))
+        ).pipe(map(() => navigator.onLine), takeUntilDestroyed(this.destroyRef))
             .subscribe(status => {
                 this.appState.setNetWorkOnline(status);
             });

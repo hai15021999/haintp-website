@@ -1,9 +1,6 @@
-import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, DestroyRef, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppStateService } from '@app-state';
-import { fromEvent, map, merge, of, Subject, takeUntil } from 'rxjs';
-import { MatIconRegistry, SafeResourceUrlWithIconOptions } from '@angular/material/icon';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { SnackbarService } from '@common/services';
 import { MatDialog } from '@angular/material/dialog';
 import { LoadingDialogComponent } from '@common/components';
@@ -17,12 +14,9 @@ export abstract class BaseComponent {
     cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
     appState = inject(AppStateService);
     router = inject(Router);
-    iconRegistry = inject(MatIconRegistry);
-    domSanitizer = inject(DomSanitizer);
     snackbarService = inject(SnackbarService);
     dialog = inject(MatDialog);
-
-    destroy$ = new Subject<void>();
+    destroyRef = inject(DestroyRef);
 
     loadingDialog = {
         __componentRef: null as any,
@@ -43,9 +37,4 @@ export abstract class BaseComponent {
     }
 
     abstract registerCoreLayer();
-
-    ngOnDestroy() {
-        this.destroy$.next();
-        this.destroy$.complete();
-    }
 }
