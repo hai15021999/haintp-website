@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
 import { BaseComponent } from '@common/base';
 import { MatIconModule } from '@angular/material/icon';
 import { calculateExperience } from '@common/functions';
@@ -29,12 +29,12 @@ export class AboutMeComponent extends BaseComponent {
         }[];
     }[] = [];
 
-    yearExperience: number = 0;
+    yearExperience: WritableSignal<number> = signal(0);
     startDate: Date = new Date('2020-06-01');
 
     ngOnInit() {
         this.registerCoreLayer();
-        this.yearExperience = calculateExperience(this.startDate, new Date());
+        this.yearExperience.set(calculateExperience(this.startDate, new Date()));
     }
 
     registerCoreLayer() {
