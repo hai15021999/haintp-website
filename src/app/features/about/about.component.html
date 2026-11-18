@@ -1,0 +1,100 @@
+<div class="page">
+    <section class="intro ui-panel" aria-labelledby="h-intro">
+        <div class="intro__text">
+            <p class="eyebrow">{{ profile.role }} · {{ profile.location }}</p>
+            <h1 class="intro__title" id="h-intro">Hi, I'm {{ profile.displayName }}.</h1>
+            <p class="intro__headline">{{ profile.headline }}</p>
+            <p class="intro__summary">{{ profile.summary }}</p>
+            <div class="page-header__actions">
+                <a class="ui-btn ui-btn--primary" routerLink="/portfolio">
+                    View portfolio
+                    <app-icon name="arrow-right" />
+                </a>
+                <a class="ui-btn ui-btn--secondary" routerLink="/resume">
+                    <app-icon name="file-text" />
+                    Resume
+                </a>
+                <a class="ui-btn" routerLink="/contact">
+                    <app-icon name="mail" />
+                    Get in touch
+                </a>
+            </div>
+        </div>
+        <img class="intro__portrait" [src]="profile.portrait" [alt]="'Portrait of ' + profile.displayName" width="511" height="621" />
+    </section>
+
+    <section class="stat-grid" aria-label="At a glance">
+        @for (stat of stats; track stat.label) {
+            <div class="stat">
+                <span class="stat__value">{{ stat.value }}</span>
+                <span class="stat__label">{{ stat.label }}</span>
+                <span class="stat__sub">{{ stat.sub }}</span>
+            </div>
+        }
+    </section>
+
+    <section class="section" aria-labelledby="h-featured">
+        <div class="section__head">
+            <h2 class="section__title" id="h-featured">Featured work</h2>
+            <a class="ui-link section__more" routerLink="/portfolio">
+                All projects
+                <app-icon name="arrow-right" [size]="14" />
+            </a>
+        </div>
+        <ul class="featured" role="list">
+            @for (project of featured; track project.slug) {
+                <li><app-project-card [project]="project" /></li>
+            }
+        </ul>
+    </section>
+
+    <section class="section" aria-labelledby="h-skills">
+        <div class="section__head">
+            <h2 class="section__title" id="h-skills">What I work with</h2>
+        </div>
+        <div class="skills">
+            @for (group of skills; track group.id) {
+                <article class="ui-panel">
+                    <div class="panel-header">
+                        <app-icon class="panel-icon" [name]="group.icon" />
+                        <h3 class="panel-title">{{ group.title }}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p class="skills__summary">{{ group.summary }}</p>
+                        <ul class="tech" role="list">
+                            @for (tech of group.items; track tech.id) {
+                                <li class="tech__row">
+                                    @if (tech.logo) {
+                                        <img class="tech-logo" [src]="tech.logo" alt="" width="20" height="20" />
+                                    } @else {
+                                        <span class="tech__dot" aria-hidden="true"></span>
+                                    }
+                                    <span class="tech__name">{{ tech.name }}</span>
+                                    <span class="tech__note">{{ tech.note }}</span>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </article>
+            }
+        </div>
+    </section>
+
+    <section class="ui-panel" aria-labelledby="h-education">
+        <div class="panel-header">
+            <app-icon class="panel-icon" name="graduation" />
+            <h2 class="panel-title" id="h-education">Education</h2>
+        </div>
+        @for (edu of education; track edu.id) {
+            <div class="panel-body edu">
+                @if (edu.logo) {
+                    <img class="edu__logo" [src]="edu.logo" [alt]="edu.school" />
+                }
+                <div>
+                    <p class="edu__degree">{{ edu.degree }}</p>
+                    <p class="edu__meta">{{ edu.school }} · {{ edu.periodLabel }}</p>
+                </div>
+            </div>
+        }
+    </section>
+</div>

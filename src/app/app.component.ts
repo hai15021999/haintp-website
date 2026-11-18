@@ -1,80 +1,84 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { AppNavBarComponent } from './common/components/nav-bar/app-nav-bar.component';
-import { BaseComponent } from '@common/base';
-import { fromEvent, map, merge, of } from 'rxjs';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SnackbarErrorComponent, SnackbarInfoComponent, SnackbarSuccessComponent } from '@common/components';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ChangeDetectionStrategy, Component, ElementRef, computed, inject, viewChild } from '@angular/core';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { filter, map } from 'rxjs';
+import { IconName, PROFILE } from '@content';
+import { LayoutService } from '@core/layout.service';
+import { ColorMode, ThemeService } from '@core/theme.service';
+import { IconComponent } from '@shared/icon/icon.component';
+import { environment } from '@environment';
 
+const THEME_LABEL: Record<ColorMode, string> = { system: 'Theme: System', light: 'Theme: Light', dark: 'Theme: Dark' };
+const THEME_ICON: Record<ColorMode, IconName> = { system: 'monitor', light: 'sun', dark: 'moon' };
+
+interface NavItem {
+    path: string;
+    label: string;
+    icon: IconName;
+}
+
+/** Site shell: kit side navigation (rail on desktop, drawer on mobile) + top bar + routed page. */
 @Component({
     selector: 'app-root',
-    standalone: true,
-    imports: [RouterOutlet, AppNavBarComponent],
+    imports: [RouterOutlet, RouterLink, RouterLinkActive, IconComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent extends BaseComponent {
-    #snackbar = inject(MatSnackBar);
+export class AppComponent {
+    readonly layout = inject(LayoutService);
+    readonly theme = inject(ThemeService);
+    readonly #router = inject(Router);
 
-    ngOnInit(): void {
-        this.registerCoreLayer();
-    }
+    readonly profile = PROFILE;
+    readonly version = environment.version;
+    readonly year = new Date().getFullYear();
 
-    override registerCoreLayer() {
-        this.registerWindowNetworkObserver();
-        this.snackbarService
-            .registerSnackbarEvent$()
-            .pipe(takeUntilDestroyed(this.destroyRef))
-            .subscribe({
-                next: (res) => {
-                    this.bindingSnackbarTemplate(res.type, res.message);
-                },
+    readonly nav: NavItem[] = [
+        { path: '/about', label: 'About', icon: 'user' },
+        { path: '/portfolio', label: 'Portfolio', icon: 'briefcase' },
+        { path: '/resume', label: 'Resume', icon: 'file-text' },
+        { path: '/contact', label: 'Contact', icon: 'mail' },
+    ];
+
+    readonly #url = toSignal(
+        this.#router.events.pipe(
+            filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+            map((e) => e.urlAfterRedirects)
+        ),
+        { initialValue: this.#router.url }
+    );
+
+    /** Section label for the top bar (first URL segment). */
+    readonly section = computed(() => {
+        const first = '/' + (this.#url().split(/[/?#]/)[1] ?? '');
+        return this.nav.find((n) => n.path === first)?.label ?? '';
+    });
+
+    readonly themeLabel = computed(() => THEME_LABEL[this.theme.mode()]);
+    readonly themeIcon = computed(() => THEME_ICON[this.theme.mode()]);
+
+    /** Drawer hidden from keyboard and screen readers while closed on mobile. */
+    readonly navHidden = computed(() => this.layout.isMobile() && !this.layout.drawerOpen());
+    /** Rail applies on desktop only; the mobile drawer always shows labels. */
+    readonly navExpanded = computed(() => this.layout.isMobile() || !this.layout.railCollapsed());
+
+    private readonly main = viewChild.required<ElementRef<HTMLElement>>('main');
+
+    constructor() {
+        // New page: close the drawer and start at the top of the scroll container.
+        this.#router.events
+            .pipe(
+                filter((e) => e instanceof NavigationEnd),
+                takeUntilDestroyed()
+            )
+            .subscribe(() => {
+                this.layout.closeDrawer();
+                this.main().nativeElement.scrollTo({ top: 0 });
             });
     }
 
-    bindingSnackbarTemplate(type: 'info' | 'error' | 'success', message: string) {
-        const config: any = {
-            duration: 3000,
-            horizontalPosition: 'right',
-            verticalPosition: 'bottom',
-            data: { message },
-            panelClass: '__app-snackbar-container'
-        }
-        if (type === 'error') {
-            this.#snackbar.openFromComponent(SnackbarErrorComponent, config);
-            return;
-        }
-        if (type === 'info') {
-            this.#snackbar.openFromComponent(SnackbarInfoComponent, config);
-            return;
-        }
-        if (type === 'success') {
-            this.#snackbar.openFromComponent(SnackbarSuccessComponent, config);
-            return;
-        }
-    }
-
-    registerWindowNetworkObserver() {
-        merge(
-            of(null),
-            fromEvent(window, 'online'),
-            fromEvent(window, 'offline')
-        ).pipe(map(() => navigator.onLine), takeUntilDestroyed(this.destroyRef))
-            .subscribe(status => {
-                this.appState.setNetWorkOnline(status);
-            });
-    }
-
-    registerWindowResizeObserver() {
-        window.addEventListener('resize', () => {
-            this.handleWindowSize(window.innerWidth);
-        });
-    }
-
-    handleWindowSize(size: number) {
-        const screenSize = size > 1024 ? 'large' : 'small';
-        this.appState.setScreenSize(screenSize);
+    onNavKeydown(event: KeyboardEvent): void {
+        if (event.key === 'Escape' && this.layout.drawerOpen()) this.layout.closeDrawer();
     }
 }

@@ -1,0 +1,61 @@
+/* Theme: haintp — Valuation Platform visual system (Inter, 6/8px radius, neutrals) with the kit Plum brand (#8e2c6e).
+   Plum values = D:\report-page-design\themes\plum.css. 
+   Load order: tokens.css -> this file -> components.css. Contract: D:\report-page-design\docs\theming.md
+   Only this file may hold hex colors (docs/10-engineering/coding-standards.md § Styling). */
+
+:root {
+	/* Brand. White on #8e2c6e = 7.7:1; accent text on surface 7.7:1, on wash 5.5:1 (kit contrast report). */
+	--theme-primary: #8e2c6e;
+	--theme-primary-text: #8e2c6e;
+	--theme-on-primary: #ffffff;
+
+	/* Neutrals */
+	--theme-surface: #ffffff;
+	--theme-canvas: #f5f6f8;
+	--theme-text: #0a0a0a;
+	--theme-text-muted: #6b6b73;
+	--theme-line: #e6e8eb;
+	--theme-line-strong: #b4b4bc;
+
+	/* Status */
+	--theme-danger: #dc2626;
+
+	/* Shape and type */
+	--theme-font: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+	--theme-radius: 6px;
+	--theme-radius-container: 8px;
+
+	/* Elevation: menus and popups get a hairline so they separate from a white page. */
+	--theme-shadow-card: 0 1px 2px rgb(24 24 27 / 0.06);
+	--theme-shadow-menu: 0 2px 4px rgb(16 24 40 / 0.06), 0 8px 20px rgb(16 24 40 / 0.14);
+	--theme-shadow-popup: 0 2px 4px rgb(16 24 40 / 0.06), 0 8px 20px rgb(16 24 40 / 0.14);
+	--theme-overlay-border: color-mix(in srgb, #0a0a0a 14%, #ffffff);
+
+	/* Site-only token: card hover lift (portfolio cards). */
+	--site-shadow-hover: 0 4px 12px rgb(16 24 40 / 0.08);
+}
+
+/* A :root rule outranks the kit's dark defaults, so every neutral set above is set again here. */
+.dark,
+[data-ui-mode='dark'] {
+	/* Dark: lighter plum fill with dark label; accent text mixed toward the dark-mode text color. */
+	--theme-primary: color-mix(in srgb, #8e2c6e 60%, #ffffff);
+	--theme-primary-text: color-mix(in srgb, #8e2c6e 40%, #f5f5f5);
+	--theme-on-primary: #0e0e11;
+
+	--theme-surface: #1f1f1f;
+	--theme-canvas: #141414;
+	--theme-text: #f5f5f5;
+	--theme-text-muted: #a1a1aa;
+	--theme-line: #383838;
+	--theme-line-strong: #52525c;
+
+	--theme-danger: #ef4444;
+
+	--theme-shadow-card: none;
+	--theme-shadow-menu: 0 8px 24px rgb(0 0 0 / 0.5);
+	--theme-shadow-popup: 0 8px 24px rgb(0 0 0 / 0.5);
+	--theme-overlay-border: color-mix(in srgb, #f5f5f5 18%, #242424);
+
+	--site-shadow-hover: 0 4px 12px rgb(0 0 0 / 0.45);
+}

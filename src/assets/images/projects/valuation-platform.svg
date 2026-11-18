@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" font-family="Inter, Segoe UI, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e6f4f3"/>
+      <stop offset="1" stop-color="#cfe9e6"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" fill="url(#bg)"/>
+  <!-- app window -->
+  <g transform="translate(48 36)">
+    <rect width="544" height="300" rx="10" fill="#ffffff" stroke="#d5e3e1"/>
+    <!-- sidenav -->
+    <rect width="120" height="300" rx="10" fill="#f8fafa"/>
+    <rect x="119" width="1" height="300" fill="#e6e8eb"/>
+    <rect x="14" y="16" width="56" height="10" rx="3" fill="#007d75"/>
+    <g fill="#c9d2d1">
+      <rect x="14" y="52" width="90" height="8" rx="3"/>
+      <rect x="14" y="96" width="76" height="8" rx="3"/>
+      <rect x="14" y="118" width="84" height="8" rx="3"/>
+      <rect x="14" y="140" width="70" height="8" rx="3"/>
+    </g>
+    <rect x="8" y="68" width="104" height="22" rx="5" fill="#d6efec"/>
+    <rect x="8" y="68" width="3" height="22" rx="1.5" fill="#007d75"/>
+    <rect x="18" y="75" width="70" height="8" rx="3" fill="#006b65"/>
+    <!-- header -->
+    <rect x="120" y="0" width="424" height="40" fill="#ffffff"/>
+    <rect x="120" y="40" width="424" height="1" fill="#e6e8eb"/>
+    <rect x="136" y="16" width="120" height="8" rx="3" fill="#c9d2d1"/>
+    <rect x="456" y="10" width="72" height="20" rx="5" fill="#007d75"/>
+    <!-- stat cards -->
+    <g transform="translate(136 54)">
+      <rect width="92" height="54" rx="6" fill="#fff" stroke="#e6e8eb"/>
+      <rect x="10" y="12" width="40" height="12" rx="3" fill="#1f2937"/>
+      <rect x="10" y="32" width="60" height="7" rx="3" fill="#c9d2d1"/>
+      <rect x="100" width="92" height="54" rx="6" fill="#fff" stroke="#e6e8eb"/>
+      <rect x="110" y="12" width="30" height="12" rx="3" fill="#1f2937"/>
+      <rect x="110" y="32" width="54" height="7" rx="3" fill="#c9d2d1"/>
+      <rect x="200" width="92" height="54" rx="6" fill="#d6efec" stroke="#007d75"/>
+      <rect x="210" y="12" width="36" height="12" rx="3" fill="#006b65"/>
+      <rect x="210" y="32" width="58" height="7" rx="3" fill="#7fbfb9"/>
+      <rect x="300" width="92" height="54" rx="6" fill="#fff" stroke="#e6e8eb"/>
+      <rect x="310" y="12" width="24" height="12" rx="3" fill="#1f2937"/>
+      <rect x="310" y="32" width="50" height="7" rx="3" fill="#c9d2d1"/>
+    </g>
+    <!-- table -->
+    <g transform="translate(136 120)">
+      <rect width="392" height="166" rx="6" fill="#fff" stroke="#e6e8eb"/>
+      <rect x="1" y="1" width="390" height="26" rx="5" fill="#f5f6f8"/>
+      <g fill="#9aa3a2">
+        <rect x="12" y="10" width="44" height="7" rx="3"/>
+        <rect x="110" y="10" width="64" height="7" rx="3"/>
+        <rect x="230" y="10" width="40" height="7" rx="3"/>
+        <rect x="316" y="10" width="52" height="7" rx="3"/>
+      </g>
+      <g>
+        <rect x="0" y="27" width="392" height="1" fill="#e6e8eb"/>
+        <rect x="12" y="39" width="54" height="7" rx="3" fill="#007d75"/>
+        <rect x="110" y="39" width="96" height="7" rx="3" fill="#c9d2d1"/>
+        <rect x="230" y="39" width="56" height="7" rx="3" fill="#c9d2d1"/>
+        <rect x="316" y="35" width="58" height="15" rx="3" fill="#e7f6ec" stroke="#5cb87a"/>
+        <rect x="0" y="60" width="392" height="1" fill="#e6e8eb"/>
+        <rect x="12" y="72" width="54" height="7" rx="3" fill="#007d75"/>
+        <rect x="110" y="72" width="80" height="7" rx="3" fill="#c9d2d1"/>
+        <rect x="230" y="72" width="48" height="7" rx="3" fill="#c9d2d1"/>
+        <rect x="316" y="68" width="58" height="15" rx="3" fill="#fdf3dc" stroke="#d4a43a"/>
+        <rect x="0" y="93" width="392" height="1" fill="#e6e8eb"/>
+        <rect x="12" y="105" width="54" height="7" rx="3" fill="#007d75"/>
+        <rect x="110" y="105" width="104" height="7" rx="3" fill="#c9d2d1"/>
+        <rect x="230" y="105" width="60" height="7" rx="3" fill="#c9d2d1"/>
+        <rect x="316" y="101" width="58" height="15" rx="3" fill="#e7f6ec" stroke="#5cb87a"/>
+        <rect x="0" y="126" width="392" height="1" fill="#e6e8eb"/>
+        <rect x="12" y="138" width="54" height="7" rx="3" fill="#007d75"/>
+        <rect x="110" y="138" width="72" height="7" rx="3" fill="#c9d2d1"/>
+        <rect x="230" y="138" width="44" height="7" rx="3" fill="#c9d2d1"/>
+        <rect x="316" y="134" width="58" height="15" rx="3" fill="#eaf1fb" stroke="#5b8fd6"/>
+      </g>
+    </g>
+  </g>
+  <!-- document card -->
+  <g transform="translate(470 196) rotate(4)">
+    <rect width="120" height="148" rx="6" fill="#ffffff" stroke="#b8d6d2" />
+    <rect x="14" y="16" width="70" height="9" rx="3" fill="#006b65"/>
+    <g fill="#d5dedd">
+      <rect x="14" y="36" width="92" height="6" rx="3"/>
+      <rect x="14" y="48" width="84" height="6" rx="3"/>
+      <rect x="14" y="60" width="90" height="6" rx="3"/>
+      <rect x="14" y="80" width="60" height="6" rx="3"/>
+      <rect x="14" y="92" width="88" height="6" rx="3"/>
+    </g>
+    <circle cx="88" cy="124" r="14" fill="none" stroke="#007d75" stroke-width="2.5"/>
+    <path d="M81 124l5 5 9-10" fill="none" stroke="#007d75" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

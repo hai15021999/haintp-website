@@ -1,0 +1,217 @@
+/* =====================================================================
+   UI kit tokens — v2.0
+   ---------------------------------------------------------------------
+   Two layers:
+
+   1. Theme inputs  (--theme-*)  Raw colors. A theme file sets them.
+                                  Only --theme-primary is required.
+   2. Semantic      (--ui-*)      What components read. Derived from the
+                                  inputs. Components never read --theme-*.
+
+   Load order: tokens.css -> one file from themes/ -> components.css.
+   Docs: docs/theming.md
+   ===================================================================== */
+
+
+/* ---------------------------------------------------------------------
+   Layer 1 — default inputs.
+   :where() keeps specificity at 0, so any theme file wins whatever the
+   load order.
+   --------------------------------------------------------------------- */
+
+:where(:root) {
+	/* Neutrals. The whole grey ramp is mixed from these two. */
+	--theme-surface: #ffffff;
+	--theme-canvas: #f3f3f3;
+	--theme-text: #292929;
+
+	/* Brand. A theme file must set --theme-primary.
+	   This grey is a visible "no theme loaded" placeholder. */
+	--theme-primary: #5c5c5c;
+	--theme-on-primary: #ffffff;
+
+	/* Status */
+	--theme-alert: #c2530e;
+	--theme-danger: #c50f1f;
+	--theme-on-danger: #ffffff;
+	--theme-note-bg: #ffedce;
+	--theme-note-text: #795d1a;
+
+	/* Elevation */
+	--theme-shadow-card: 1px 2px 6px rgb(0 0 0 / 0.06);
+	--theme-shadow-menu: 0 8px 16px rgb(0 0 0 / 0.14);
+	--theme-shadow-popup: 0 8px 16px rgb(0 0 0 / 0.14), 0 0 2px rgb(0 0 0 / 0.12);
+	--theme-shadow-tip: 0 4px 12px rgb(0 0 0 / 0.16);
+	--theme-overlay-border: transparent;
+	/* Dialog backdrop */
+	--theme-scrim: rgb(0 0 0 / 0.4);
+
+	/* Native widgets (date/time pickers, scrollbars) inside kit controls */
+	--theme-color-scheme: light;
+}
+
+/* Dark mode. Turn it on with class="dark" (Tailwind / shadcn hosts)
+   or data-ui-mode="dark" on <html> or on any container. */
+:where(.dark, [data-ui-mode="dark"]) {
+	--theme-surface: #242424;
+	--theme-canvas: #141414;
+	--theme-text: #ececec;
+
+	/* A dark brand color is unreadable as text on a dark surface.
+	   Lighten it for text, lines and focus. Fills keep --theme-primary. */
+	--theme-primary-text: color-mix(in srgb, var(--theme-primary) 40%, var(--theme-text));
+
+	--theme-alert: #f0915a;
+	--theme-danger: #f1707b;
+	/* White is 2.6:1 on the light dark-mode red; dark text is 6:1. */
+	--theme-on-danger: #1a1a1a;
+	--theme-note-bg: #3a2f1c;
+	--theme-note-text: #f2d49b;
+
+	--theme-shadow-card: 0 1px 3px rgb(0 0 0 / 0.4);
+	--theme-shadow-menu: 0 8px 24px rgb(0 0 0 / 0.5);
+	--theme-shadow-popup: 0 8px 24px rgb(0 0 0 / 0.5);
+	--theme-shadow-tip: 0 4px 12px rgb(0 0 0 / 0.5);
+	/* Shadows barely show on dark, so floating panels get a hairline. */
+	--theme-overlay-border: color-mix(in srgb, var(--theme-text) 18%, var(--theme-surface));
+	--theme-scrim: rgb(0 0 0 / 0.6);
+	--theme-color-scheme: dark;
+}
+
+
+/* ---------------------------------------------------------------------
+   Layer 2 — semantic colors.
+   Declared again on every element that can switch theme or mode, so the
+   color-mix() values are recomputed there instead of being inherited
+   from <html>.
+   Every value reads an optional --theme-* override first, then derives.
+   --------------------------------------------------------------------- */
+
+:root,
+.dark,
+[data-ui-mode],
+[data-ui-theme] {
+	/* Surfaces */
+	--ui-surface: var(--theme-surface);
+	--ui-canvas: var(--theme-canvas);
+	--ui-hover: var(--theme-hover, color-mix(in srgb, var(--theme-text) 5%, var(--theme-surface)));
+	--ui-pressed: var(--theme-pressed, color-mix(in srgb, var(--theme-text) 10%, var(--theme-surface)));
+
+	/* Lines */
+	--ui-line: var(--theme-line, color-mix(in srgb, var(--theme-text) 15%, var(--theme-surface)));
+	--ui-line-strong: var(--theme-line-strong, color-mix(in srgb, var(--theme-text) 26%, var(--theme-surface)));
+
+	/* Text, strongest to weakest */
+	--ui-text: var(--theme-text);
+	--ui-text-title: var(--theme-text-title, color-mix(in srgb, var(--theme-text) 95%, var(--theme-surface)));
+	--ui-text-body: var(--theme-text-body, color-mix(in srgb, var(--theme-text) 88%, var(--theme-surface)));
+	--ui-text-label: var(--theme-text-label, color-mix(in srgb, var(--theme-text) 74%, var(--theme-surface)));
+	--ui-text-muted: var(--theme-text-muted, color-mix(in srgb, var(--theme-text) 65%, var(--theme-surface)));
+	--ui-text-disabled: var(--theme-text-disabled, color-mix(in srgb, var(--theme-text) 35%, var(--theme-surface)));
+
+	/* Brand */
+	--ui-primary: var(--theme-primary);
+	--ui-primary-hover: var(--theme-primary-hover, color-mix(in srgb, var(--theme-primary) 80%, #000));
+	--ui-primary-active: var(--theme-primary-active, color-mix(in srgb, var(--theme-primary) 68%, #000));
+	--ui-on-primary: var(--theme-on-primary);
+	/* Brand color used as text, line or icon on a surface. */
+	--ui-accent: var(--theme-primary-text, var(--theme-primary));
+	/* Selected background: card, menu item, chip, pressed icon button. */
+	--ui-wash: var(--theme-primary-soft, color-mix(in srgb, var(--theme-primary) 20%, var(--theme-surface)));
+	--ui-focus: var(--theme-focus, var(--ui-accent));
+
+	/* Status */
+	--ui-alert: var(--theme-alert);
+	--ui-danger: var(--theme-danger);
+	--ui-on-danger: var(--theme-on-danger);
+	--ui-danger-hover: var(--theme-danger-hover, color-mix(in srgb, var(--theme-danger) 85%, #000));
+	--ui-note-bg: var(--theme-note-bg);
+	--ui-note-text: var(--theme-note-text);
+	/* Label on a data-colored badge. Badge fills come from row data. */
+	--ui-on-data: #ffffff;
+
+	/* Elevation */
+	--ui-shadow-card: var(--theme-shadow-card);
+	--ui-shadow-menu: var(--theme-shadow-menu);
+	--ui-shadow-popup: var(--theme-shadow-popup);
+	--ui-shadow-tip: var(--theme-shadow-tip);
+	--ui-overlay-border: var(--theme-overlay-border);
+	--ui-scrim: var(--theme-scrim);
+	/* Translucent page color behind a loading overlay (+ 2px blur) */
+	--ui-veil: var(--theme-veil, color-mix(in srgb, var(--theme-canvas) 50%, transparent));
+	--ui-color-scheme: var(--theme-color-scheme);
+
+	/* Shape. A theme may round controls and containers differently. */
+	--ui-radius: var(--theme-radius, 4px);
+	--ui-radius-container: var(--theme-radius-container, var(--ui-radius));
+	--ui-radius-sm: 2px;
+	--ui-radius-pill: 999px;
+
+	/* Font */
+	--ui-font: var(--theme-font, "Segoe UI", system-ui, sans-serif);
+}
+
+
+/* ---------------------------------------------------------------------
+   Layer 2 — measurements. These do not change with theme or mode.
+   :where() so a host can override any of them from its own :root.
+   --------------------------------------------------------------------- */
+
+:where(:root) {
+	/* Type: use with the `font` shorthand, e.g. font: var(--ui-type-body) */
+	--ui-type-control: 600 14px/20px var(--ui-font);
+	--ui-type-body: 400 14px/20px var(--ui-font);
+	--ui-type-label: 600 12px/16px var(--ui-font);
+	--ui-type-meta: 400 12px/16px var(--ui-font);
+	--ui-type-badge: 600 12px/18px var(--ui-font);
+	--ui-type-value: 600 28px/34px var(--ui-font);
+	--ui-type-title: 600 16px/24px var(--ui-font);
+	--ui-type-status: 500 13px/18px var(--ui-font);
+	--ui-type-sort: 400 11px/1 var(--ui-font);
+
+	/* Space. 2px base, prefer multiples of 4. */
+	--ui-space-2xs: 2px;
+	--ui-space-xs: 4px;
+	--ui-space-sm: 6px;
+	--ui-space-md: 8px;
+	--ui-space-lg: 12px;
+	--ui-space-xl: 16px;
+	--ui-space-2xl: 20px;
+	--ui-space-3xl: 24px;
+
+	/* Component sizes */
+	--ui-control-h: 32px;
+	--ui-control-h-sm: 24px;
+	--ui-field-px: 10px;
+	--ui-row-h: 42px;
+	--ui-toolbar-h: 48px;
+	--ui-pager-h: 52px;
+	--ui-card-min-h: 96px;
+	--ui-cell-max-w: 260px;
+	--ui-table-max-h: 470px;
+	--ui-popup-w: 260px;
+	--ui-popup-list-max-h: 200px;
+	--ui-search-w: 240px;
+	--ui-tip-max-w: 280px;
+	--ui-focus-ring: 2px;
+	--ui-choice-size: 16px;
+	--ui-switch-w: 32px;
+	--ui-switch-h: 18px;
+	--ui-progress-h: 4px;
+	--ui-dialog-w: 560px;
+	--ui-time-w: 128px;
+	--ui-date-w: 160px;
+	--ui-menu-max-h: 240px;
+	--ui-tab-h: 40px;
+	--ui-tab-indicator: 2px;
+	--ui-sidenav-w: 240px;
+	--ui-sidenav-w-rail: 56px;
+
+	/* Motion */
+	--ui-duration: 150ms;
+
+	/* Layers */
+	--ui-z-sticky: 2;
+	--ui-z-overlay: 40;
+	--ui-z-menu: 50;
+}

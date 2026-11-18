@@ -1,29 +1,26 @@
-# HaiNTP-Website
+# haintp-website
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.9.
+Personal website of **Hai Nguyen** (Nguyen Tran Phuong Hai), front-end developer — profile, portfolio with case studies, printable resume and contact form.
 
-## Development server
+Built with Angular 19 (standalone, signals, zoneless) and the compact UI kit, in the same visual system as the Valuation Platform client project.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Run
 
-## Code scaffolding
+```bash
+npm ci
+npm start            # http://localhost:4200
+npm run build        # production build → dist/
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Edit content
 
-## Build
+| What | File |
+|---|---|
+| Name, role, socials, career start | `src/app/content/profile.ts` |
+| Portfolio projects | `src/app/content/projects.ts` + `src/assets/images/projects/` + optional `src/assets/case-studies/<slug>.md` |
+| Resume | `src/app/content/resume.ts` |
+| Skills | `src/app/content/skills.ts` |
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Documentation
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-
-Last Update: Oct 24, 2025
+All architecture, contracts, standards and operations docs live in [`docs/`](docs/README.md). AI agents: read [AGENTS.md](AGENTS.md) first.

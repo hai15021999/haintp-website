@@ -1,17 +1,14 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
-import { provideRouter, withComponentInputBinding, withViewTransitions } from '@angular/router';
+import { ApplicationConfig, provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideRouter, TitleStrategy, withComponentInputBinding } from '@angular/router';
 import { routes } from './app.routes';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { provideAnimations } from '@angular/platform-browser/animations';
-import { appInterceptor } from './app.interceptor';
-import { provideIcons } from '@app-config';
+import { PageTitleStrategy } from '@core/page-title.strategy';
 
 export const appConfig: ApplicationConfig = {
     providers: [
-        provideHttpClient(withInterceptors([appInterceptor])),
-        provideAnimations(),
-        provideRouter(routes, withComponentInputBinding(), withViewTransitions()),
-        importProvidersFrom(),
-        provideIcons()
+        provideExperimentalZonelessChangeDetection(),
+        provideHttpClient(withFetch()),
+        provideRouter(routes, withComponentInputBinding()),
+        { provide: TitleStrategy, useClass: PageTitleStrategy },
     ],
 };

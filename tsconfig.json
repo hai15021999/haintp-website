@@ -19,66 +19,14 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
-    "strictNullChecks": false,
-    "noImplicitAny": false,
+    "lib": ["ES2022", "dom"],
     "resolveJsonModule": true,
-    "noImplicitThis": false,
-    "useUnknownInCatchVariables": false,
-    "strictPropertyInitialization": false,
     "baseUrl": "./",
     "paths": {
-      "@environment": [
-        "src/environments/environment"
-      ],
-      "@common/state": [
-        "src/app/common/state/index.ts"
-      ],
-      "@common/translate": [
-        "src/app/common/translate/index.ts"
-      ],
-      "@common/validators": [
-        "src/app/common/validators/index.ts"
-      ],
-      "@common/services": [
-        "src/app/common/services/index.ts"
-      ],
-      "@common/components": [
-        "src/app/common/components/index.ts"
-      ],
-      "@common/directives": [
-        "src/app/common/directives/index.ts"
-      ],
-      "@common/pipes": [
-        "src/app/common/pipes/index.ts"
-      ],
-      "@common/base": [
-        "src/app/common/base/index.ts"
-      ],
-      "@common/schemas": [
-        "src/app/common/schemas/index.ts"
-      ],
-      "@common/interfaces": [
-        "src/app/common/interfaces/index.ts"
-      ],
-      "@common/mocks": [
-        "src/app/common/mocks/index.ts"
-      ],
-      "@common/animations": [
-        "src/app/common/animations/index.ts"
-      ],
-      "@common/functions": [
-        "src/app/common/functions/index.ts"
-      ],
-      "@app-config": [
-        "src/app/configs/index.ts"
-      ],
-      "@app-state": [
-        "src/app/app.state.ts"
-      ],
+      "@environment": ["src/environments/environment"],
+      "@content": ["src/app/content/index.ts"],
+      "@core/*": ["src/app/core/*"],
+      "@shared/*": ["src/app/shared/*"]
     }
   },
   "angularCompilerOptions": {

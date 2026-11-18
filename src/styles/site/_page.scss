@@ -1,0 +1,267 @@
+/* Page building blocks shared by every view (page-*, panel-*, tag, pill, stat, meta-list, bullet-list).
+   Kit classes (.ui-*) stay untouched; these only lay out around them. */
+
+.page {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: var(--ui-space-xl);
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: var(--ui-space-3xl);
+}
+
+@media (max-width: 767px) {
+    .page {
+        padding: var(--ui-space-xl);
+    }
+}
+
+/* Page header: title + one-line description + optional actions. */
+.page-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--ui-space-lg);
+}
+
+.page-header__title {
+    margin: 0;
+    color: var(--ui-text-title);
+    font: 600 24px/32px var(--ui-font);
+    letter-spacing: -0.01em;
+}
+
+.page-header__desc {
+    max-width: 72ch;
+    margin: var(--ui-space-xs) 0 0;
+    color: var(--ui-text-muted);
+}
+
+.page-header__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ui-space-md);
+}
+
+/* Panel with a header row and padded body. Wraps .ui-panel. */
+.panel-header {
+    display: flex;
+    align-items: center;
+    gap: var(--ui-space-md);
+    min-height: var(--ui-toolbar-h);
+    padding: 0 var(--ui-space-xl);
+    border-bottom: 1px solid var(--ui-line);
+}
+
+.panel-title {
+    margin: 0;
+    overflow: hidden;
+    color: var(--ui-text-title);
+    font: var(--ui-type-title);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.panel-icon {
+    flex: none;
+    color: var(--ui-accent);
+}
+
+.panel-body {
+    padding: var(--ui-space-xl);
+}
+
+/* Small uppercase section label inside a panel body. */
+.eyebrow {
+    margin: 0 0 var(--ui-space-xs);
+    color: var(--ui-text-muted);
+    font: var(--ui-type-label);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+/* Tag: tech stack label. Neutral by design: brand color is reserved for actions and the current state. */
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ui-space-xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tag {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    height: 22px;
+    padding: 0 var(--ui-space-md);
+    border: 1px solid var(--ui-line);
+    border-radius: 4px;
+    background: var(--ui-canvas);
+    color: var(--ui-text-body);
+    font: 500 12px/16px var(--ui-font);
+    white-space: nowrap;
+}
+
+/* Status pill (project type, "Current"): accent text, 8% wash, 45% border. */
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--ui-space-xs);
+    padding: 0 var(--ui-space-md);
+    border: 1px solid color-mix(in srgb, currentColor 45%, transparent);
+    border-radius: 4px;
+    background-color: color-mix(in srgb, currentColor 8%, transparent);
+    color: var(--ui-accent);
+    font: var(--ui-type-badge);
+    white-space: nowrap;
+}
+
+.pill--neutral {
+    color: var(--ui-text-label);
+}
+
+/* Stat tiles. Read-only, so not .ui-card (that one is a pressable control). */
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: var(--ui-space-lg);
+}
+
+.stat {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: var(--ui-card-min-h);
+    padding: var(--ui-space-xl) var(--ui-space-2xl);
+    border: 1px solid var(--ui-line);
+    border-radius: var(--ui-radius-container);
+    background: var(--ui-surface);
+    box-shadow: var(--ui-shadow-card);
+}
+
+.stat__value {
+    color: var(--ui-text-title);
+    font: var(--ui-type-value);
+}
+
+.stat__label {
+    color: var(--ui-text-label);
+    font: var(--ui-type-label);
+}
+
+.stat__sub {
+    color: var(--ui-text-muted);
+    font: var(--ui-type-meta);
+}
+
+/* Label / value pairs (project meta, resume contact). */
+.meta-list {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: var(--ui-space-md) var(--ui-space-xl);
+    margin: 0;
+}
+
+.meta-list dt {
+    color: var(--ui-text-muted);
+    font: var(--ui-type-label);
+    line-height: 20px;
+}
+
+.meta-list dd {
+    margin: 0;
+    color: var(--ui-text-body);
+}
+
+/* Bulleted list with accent markers. */
+.bullet-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ui-space-sm);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.bullet-list > li {
+    position: relative;
+    padding-left: var(--ui-space-xl);
+    color: var(--ui-text-body);
+}
+
+.bullet-list > li::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 2px;
+    width: 5px;
+    height: 5px;
+    border-radius: var(--ui-radius-pill);
+    background: var(--ui-accent);
+}
+
+/* Empty state inside a panel. */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--ui-space-sm);
+    padding: var(--ui-space-3xl);
+    color: var(--ui-text-muted);
+    text-align: center;
+}
+
+/* Brand logo image in tech lists. Logos keep their own color. */
+.tech-logo {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+/* Multi-line field. The kit has no textarea; this keeps .ui-field borders and focus line, grows in height. */
+.ui-field.field--multiline {
+    height: auto;
+    min-height: 96px;
+    align-items: stretch;
+}
+
+.ui-field.field--multiline > textarea.ui-field__input {
+    min-height: 94px;
+    padding-block: var(--ui-space-sm);
+    resize: vertical;
+    font: var(--ui-type-body);
+}
+
+/* Kit buttons used as links. */
+a.ui-btn {
+    text-decoration: none;
+}
+
+/* Two-column page body: main + aside. Collapses under 960px. */
+.split {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+    gap: var(--ui-space-xl);
+    align-items: start;
+}
+
+.split__main,
+.split__aside {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ui-space-xl);
+    min-width: 0;
+}
+
+@media (max-width: 959px) {
+    .split {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}

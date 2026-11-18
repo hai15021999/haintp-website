@@ -1,0 +1,133 @@
+<div class="page">
+    <header class="page-header">
+        <div>
+            <h1 class="page-header__title">Contact</h1>
+            <p class="page-header__desc">A project, a role or a question about something on this site — send a message and I will reply by email.</p>
+        </div>
+    </header>
+
+    <div class="split">
+        <section class="ui-panel" aria-labelledby="h-form">
+            <div class="panel-header">
+                <app-icon class="panel-icon" name="mail" />
+                <h2 class="panel-title" id="h-form">Send a message</h2>
+            </div>
+
+            @if (state() === 'sent') {
+                <div class="panel-body result" role="status">
+                    <span class="result__icon"><app-icon name="check" [size]="20" /></span>
+                    <p class="result__title">Message sent</p>
+                    <p class="ui-text-muted">Thanks for reaching out. I usually reply within a few days.</p>
+                    <button type="button" class="ui-btn ui-btn--secondary" (click)="reset()">Send another message</button>
+                </div>
+            } @else {
+                <form class="panel-body form" [formGroup]="form" (ngSubmit)="submit()" novalidate [attr.aria-busy]="state() === 'sending'">
+                    <div class="form__row">
+                        <label class="ui-form-item">
+                            <span class="ui-label">Name <span class="req" aria-hidden="true">*</span></span>
+                            <span class="ui-field">
+                                <input
+                                    class="ui-field__input"
+                                    formControlName="name"
+                                    autocomplete="name"
+                                    required
+                                    [attr.aria-invalid]="showError('name')"
+                                    aria-describedby="err-name" />
+                            </span>
+                            @if (showError('name')) {
+                                <span class="ui-field-msg ui-field-msg--error" id="err-name">Please enter your name.</span>
+                            }
+                        </label>
+
+                        <label class="ui-form-item">
+                            <span class="ui-label">Email <span class="req" aria-hidden="true">*</span></span>
+                            <span class="ui-field">
+                                <input
+                                    class="ui-field__input"
+                                    type="email"
+                                    formControlName="email"
+                                    autocomplete="email"
+                                    required
+                                    [attr.aria-invalid]="showError('email')"
+                                    aria-describedby="err-email" />
+                            </span>
+                            @if (showError('email')) {
+                                <span class="ui-field-msg ui-field-msg--error" id="err-email">Please enter a valid email address.</span>
+                            }
+                        </label>
+                    </div>
+
+                    <label class="ui-form-item">
+                        <span class="ui-label">Message <span class="req" aria-hidden="true">*</span></span>
+                        <span class="ui-field field--multiline">
+                            <textarea
+                                class="ui-field__input"
+                                rows="6"
+                                formControlName="message"
+                                required
+                                [attr.aria-invalid]="showError('message')"
+                                aria-describedby="err-message"></textarea>
+                        </span>
+                        @if (showError('message')) {
+                            <span class="ui-field-msg ui-field-msg--error" id="err-message">Please write at least 10 characters.</span>
+                        } @else {
+                            <span class="ui-field-msg" id="err-message">Up to 4,000 characters.</span>
+                        }
+                    </label>
+
+                    <!-- Honeypot: invisible to people and screen readers. -->
+                    <div class="hp" aria-hidden="true">
+                        <label>Website <input type="text" formControlName="website" tabindex="-1" autocomplete="off" /></label>
+                    </div>
+
+                    @if (state() === 'error') {
+                        <p class="ui-note form__error" role="alert">
+                            <app-icon name="alert" />
+                            The message could not be sent. Check your connection and try again.
+                        </p>
+                    }
+
+                    <div class="form__actions">
+                        <button type="submit" class="ui-btn ui-btn--primary" [attr.aria-busy]="state() === 'sending'" [disabled]="state() === 'sending'">
+                            @if (state() === 'sending') {
+                                <span class="ui-spinner ui-spinner--sm ui-spinner--current" aria-hidden="true"></span>
+                                Sending…
+                            } @else {
+                                <app-icon name="send" />
+                                Send message
+                            }
+                        </button>
+                    </div>
+                </form>
+            }
+        </section>
+
+        <aside class="split__aside">
+            <section class="ui-panel" aria-labelledby="h-other">
+                <div class="panel-header">
+                    <h2 class="panel-title" id="h-other">Elsewhere</h2>
+                </div>
+                <ul class="links" role="list">
+                    @for (social of profile.socials; track social.id) {
+                        <li>
+                            <a class="links__item" [href]="social.url" target="_blank" rel="noopener noreferrer">
+                                <app-icon [name]="social.id" />
+                                <span class="links__label">{{ social.label }}</span>
+                                <app-icon class="links__ext" name="external" [size]="12" />
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </section>
+            <section class="ui-panel" aria-labelledby="h-where">
+                <div class="panel-header">
+                    <h2 class="panel-title" id="h-where">Based in</h2>
+                </div>
+                <div class="panel-body where">
+                    <app-icon name="map-pin" />
+                    <span>{{ profile.location }} · UTC+7</span>
+                </div>
+            </section>
+        </aside>
+    </div>
+</div>

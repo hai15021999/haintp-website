@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" font-family="Inter, Segoe UI, sans-serif">
+  <rect width="640" height="360" fill="#eef3ea"/>
+  <!-- web dashboard -->
+  <g transform="translate(36 40)">
+    <rect width="380" height="270" rx="10" fill="#ffffff" stroke="#d6e1d0"/>
+    <rect width="380" height="36" rx="10" fill="#ffffff"/>
+    <rect y="36" width="380" height="1" fill="#e5ebe1"/>
+    <path d="M22 26c0-8 6-12 10-14-1 6 2 9 0 14z" fill="#4d7c0f"/>
+    <rect x="40" y="14" width="74" height="9" rx="3" fill="#1f2a1a"/>
+    <!-- stat cards -->
+    <g transform="translate(16 52)">
+      <rect width="108" height="56" rx="8" fill="#f6f9f3" stroke="#e1e9db"/>
+      <rect x="12" y="12" width="42" height="13" rx="3" fill="#1f2a1a"/><rect x="12" y="34" width="62" height="7" rx="3" fill="#a3b39a"/>
+      <rect x="120" width="108" height="56" rx="8" fill="#f6f9f3" stroke="#e1e9db"/>
+      <rect x="132" y="12" width="30" height="13" rx="3" fill="#1f2a1a"/><rect x="132" y="34" width="56" height="7" rx="3" fill="#a3b39a"/>
+      <rect x="240" width="108" height="56" rx="8" fill="#ecf5e3" stroke="#4d7c0f"/>
+      <rect x="252" y="12" width="48" height="13" rx="3" fill="#3f6212"/><rect x="252" y="34" width="60" height="7" rx="3" fill="#86a86a"/>
+    </g>
+    <!-- chart -->
+    <g transform="translate(16 122)">
+      <rect width="228" height="132" rx="8" fill="#ffffff" stroke="#e1e9db"/>
+      <rect x="14" y="14" width="80" height="8" rx="3" fill="#1f2a1a"/>
+      <path d="M16 112h196" stroke="#e5ebe1"/>
+      <g fill="#a3c585"><rect x="26" y="78" width="16" height="34" rx="3"/><rect x="56" y="62" width="16" height="50" rx="3"/><rect x="86" y="70" width="16" height="42" rx="3"/></g>
+      <g fill="#4d7c0f"><rect x="116" y="50" width="16" height="62" rx="3"/><rect x="146" y="40" width="16" height="72" rx="3"/><rect x="176" y="32" width="16" height="80" rx="3"/></g>
+    </g>
+    <!-- contracts list -->
+    <g transform="translate(256 122)">
+      <rect width="108" height="132" rx="8" fill="#ffffff" stroke="#e1e9db"/>
+      <rect x="12" y="14" width="60" height="8" rx="3" fill="#1f2a1a"/>
+      <g fill="#cbd6c4"><rect x="12" y="38" width="84" height="7" rx="3"/><rect x="12" y="62" width="70" height="7" rx="3"/><rect x="12" y="86" width="78" height="7" rx="3"/><rect x="12" y="110" width="60" height="7" rx="3"/></g>
+      <g><circle cx="92" cy="41" r="4" fill="#65a30d"/><circle cx="92" cy="65" r="4" fill="#f59e0b"/><circle cx="92" cy="89" r="4" fill="#65a30d"/><circle cx="92" cy="113" r="4" fill="#65a30d"/></g>
+    </g>
+  </g>
+  <!-- phone -->
+  <g transform="translate(444 30)">
+    <rect width="160" height="300" rx="24" fill="#1f2a1a"/>
+    <rect x="8" y="8" width="144" height="284" rx="18" fill="#fbfdf9"/>
+    <rect x="58" y="16" width="44" height="6" rx="3" fill="#1f2a1a"/>
+    <!-- bonsai -->
+    <g transform="translate(80 118)">
+      <ellipse cx="0" cy="-58" rx="44" ry="24" fill="#65a30d"/>
+      <ellipse cx="-30" cy="-38" rx="24" ry="14" fill="#4d7c0f"/>
+      <ellipse cx="28" cy="-40" rx="22" ry="13" fill="#4d7c0f"/>
+      <path d="M-4 -30c-6 10 8 14 0 30h10c-4-12 -10-16 0-30z" fill="#7c4a24"/>
+      <path d="M2 -26c8-4 16-6 24-12" stroke="#7c4a24" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M-36 0h72l-8 18h-56z" fill="#b45309"/>
+      <rect x="-40" y="-4" width="80" height="6" rx="3" fill="#92400e"/>
+    </g>
+    <rect x="20" y="160" width="90" height="10" rx="3" fill="#1f2a1a"/>
+    <rect x="20" y="178" width="120" height="7" rx="3" fill="#a3b39a"/>
+    <rect x="20" y="190" width="100" height="7" rx="3" fill="#a3b39a"/>
+    <!-- date slots -->
+    <g transform="translate(20 210)">
+      <rect width="34" height="40" rx="8" fill="#ecf5e3"/><rect x="40" width="34" height="40" rx="8" fill="#4d7c0f"/><rect x="80" width="34" height="40" rx="8" fill="#ecf5e3"/>
+      <rect x="9" y="10" width="16" height="6" rx="3" fill="#86a86a"/><rect x="49" y="10" width="16" height="6" rx="3" fill="#d9f99d"/><rect x="89" y="10" width="16" height="6" rx="3" fill="#86a86a"/>
+      <rect x="11" y="22" width="12" height="9" rx="3" fill="#3f6212"/><rect x="51" y="22" width="12" height="9" rx="3" fill="#ffffff"/><rect x="91" y="22" width="12" height="9" rx="3" fill="#3f6212"/>
+    </g>
+    <rect x="20" y="260" width="120" height="24" rx="12" fill="#4d7c0f"/>
+    <rect x="52" y="269" width="56" height="7" rx="3" fill="#ecf5e3"/>
+  </g>
+</svg>

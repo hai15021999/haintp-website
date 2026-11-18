@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" font-family="Inter, Segoe UI, sans-serif">
+  <!-- Generic "confidential approval workflow" art. No company logos or real screens. Variant colors: ACCENT / WASH / BG -->
+  <rect width="640" height="360" fill="#fbeeee"/>
+  <!-- blurred flow in the background -->
+  <g opacity="0.55">
+    <g transform="translate(60 132)">
+      <rect width="96" height="56" rx="10" fill="#ffffff" stroke="#ecd0d2"/>
+      <rect x="14" y="16" width="52" height="8" rx="3" fill="#d9a5a9"/><rect x="14" y="30" width="68" height="6" rx="3" fill="#ecd0d2"/>
+      <path d="M96 28h40" stroke="#d9a5a9" stroke-width="2"/><path d="M130 23l6 5-6 5" fill="none" stroke="#d9a5a9" stroke-width="2"/>
+      <rect x="136" width="96" height="56" rx="10" fill="#ffffff" stroke="#ecd0d2"/>
+      <rect x="150" y="16" width="52" height="8" rx="3" fill="#d9a5a9"/><rect x="150" y="30" width="60" height="6" rx="3" fill="#ecd0d2"/>
+      <path d="M232 28h40" stroke="#d9a5a9" stroke-width="2"/><path d="M266 23l6 5-6 5" fill="none" stroke="#d9a5a9" stroke-width="2"/>
+      <rect x="272" width="96" height="56" rx="10" fill="#ffffff" stroke="#ecd0d2"/>
+      <rect x="286" y="16" width="52" height="8" rx="3" fill="#d9a5a9"/><rect x="286" y="30" width="64" height="6" rx="3" fill="#ecd0d2"/>
+      <path d="M368 28h40" stroke="#d9a5a9" stroke-width="2"/><path d="M402 23l6 5-6 5" fill="none" stroke="#d9a5a9" stroke-width="2"/>
+      <rect x="408" width="96" height="56" rx="10" fill="#ffffff" stroke="#ecd0d2"/>
+      <rect x="422" y="16" width="52" height="8" rx="3" fill="#d9a5a9"/><rect x="422" y="30" width="56" height="6" rx="3" fill="#ecd0d2"/>
+    </g>
+    <g transform="translate(110 220)" fill="#ecd0d2">
+      <circle cx="0" cy="0" r="10"/><circle cx="136" cy="0" r="10"/><circle cx="272" cy="0" r="10"/><circle cx="408" cy="0" r="10"/>
+    </g>
+  </g>
+  <rect width="640" height="360" fill="#fbeeee" opacity="0.35"/>
+  <!-- lock badge -->
+  <g transform="translate(320 160)">
+    <circle r="62" fill="#ffffff" stroke="#a3262f" stroke-width="3"/>
+    <circle r="50" fill="#f6dcde"/>
+    <rect x="-22" y="-6" width="44" height="34" rx="6" fill="#a3262f"/>
+    <path d="M-13 -6v-10a13 13 0 0 1 26 0v10" fill="none" stroke="#a3262f" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="0" cy="9" r="5" fill="#ffffff"/>
+    <rect x="-2" y="10" width="4" height="9" rx="2" fill="#ffffff"/>
+  </g>
+  <g transform="translate(320 262)" text-anchor="middle">
+    <rect x="-96" y="-16" width="192" height="28" rx="14" fill="#a3262f"/>
+    <text y="3" font-size="12" font-weight="700" fill="#ffffff" letter-spacing="1.5">CONFIDENTIAL</text>
+  </g>
+</svg>

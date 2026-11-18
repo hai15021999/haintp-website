@@ -1,0 +1,4 @@
+/* Tailwind v3 layers. Loaded after the UI kit so utilities override kit classes (D:\report-page-design\docs\tailwind.md). */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

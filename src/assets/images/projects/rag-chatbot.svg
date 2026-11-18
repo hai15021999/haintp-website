@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" font-family="Inter, Segoe UI, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eef2ff"/>
+      <stop offset="1" stop-color="#e0f2f1"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" fill="url(#bg)"/>
+  <!-- documents -->
+  <g transform="translate(36 64)">
+    <g transform="rotate(-6)">
+      <rect width="96" height="122" rx="8" fill="#ffffff" stroke="#c7d2fe"/>
+      <g fill="#c7d2fe"><rect x="14" y="18" width="60" height="7" rx="3"/><rect x="14" y="34" width="68" height="6" rx="3"/><rect x="14" y="46" width="52" height="6" rx="3"/><rect x="14" y="58" width="64" height="6" rx="3"/></g>
+    </g>
+    <g transform="translate(26 26)">
+      <rect width="96" height="122" rx="8" fill="#ffffff" stroke="#a5b4fc"/>
+      <rect x="14" y="18" width="50" height="8" rx="3" fill="#4f46e5"/>
+      <g fill="#c7d2fe"><rect x="14" y="36" width="68" height="6" rx="3"/><rect x="14" y="48" width="60" height="6" rx="3"/></g>
+      <rect x="10" y="60" width="76" height="22" rx="4" fill="#fef3c7" stroke="#f59e0b"/>
+      <g fill="#c7d2fe"><rect x="14" y="92" width="64" height="6" rx="3"/><rect x="14" y="104" width="48" height="6" rx="3"/></g>
+    </g>
+  </g>
+  <!-- pipeline arrows + vector store -->
+  <g stroke="#94a3b8" stroke-width="2" fill="none" stroke-dasharray="5 5">
+    <path d="M172 150h40"/>
+    <path d="M300 150h40"/>
+  </g>
+  <g transform="translate(214 104)">
+    <rect width="84" height="92" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+    <ellipse cx="42" cy="24" rx="26" ry="8" fill="#e0e7ff" stroke="#6366f1"/>
+    <path d="M16 24v40c0 4.4 11.6 8 26 8s26-3.6 26-8V24" fill="#e0e7ff" stroke="#6366f1"/>
+    <path d="M16 44c0 4.4 11.6 8 26 8s26-3.6 26-8" fill="none" stroke="#6366f1"/>
+    <g fill="#6366f1"><circle cx="30" cy="36" r="2"/><circle cx="46" cy="40" r="2"/><circle cx="56" cy="58" r="2"/><circle cx="34" cy="60" r="2"/></g>
+    <text x="42" y="86" font-size="9" font-weight="600" fill="#64748b" text-anchor="middle">vectors</text>
+  </g>
+  <!-- chat window -->
+  <g transform="translate(342 34)">
+    <rect width="262" height="292" rx="14" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect width="262" height="44" rx="14" fill="#0f766e"/>
+    <rect y="30" width="262" height="14" fill="#0f766e"/>
+    <circle cx="24" cy="22" r="11" fill="#ccfbf1"/>
+    <path d="M24 15l1.6 4.2 4.4 1.6-4.4 1.6L24 27l-1.6-4.2-4.4-1.6 4.4-1.6z" fill="#0f766e"/>
+    <rect x="42" y="17" width="80" height="9" rx="3" fill="#ccfbf1"/>
+    <!-- user msg -->
+    <g transform="translate(96 60)">
+      <rect width="150" height="40" rx="12" fill="#e0e7ff"/>
+      <rect x="12" y="11" width="120" height="7" rx="3" fill="#6366f1"/>
+      <rect x="12" y="23" width="80" height="7" rx="3" fill="#6366f1"/>
+    </g>
+    <!-- bot answer -->
+    <g transform="translate(16 114)">
+      <rect width="210" height="96" rx="12" fill="#f1f5f9"/>
+      <g fill="#475569"><rect x="12" y="14" width="180" height="7" rx="3"/><rect x="12" y="27" width="166" height="7" rx="3"/><rect x="12" y="40" width="176" height="7" rx="3"/><rect x="12" y="53" width="120" height="7" rx="3"/></g>
+      <rect x="12" y="70" width="64" height="16" rx="8" fill="#fef3c7" stroke="#f59e0b"/>
+      <rect x="20" y="75" width="48" height="6" rx="3" fill="#b45309"/>
+      <rect x="82" y="70" width="64" height="16" rx="8" fill="#fef3c7" stroke="#f59e0b"/>
+      <rect x="90" y="75" width="48" height="6" rx="3" fill="#b45309"/>
+    </g>
+    <!-- typing -->
+    <g transform="translate(16 222)" fill="#94a3b8">
+      <circle cx="10" cy="8" r="4"/><circle cx="24" cy="8" r="4" opacity="0.7"/><circle cx="38" cy="8" r="4" opacity="0.4"/>
+    </g>
+    <rect x="14" y="248" width="234" height="32" rx="16" fill="#ffffff" stroke="#cbd5e1"/>
+    <rect x="30" y="261" width="110" height="7" rx="3" fill="#cbd5e1"/>
+    <circle cx="232" cy="264" r="12" fill="#0f766e"/>
+    <path d="M227 264h9M232 259l5 5-5 5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>

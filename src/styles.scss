@@ -1,42 +1,9 @@
+/* Site stylesheet. Load order (angular.json → styles):
+   ui-kit/tokens.css → ui-kit/theme-haintp.css → ui-kit/components.css → tailwind.css → this file.
+   Rules: colors only via --ui-* / --site-* tokens; no hex values; no !important.
+   Docs: docs/10-engineering/coding-standards.md § Styling. */
 
-@import './styles/variable.scss';
-@import './styles/global/nav-bar/nav-bar.scss';
-@import './styles/material/themes.scss';
-
-@import './styles/material/components/mat-button';
-@import './styles/material/components/mat-spinner';
-@import './styles/material/components/mat-snackbar';
-
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-html {
-    background-color: var(--Grayscale50);
-}
-html,
-body {
-    margin: 0px;
-}
-
-::-webkit-scrollbar {
-	width: 6px;
-	height: 6px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-	background: transparent;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-	border-radius: 10px;
-	background: rgb(0 0 0 / 30%);
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-	background: rgb(0 0 0 / 30%);
-}
+@use './styles/site/base';
+@use './styles/site/page';
+@use './styles/site/prose';
+@use './styles/site/print';

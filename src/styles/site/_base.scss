@@ -1,0 +1,60 @@
+/* Document defaults on kit tokens. */
+
+html {
+    font-size: 14px;
+    color-scheme: var(--ui-color-scheme);
+}
+
+body {
+    margin: 0;
+    background-color: var(--ui-canvas);
+    color: var(--ui-text);
+    font: var(--ui-type-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'cv11', 'ss01';
+}
+
+::selection {
+    background: var(--ui-wash);
+    color: var(--ui-text-title);
+}
+
+/* Scrollbars follow the theme. */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--ui-line-strong) transparent;
+}
+
+/* Visible keyboard focus for site-level links and buttons (kit controls draw their own). */
+:where(a, button, [tabindex]):focus-visible {
+    outline: var(--ui-focus-ring) solid var(--ui-focus);
+    outline-offset: 2px;
+}
+
+/* Skip link: first focusable element on every page. */
+.skip-link {
+    position: absolute;
+    top: var(--ui-space-md);
+    left: var(--ui-space-md);
+    z-index: calc(var(--ui-z-menu) + 10);
+    padding: var(--ui-space-sm) var(--ui-space-lg);
+    border-radius: var(--ui-radius);
+    background: var(--ui-primary);
+    color: var(--ui-on-primary);
+    font: var(--ui-type-control);
+    transform: translateY(-200%);
+}
+
+.skip-link:focus-visible {
+    transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms;
+        transition-duration: 0.01ms;
+    }
+}

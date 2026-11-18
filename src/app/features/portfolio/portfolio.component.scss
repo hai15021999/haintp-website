@@ -1,0 +1,34 @@
+.toolbar {
+    flex-wrap: wrap;
+    padding: var(--ui-space-md) var(--ui-space-xl);
+}
+
+.toolbar__count {
+    margin-left: var(--ui-space-xs);
+    opacity: 0.75;
+    font-weight: 400;
+}
+
+.toolbar__search {
+    width: var(--ui-search-w);
+    max-width: 100%;
+}
+
+@media (max-width: 599px) {
+    .toolbar__search {
+        width: 100%;
+    }
+}
+
+.grid-wrap {
+    padding: var(--ui-space-xl);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--ui-space-xl);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}

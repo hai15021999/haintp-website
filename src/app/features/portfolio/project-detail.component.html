@@ -1,0 +1,161 @@
+<div class="page">
+    <a class="back ui-link" routerLink="/portfolio">
+        <app-icon name="arrow-left" />
+        All projects
+    </a>
+
+    @if (project(); as project) {
+        <header class="hero ui-panel">
+            <img class="hero__cover" [src]="project.cover" alt="" />
+            <div class="hero__text">
+                <div class="hero__meta">
+                    <span class="pill" [class.pill--neutral]="project.type === 'personal'">{{ typeLabel() }}</span>
+                    @if (project.confidential) {
+                        <span class="pill pill--neutral">
+                            <app-icon name="lock" [size]="12" />
+                            Confidential
+                        </span>
+                    }
+                    @if (period()) {
+                        <span class="hero__period">
+                            <app-icon name="calendar" [size]="14" />
+                            {{ period() }}
+                        </span>
+                    }
+                </div>
+                <h1 class="page-header__title">{{ project.title }}</h1>
+                <p class="hero__summary">{{ project.summary }}</p>
+                @if (project.links?.length) {
+                    <div class="page-header__actions">
+                        @for (link of project.links; track link.url) {
+                            <a class="ui-btn ui-btn--secondary" [href]="link.url" target="_blank" rel="noopener noreferrer">
+                                <app-icon [name]="link.kind === 'source' ? 'github' : 'external'" />
+                                {{ link.label }}
+                            </a>
+                        }
+                    </div>
+                }
+            </div>
+        </header>
+
+        @if (project.confidential) {
+            <section class="ui-panel confidential" role="note" aria-labelledby="h-confidential">
+                <span class="confidential__icon"><app-icon name="lock" [size]="20" /></span>
+                <div class="confidential__text">
+                    <h2 class="panel-title" id="h-confidential">Project details are confidential</h2>
+                    <p>
+                        Under company policy and the confidentiality terms with this client, I can't publish the role, scope, screens or technical details of this
+                        project. Only its name and a one-line description are shown here.
+                    </p>
+                    <p class="ui-text-muted">I'm happy to talk about how I work on approval workflows in general terms — without any client information.</p>
+                    <div class="page-header__actions">
+                        <a class="ui-btn ui-btn--secondary" routerLink="/contact">
+                            <app-icon name="mail" />
+                            Get in touch
+                        </a>
+                        <a class="ui-btn" routerLink="/portfolio">Back to all projects</a>
+                    </div>
+                </div>
+            </section>
+        } @else {
+        <div class="split">
+            <div class="split__main">
+                <section class="ui-panel" aria-labelledby="h-highlights">
+                    <div class="panel-header">
+                        <app-icon class="panel-icon" name="check" />
+                        <h2 class="panel-title" id="h-highlights">What I built</h2>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="bullet-list">
+                            @for (item of project.highlights; track item) {
+                                <li>{{ item }}</li>
+                            }
+                        </ul>
+                    </div>
+                </section>
+
+                @if (project.caseStudy) {
+                    <section class="ui-panel" aria-labelledby="h-case" [attr.aria-busy]="caseStudy.isLoading()">
+                        <div class="panel-header">
+                            <app-icon class="panel-icon" name="file-text" />
+                            <h2 class="panel-title" id="h-case">Case study</h2>
+                        </div>
+                        <div class="panel-body case">
+                            @if (caseStudy.isLoading()) {
+                                <span class="ui-loader" role="status" aria-label="Loading case study">
+                                    <span class="ui-loader__dot"></span>
+                                    <span class="ui-loader__dot"></span>
+                                    <span class="ui-loader__dot"></span>
+                                </span>
+                            } @else if (caseStudy.value()) {
+                                <article class="prose" [innerHTML]="caseStudy.value()"></article>
+                            } @else {
+                                <p class="ui-text-muted">The case study could not be loaded. Please try again later.</p>
+                            }
+                        </div>
+                    </section>
+                }
+            </div>
+
+            <aside class="split__aside">
+                <section class="ui-panel" aria-labelledby="h-details">
+                    <div class="panel-header">
+                        <h2 class="panel-title" id="h-details">Details</h2>
+                    </div>
+                    <div class="panel-body">
+                        <dl class="meta-list">
+                            @if (project.role) {
+                                <dt>Role</dt>
+                                <dd>{{ project.role }}</dd>
+                            }
+                            <dt>Type</dt>
+                            <dd>{{ typeLabel() }}</dd>
+                            @if (period()) {
+                                <dt>Period</dt>
+                                <dd>{{ period() }}</dd>
+                            }
+                            @if (project.context) {
+                                <dt>Context</dt>
+                                <dd>{{ project.context }}</dd>
+                            }
+                        </dl>
+                    </div>
+                </section>
+
+                <section class="ui-panel" aria-labelledby="h-stack">
+                    <div class="panel-header">
+                        <h2 class="panel-title" id="h-stack">Stack</h2>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="tag-list">
+                            @for (tech of project.stack; track tech) {
+                                <li class="tag">{{ tech }}</li>
+                            }
+                        </ul>
+                    </div>
+                </section>
+            </aside>
+        </div>
+        }
+
+        @if (siblings(); as s) {
+            <nav class="pager-nav" aria-label="More projects">
+                <a class="pager-nav__link" [routerLink]="['/portfolio', s.prev.slug]">
+                    <span class="pager-nav__dir"><app-icon name="arrow-left" [size]="14" /> Previous</span>
+                    <span class="pager-nav__title">{{ s.prev.title }}</span>
+                </a>
+                <a class="pager-nav__link pager-nav__link--next" [routerLink]="['/portfolio', s.next.slug]">
+                    <span class="pager-nav__dir">Next <app-icon name="arrow-right" [size]="14" /></span>
+                    <span class="pager-nav__title">{{ s.next.title }}</span>
+                </a>
+            </nav>
+        }
+    } @else {
+        <div class="ui-panel empty-state">
+            <app-icon name="search" [size]="24" />
+            <h1 class="panel-title">Project not found</h1>
+            <p>There is no project at “{{ slug() }}”. It may have been renamed.</p>
+            <a class="ui-btn ui-btn--primary" routerLink="/portfolio">Browse all projects</a>
+        </div>
+    }
+</div>

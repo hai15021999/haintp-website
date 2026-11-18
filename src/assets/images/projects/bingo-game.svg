@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" font-family="Inter, Segoe UI, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff4e0"/>
+      <stop offset="1" stop-color="#ffe2cc"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" fill="url(#bg)"/>
+  <!-- bingo card -->
+  <g transform="translate(56 40)">
+    <rect width="280" height="284" rx="14" fill="#ffffff" stroke="#f3c9a6" stroke-width="2"/>
+    <g font-size="26" font-weight="800" text-anchor="middle">
+      <text x="36" y="40" fill="#ef4444">B</text><text x="88" y="40" fill="#f59e0b">I</text><text x="140" y="40" fill="#10b981">N</text><text x="192" y="40" fill="#3b82f6">G</text><text x="244" y="40" fill="#8b5cf6">O</text>
+    </g>
+    <g font-size="16" font-weight="600" fill="#334155" text-anchor="middle">
+      <g transform="translate(14 54)">
+        <rect width="44" height="40" rx="8" fill="#f8fafc"/><text x="22" y="26">7</text>
+        <rect x="52" width="44" height="40" rx="8" fill="#f8fafc"/><text x="74" y="26">21</text>
+        <rect x="104" width="44" height="40" rx="8" fill="#f8fafc"/><text x="126" y="26">38</text>
+        <rect x="156" width="44" height="40" rx="8" fill="#f8fafc"/><text x="178" y="26">49</text>
+        <rect x="208" width="44" height="40" rx="8" fill="#f8fafc"/><text x="230" y="26">66</text>
+      </g>
+      <g transform="translate(14 98)">
+        <rect width="44" height="40" rx="8" fill="#f8fafc"/><text x="22" y="26">3</text>
+        <rect x="52" width="44" height="40" rx="8" fill="#f8fafc"/><text x="74" y="26">17</text>
+        <rect x="104" width="44" height="40" rx="8" fill="#f8fafc"/><text x="126" y="26">42</text>
+        <rect x="156" width="44" height="40" rx="8" fill="#f8fafc"/><text x="178" y="26">55</text>
+        <rect x="208" width="44" height="40" rx="8" fill="#f8fafc"/><text x="230" y="26">71</text>
+      </g>
+      <!-- winning row -->
+      <g transform="translate(14 142)">
+        <rect width="252" height="40" rx="10" fill="#fde68a" opacity="0.6"/>
+        <rect width="44" height="40" rx="8" fill="#ef4444"/><text x="22" y="26" fill="#fff">12</text>
+        <rect x="52" width="44" height="40" rx="8" fill="#f59e0b"/><text x="74" y="26" fill="#fff">29</text>
+        <rect x="104" width="44" height="40" rx="8" fill="#10b981"/><text x="126" y="23" fill="#fff" font-size="18">★</text>
+        <rect x="156" width="44" height="40" rx="8" fill="#3b82f6"/><text x="178" y="26" fill="#fff">58</text>
+        <rect x="208" width="44" height="40" rx="8" fill="#8b5cf6"/><text x="230" y="26" fill="#fff">63</text>
+      </g>
+      <g transform="translate(14 186)">
+        <rect width="44" height="40" rx="8" fill="#f8fafc"/><text x="22" y="26">9</text>
+        <rect x="52" width="44" height="40" rx="8" fill="#f8fafc"/><text x="74" y="26">24</text>
+        <rect x="104" width="44" height="40" rx="8" fill="#f8fafc"/><text x="126" y="26">33</text>
+        <rect x="156" width="44" height="40" rx="8" fill="#f8fafc"/><text x="178" y="26">47</text>
+        <rect x="208" width="44" height="40" rx="8" fill="#f8fafc"/><text x="230" y="26">74</text>
+      </g>
+      <g transform="translate(14 230)">
+        <rect width="44" height="40" rx="8" fill="#f8fafc"/><text x="22" y="26">1</text>
+        <rect x="52" width="44" height="40" rx="8" fill="#f8fafc"/><text x="74" y="26">16</text>
+        <rect x="104" width="44" height="40" rx="8" fill="#f8fafc"/><text x="126" y="26">40</text>
+        <rect x="156" width="44" height="40" rx="8" fill="#f8fafc"/><text x="178" y="26">52</text>
+        <rect x="208" width="44" height="40" rx="8" fill="#f8fafc"/><text x="230" y="26">68</text>
+      </g>
+    </g>
+  </g>
+  <!-- called ball -->
+  <g transform="translate(450 112)">
+    <circle r="62" fill="#3b82f6"/>
+    <circle r="40" fill="#ffffff"/>
+    <text y="-6" font-size="14" font-weight="800" fill="#3b82f6" text-anchor="middle">G</text>
+    <text y="20" font-size="28" font-weight="800" fill="#1e293b" text-anchor="middle">58</text>
+    <circle cx="-26" cy="-36" r="10" fill="#ffffff" opacity="0.35"/>
+  </g>
+  <!-- recent calls + chat -->
+  <g transform="translate(372 206)">
+    <circle cx="14" cy="14" r="14" fill="#ef4444"/><text x="14" y="19" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">12</text>
+    <circle cx="48" cy="14" r="14" fill="#f59e0b"/><text x="48" y="19" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">29</text>
+    <circle cx="82" cy="14" r="14" fill="#8b5cf6"/><text x="82" y="19" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">63</text>
+    <circle cx="116" cy="14" r="14" fill="#10b981"/><text x="116" y="19" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">40</text>
+    <circle cx="150" cy="14" r="14" fill="#3b82f6"/><text x="150" y="19" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">58</text>
+    <rect x="0" y="44" width="210" height="32" rx="16" fill="#ffffff"/>
+    <circle cx="18" cy="60" r="9" fill="#fca5a5"/>
+    <rect x="34" y="56" width="110" height="8" rx="4" fill="#cbd5e1"/>
+    <rect x="40" y="84" width="170" height="32" rx="16" fill="#ffffff"/>
+    <circle cx="58" cy="100" r="9" fill="#93c5fd"/>
+    <text x="74" y="105" font-size="13" font-weight="800" fill="#ef4444">BINGO! 🎉</text>
+  </g>
+</svg>

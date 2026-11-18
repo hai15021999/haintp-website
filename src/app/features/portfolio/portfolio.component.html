@@ -1,0 +1,53 @@
+<div class="page">
+    <header class="page-header">
+        <div>
+            <h1 class="page-header__title">Portfolio</h1>
+            <p class="page-header__desc">
+                Client and product work from enterprise teams, plus the side projects where I try new ideas. Open a card for the role, stack and what I shipped.
+            </p>
+        </div>
+    </header>
+
+    <div class="ui-panel">
+        <div class="ui-toolbar toolbar">
+            <div class="ui-segment" role="group" aria-label="Project type">
+                @for (f of filters; track f.id) {
+                    <button type="button" class="ui-btn" [attr.aria-pressed]="filter() === f.id" (click)="setFilter(f.id)">
+                        {{ f.label }}
+                        <span class="toolbar__count">{{ f.count }}</span>
+                    </button>
+                }
+            </div>
+            <span class="ui-spacer"></span>
+            <label class="ui-field ui-field--search toolbar__search">
+                <app-icon class="ui-field__icon" name="search" />
+                <input
+                    #search
+                    class="ui-field__input"
+                    type="search"
+                    placeholder="Search title or stack"
+                    aria-label="Search projects"
+                    [value]="query()"
+                    (input)="onSearch($event)" />
+            </label>
+        </div>
+
+        <div class="grid-wrap" aria-live="polite">
+            @if (projects().length) {
+                <ul class="grid" role="list">
+                    @for (project of projects(); track project.slug) {
+                        <li>
+                            <app-project-card [project]="project" />
+                        </li>
+                    }
+                </ul>
+            } @else {
+                <div class="empty-state">
+                    <app-icon name="search" [size]="24" />
+                    <p>No project matches “{{ query() }}”.</p>
+                    <button type="button" class="ui-btn ui-btn--secondary" (click)="clearSearch(search)">Clear search</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

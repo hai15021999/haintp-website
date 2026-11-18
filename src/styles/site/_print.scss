@@ -1,0 +1,44 @@
+/* Print: page content only (Resume → "Print / Save PDF"). */
+
+@media print {
+    @page {
+        margin: 14mm 12mm;
+    }
+
+    html,
+    body {
+        background: none;
+    }
+
+    .no-print,
+    .ui-sidenav,
+    .site-topbar,
+    .site-scrim {
+        display: none;
+    }
+
+    .ui-shell {
+        display: block;
+        height: auto;
+    }
+
+    .ui-shell__main {
+        overflow: visible;
+    }
+
+    .page {
+        max-width: none;
+        padding: 0;
+    }
+
+    .ui-panel,
+    .stat {
+        box-shadow: none;
+        break-inside: avoid;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+}

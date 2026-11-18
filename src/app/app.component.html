@@ -1,9 +1,112 @@
-<div
-    class="flex h-screen md:flex-row flex-col">
-    <div class="bg-Purple140 shadow-inner flex">
-        <app-nav-bar class="w-screen md:w-auto"></app-nav-bar>
-    </div>
-    <div class="w-full overflow-y-auto">
-        <router-outlet></router-outlet>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<div class="ui-shell">
+    @if (layout.isMobile() && layout.drawerOpen()) {
+        <div class="site-scrim" aria-hidden="true" (click)="layout.closeDrawer()"></div>
+    }
+
+    <nav
+        id="site-nav"
+        class="ui-sidenav site-sidenav"
+        aria-label="Main"
+        [class.site-sidenav--mobile]="layout.isMobile()"
+        [class.site-sidenav--hidden]="navHidden()"
+        [attr.inert]="navHidden() ? '' : null"
+        (keydown)="onNavKeydown($event)">
+        <div class="ui-sidenav__header">
+            <p class="ui-sidenav__title site-sidenav__brand">
+                <img class="site-sidenav__avatar" [src]="profile.avatar" alt="" width="28" height="28" />
+                <span class="site-sidenav__name">{{ profile.displayName }}</span>
+            </p>
+            @if (layout.isMobile()) {
+                <button type="button" class="ui-btn ui-btn--icon" aria-label="Close navigation" (click)="layout.closeDrawer()">
+                    <app-icon name="x" />
+                </button>
+            } @else {
+                <button
+                    type="button"
+                    class="ui-sidenav__toggle"
+                    aria-controls="site-nav"
+                    [attr.aria-expanded]="navExpanded()"
+                    [attr.aria-label]="navExpanded() ? 'Collapse navigation' : 'Expand navigation'"
+                    [title]="navExpanded() ? 'Collapse' : 'Expand'"
+                    (click)="layout.toggleRail()">
+                    <app-icon name="panel" />
+                </button>
+            }
+        </div>
+
+        <div class="ui-sidenav__body">
+            <p class="ui-sidenav__heading" id="nav-pages">Pages</p>
+            <ul class="ui-sidenav__list" aria-labelledby="nav-pages">
+                @for (item of nav; track item.path) {
+                    <li>
+                        <a class="ui-sidenav__link" [routerLink]="item.path" routerLinkActive="" ariaCurrentWhenActive="page" [title]="item.label">
+                            <app-icon class="ui-sidenav__icon" [name]="item.icon" />
+                            <span class="ui-sidenav__label">{{ item.label }}</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+
+            <p class="ui-sidenav__heading" id="nav-elsewhere">Elsewhere</p>
+            <ul class="ui-sidenav__list" aria-labelledby="nav-elsewhere">
+                @for (social of profile.socials; track social.id) {
+                    <li>
+                        <a class="ui-sidenav__link" [href]="social.url" target="_blank" rel="noopener noreferrer" [title]="social.label">
+                            <app-icon class="ui-sidenav__icon" [name]="social.id" />
+                            <span class="ui-sidenav__label">{{ social.label }}</span>
+                            <app-icon class="site-sidenav__ext" name="external" [size]="12" />
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <div class="ui-sidenav__footer">
+            <button type="button" class="ui-sidenav__link" [title]="themeLabel()" (click)="theme.cycle()">
+                <app-icon class="ui-sidenav__icon" [name]="themeIcon()" />
+                <span class="ui-sidenav__label">{{ themeLabel() }}</span>
+            </button>
+            @if (navExpanded()) {
+                <p class="site-sidenav__meta">v{{ version }} · © {{ year }} {{ profile.displayName }}</p>
+            }
+        </div>
+    </nav>
+
+    <div class="ui-shell__main site-main" #main>
+        <header class="site-topbar">
+            @if (layout.isMobile()) {
+                <button
+                    type="button"
+                    class="ui-btn ui-btn--icon"
+                    aria-label="Open navigation"
+                    aria-controls="site-nav"
+                    [attr.aria-expanded]="layout.drawerOpen()"
+                    (click)="layout.openDrawer()">
+                    <app-icon name="menu" />
+                </button>
+            }
+            <p class="site-topbar__crumb">
+                <span class="site-topbar__site">{{ profile.displayName }}</span>
+                @if (section()) {
+                    <span class="site-topbar__sep" aria-hidden="true">/</span>
+                    <span class="site-topbar__current">{{ section() }}</span>
+                }
+            </p>
+            <span class="ui-spacer"></span>
+            <a class="ui-btn site-topbar__optional" href="https://github.com/hai15021999" target="_blank" rel="noopener noreferrer">
+                <app-icon name="github" />
+                GitHub
+            </a>
+            <a class="ui-btn ui-btn--primary" routerLink="/contact">
+                <app-icon name="send" />
+                Contact me
+            </a>
+        </header>
+
+        <main id="main-content" tabindex="-1">
+            <router-outlet />
+        </main>
     </div>
 </div>

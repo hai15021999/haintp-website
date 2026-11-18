@@ -1,0 +1,148 @@
+<div class="page">
+    <header class="page-header">
+        <div>
+            <h1 class="page-header__title">Resume</h1>
+            <p class="page-header__desc">{{ profile.role }} · {{ years }}+ years · {{ profile.location }}</p>
+        </div>
+        <div class="page-header__actions no-print">
+            <button type="button" class="ui-btn ui-btn--secondary" (click)="print()">
+                <app-icon name="printer" />
+                Print / Save PDF
+            </button>
+            <a class="ui-btn ui-btn--primary" routerLink="/contact">
+                <app-icon name="send" />
+                Contact me
+            </a>
+        </div>
+    </header>
+
+    <div class="split resume">
+        <div class="split__main">
+            <section class="ui-panel" aria-labelledby="h-summary">
+                <div class="panel-header">
+                    <app-icon class="panel-icon" name="user" />
+                    <h2 class="panel-title" id="h-summary">Summary</h2>
+                </div>
+                <div class="panel-body">
+                    <p class="summary">{{ resume.summary }}</p>
+                </div>
+            </section>
+
+            <section class="ui-panel" aria-labelledby="h-experience">
+                <div class="panel-header">
+                    <app-icon class="panel-icon" name="briefcase" />
+                    <h2 class="panel-title" id="h-experience">Experience</h2>
+                </div>
+                <ol class="timeline" role="list">
+                    @for (job of experience; track job.id) {
+                        <li class="job">
+                            <div class="job__head">
+                                <div class="job__titles">
+                                    <h3 class="job__title">{{ job.title }}</h3>
+                                    <p class="job__company">{{ job.company }}</p>
+                                </div>
+                                <div class="job__when">
+                                    @if (job.current) {
+                                        <span class="pill">Current</span>
+                                    }
+                                    <span>{{ job.periodLabel }}</span>
+                                    @if (job.location) {
+                                        <span class="job__loc">{{ job.location }}</span>
+                                    }
+                                </div>
+                            </div>
+                            <p class="job__summary">{{ job.summary }}</p>
+                            <ul class="bullet-list">
+                                @for (a of job.achievements; track a) {
+                                    <li>{{ a }}</li>
+                                }
+                            </ul>
+                            <ul class="tag-list job__stack">
+                                @for (tech of job.stack; track tech) {
+                                    <li class="tag">{{ tech }}</li>
+                                }
+                            </ul>
+                            @if (job.projectLinks.length) {
+                                <p class="job__projects no-print">
+                                    Projects:
+                                    @for (p of job.projectLinks; track p.slug; let last = $last) {
+                                        <a class="ui-link" [routerLink]="['/portfolio', p.slug]">{{ p.title }}</a>@if (!last) {<span>, </span>}
+                                    }
+                                </p>
+                            }
+                        </li>
+                    }
+                </ol>
+            </section>
+        </div>
+
+        <aside class="split__aside">
+            <section class="ui-panel card-profile" aria-label="Profile">
+                <img class="card-profile__avatar" [src]="profile.avatar" alt="" width="64" height="64" />
+                <p class="card-profile__name">{{ profile.fullName }}</p>
+                <p class="card-profile__role">{{ profile.role }}</p>
+                <ul class="contact-list" role="list">
+                    <li>
+                        <app-icon name="map-pin" [size]="14" />
+                        {{ profile.location }}
+                    </li>
+                    @if (github) {
+                        <li>
+                            <app-icon name="github" [size]="14" />
+                            <a class="ui-link" [href]="github.url" target="_blank" rel="noopener noreferrer">{{ github.url.replace('https://', '') }}</a>
+                        </li>
+                    }
+                    <li>
+                        <app-icon name="mail" [size]="14" />
+                        <a class="ui-link" routerLink="/contact">Contact form on this site</a>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="ui-panel" aria-labelledby="h-skills">
+                <div class="panel-header">
+                    <h2 class="panel-title" id="h-skills">Skills</h2>
+                </div>
+                <div class="panel-body skill-groups">
+                    @for (group of resume.skills; track group.group) {
+                        <div>
+                            <p class="eyebrow">{{ group.group }}</p>
+                            <ul class="tag-list">
+                                @for (item of group.items; track item) {
+                                    <li class="tag">{{ item }}</li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                </div>
+            </section>
+
+            <section class="ui-panel" aria-labelledby="h-edu">
+                <div class="panel-header">
+                    <h2 class="panel-title" id="h-edu">Education</h2>
+                </div>
+                @for (edu of education; track edu.id) {
+                    <div class="panel-body">
+                        <p class="edu__degree">{{ edu.degree }}</p>
+                        <p class="edu__meta">{{ edu.school }}</p>
+                        <p class="edu__meta">{{ edu.periodLabel }}</p>
+                    </div>
+                }
+            </section>
+
+            <section class="ui-panel" aria-labelledby="h-lang">
+                <div class="panel-header">
+                    <h2 class="panel-title" id="h-lang">Languages</h2>
+                </div>
+                <div class="panel-body">
+                    <dl class="meta-list">
+                        @for (lang of resume.languages; track lang.name) {
+                            <dt>{{ lang.name }}</dt>
+                            <dd>{{ lang.level }}</dd>
+                        }
+                    </dl>
+                </div>
+            </section>
+        </aside>
+    </div>
+</div>

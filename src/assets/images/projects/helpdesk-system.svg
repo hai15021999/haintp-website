@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" font-family="Inter, Segoe UI, sans-serif">
+  <rect width="640" height="360" fill="#eaf0fb"/>
+  <g transform="translate(40 32)">
+    <rect width="560" height="300" rx="10" fill="#ffffff" stroke="#d3ddef"/>
+    <!-- header -->
+    <rect width="560" height="40" rx="10" fill="#ffffff"/>
+    <rect y="40" width="560" height="1" fill="#e4e9f2"/>
+    <circle cx="22" cy="20" r="9" fill="#2563eb"/>
+    <path d="M17 21a5 5 0 0 1 10 0v2h-2v-2a3 3 0 0 0-6 0v2h-2z" fill="#fff"/>
+    <rect x="38" y="16" width="76" height="9" rx="3" fill="#1f2937"/>
+    <rect x="380" y="10" width="160" height="20" rx="6" fill="#f3f5f9" stroke="#e1e6ef"/>
+    <!-- ticket list -->
+    <g transform="translate(14 54)">
+      <rect width="230" height="232" rx="8" fill="#f8f9fc"/>
+      <g>
+        <rect x="8" y="8" width="214" height="50" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+        <rect x="18" y="18" width="40" height="7" rx="3" fill="#2563eb"/>
+        <rect x="18" y="32" width="150" height="8" rx="3" fill="#1f2937"/>
+        <rect x="170" y="16" width="44" height="12" rx="6" fill="#fde7e7"/>
+        <rect x="8" y="66" width="214" height="50" rx="6" fill="#ffffff" stroke="#e4e9f2"/>
+        <rect x="18" y="76" width="40" height="7" rx="3" fill="#94a3b8"/>
+        <rect x="18" y="90" width="130" height="8" rx="3" fill="#475569"/>
+        <rect x="170" y="74" width="44" height="12" rx="6" fill="#fef3c7"/>
+        <rect x="8" y="124" width="214" height="50" rx="6" fill="#ffffff" stroke="#e4e9f2"/>
+        <rect x="18" y="134" width="40" height="7" rx="3" fill="#94a3b8"/>
+        <rect x="18" y="148" width="140" height="8" rx="3" fill="#475569"/>
+        <rect x="170" y="132" width="44" height="12" rx="6" fill="#dcfce7"/>
+        <rect x="8" y="182" width="214" height="42" rx="6" fill="#ffffff" stroke="#e4e9f2"/>
+        <rect x="18" y="192" width="40" height="7" rx="3" fill="#94a3b8"/>
+        <rect x="18" y="206" width="110" height="8" rx="3" fill="#475569"/>
+        <rect x="170" y="190" width="44" height="12" rx="6" fill="#dbeafe"/>
+      </g>
+    </g>
+    <!-- conversation -->
+    <g transform="translate(258 54)">
+      <rect x="0" y="0" width="160" height="10" rx="3" fill="#1f2937"/>
+      <rect x="0" y="18" width="220" height="7" rx="3" fill="#94a3b8"/>
+      <g transform="translate(0 40)">
+        <circle cx="12" cy="12" r="12" fill="#c7d2fe"/>
+        <rect x="32" y="0" width="190" height="46" rx="10" fill="#f1f5f9"/>
+        <rect x="44" y="12" width="150" height="7" rx="3" fill="#64748b"/>
+        <rect x="44" y="26" width="110" height="7" rx="3" fill="#64748b"/>
+      </g>
+      <g transform="translate(60 100)">
+        <rect x="0" y="0" width="190" height="46" rx="10" fill="#2563eb"/>
+        <rect x="12" y="12" width="150" height="7" rx="3" fill="#bfdbfe"/>
+        <rect x="12" y="26" width="120" height="7" rx="3" fill="#bfdbfe"/>
+        <circle cx="214" cy="34" r="12" fill="#93c5fd"/>
+      </g>
+      <g transform="translate(0 160)">
+        <circle cx="12" cy="12" r="12" fill="#c7d2fe"/>
+        <rect x="32" y="0" width="150" height="32" rx="10" fill="#f1f5f9"/>
+        <rect x="44" y="12" width="100" height="7" rx="3" fill="#64748b"/>
+      </g>
+      <rect x="0" y="204" width="236" height="28" rx="8" fill="#fff" stroke="#d6dde8"/>
+      <rect x="12" y="215" width="100" height="7" rx="3" fill="#cbd5e1"/>
+      <rect x="200" y="208" width="30" height="20" rx="5" fill="#2563eb"/>
+      <path d="M210 218l10-5-4 10-1-4z" fill="#fff"/>
+    </g>
+    <!-- SLA card -->
+    <g transform="translate(498 54)">
+      <rect width="50" height="232" rx="8" fill="#f8f9fc"/>
+      <circle cx="25" cy="34" r="16" fill="none" stroke="#e2e8f0" stroke-width="5"/>
+      <path d="M25 18a16 16 0 1 1-15 21" fill="none" stroke="#16a34a" stroke-width="5" stroke-linecap="round"/>
+      <g fill="#cbd5e1"><rect x="10" y="70" width="30" height="6" rx="3"/><rect x="10" y="84" width="22" height="6" rx="3"/></g>
+      <g fill="#2563eb"><rect x="10" y="200" width="6" height="20" rx="2"/><rect x="20" y="186" width="6" height="34" rx="2"/><rect x="30" y="194" width="6" height="26" rx="2"/></g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,2042 @@
+/* =====================================================================
+   UI kit components — v2.0
+   Reads only --ui-* tokens (tokens.css). Never hard-code a color here.
+
+   Naming
+     .ui-<block>               component           .ui-btn
+     .ui-<block>__<element>    part of a component .ui-field__input
+     .ui-<block>--<modifier>   variant             .ui-btn--primary
+   State comes from ARIA / native attributes, not classes:
+     :disabled, [aria-disabled], [aria-pressed], [aria-selected],
+     [aria-current="page"], [aria-expanded], [aria-invalid], [aria-busy]
+   Components: button, segment, card, field, select, menu, table, pager,
+   popup, choice, chip, tooltip, date/time, loading, dialog, tabs, sidenav
+   Docs: docs/naming.md
+   ===================================================================== */
+
+
+/* ---------------------------------------------------------------------
+   Shared focus ring (keyboard only). Fields use their own bottom line.
+   --------------------------------------------------------------------- */
+
+.ui-btn:focus-visible,
+.ui-card:focus-visible,
+.ui-link:focus-visible,
+.ui-chip__dismiss:focus-visible {
+	outline: var(--ui-focus-ring) solid var(--ui-focus);
+	outline-offset: 2px;
+}
+
+
+/* ---------------------------------------------------------------------
+   Button
+   --------------------------------------------------------------------- */
+
+.ui-btn {
+	box-sizing: border-box;
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--ui-space-sm);
+	height: var(--ui-control-h);
+	padding: 0 var(--ui-space-lg);
+	border: 1px solid transparent;
+	border-radius: var(--ui-radius);
+	background: transparent;
+	color: var(--ui-text);
+	font: var(--ui-type-control);
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.ui-btn__icon {
+	flex: none;
+}
+
+/* Hover / active never apply to a disabled, busy, or selected button. */
+.ui-btn:hover:not(:disabled, [aria-disabled="true"], [aria-busy="true"], [aria-pressed="true"], [aria-current="page"]) {
+	background: var(--ui-hover);
+}
+
+.ui-btn:active:not(:disabled, [aria-disabled="true"], [aria-busy="true"], [aria-pressed="true"], [aria-current="page"]) {
+	background: var(--ui-pressed);
+}
+
+/* Secondary */
+.ui-btn--secondary {
+	border-color: var(--ui-line-strong);
+	background: var(--ui-surface);
+}
+
+/* Primary */
+.ui-btn--primary {
+	border-color: var(--ui-primary);
+	background: var(--ui-primary);
+	color: var(--ui-on-primary);
+}
+
+.ui-btn--primary:hover:not(:disabled, [aria-disabled="true"], [aria-busy="true"]) {
+	border-color: var(--ui-primary-hover);
+	background: var(--ui-primary-hover);
+}
+
+.ui-btn--primary:active:not(:disabled, [aria-disabled="true"], [aria-busy="true"]) {
+	border-color: var(--ui-primary-active);
+	background: var(--ui-primary-active);
+}
+
+/* Danger — destructive confirm (Delete, Remove). */
+.ui-btn--danger {
+	border-color: var(--ui-danger);
+	background: var(--ui-danger);
+	color: var(--ui-on-danger);
+}
+
+.ui-btn--danger:hover:not(:disabled, [aria-disabled="true"], [aria-busy="true"]) {
+	border-color: var(--ui-danger-hover);
+	background: var(--ui-danger-hover);
+}
+
+/* Toggle — a stand-alone on/off button (Bold, Show totals, Pin).
+   Off = secondary look; on = aria-pressed="true". */
+.ui-btn--toggle {
+	border-color: var(--ui-line-strong);
+	background: var(--ui-surface);
+}
+
+.ui-btn--toggle[aria-pressed="true"] {
+	border-color: var(--ui-accent);
+	background: var(--ui-wash);
+	color: var(--ui-accent);
+}
+
+/* Disabled — after the variants so it wins at equal specificity. */
+.ui-btn:disabled,
+.ui-btn[aria-disabled="true"] {
+	background: transparent;
+	color: var(--ui-text-disabled);
+	cursor: default;
+}
+
+.ui-btn--secondary:is(:disabled, [aria-disabled="true"]),
+.ui-btn--primary:is(:disabled, [aria-disabled="true"]),
+.ui-btn--danger:is(:disabled, [aria-disabled="true"]),
+.ui-btn--toggle:is(:disabled, [aria-disabled="true"]) {
+	border-color: var(--ui-line);
+}
+
+/* Busy: keeps size, hides the label, shows a spinner. */
+.ui-btn[aria-busy="true"] {
+	color: transparent;
+	cursor: progress;
+}
+
+.ui-btn[aria-busy="true"]::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	width: 14px;
+	height: 14px;
+	margin: auto;
+	border: 2px solid var(--ui-text-body);
+	border-right-color: transparent;
+	border-radius: var(--ui-radius-pill);
+	animation: ui-spin 0.7s linear infinite;
+}
+
+.ui-btn--primary[aria-busy="true"]::after {
+	border-color: var(--ui-on-primary);
+	border-right-color: transparent;
+}
+
+.ui-btn--danger[aria-busy="true"]::after {
+	border-color: var(--ui-on-danger);
+	border-right-color: transparent;
+}
+
+@keyframes ui-spin {
+	to { transform: rotate(360deg); }
+}
+
+/* Icon button — 24px, used for the column filter. */
+.ui-btn--icon {
+	width: var(--ui-control-h-sm);
+	height: var(--ui-control-h-sm);
+	padding: 0;
+	border: 0;
+	color: var(--ui-text-body);
+}
+
+.ui-btn--icon[aria-pressed="true"] {
+	background: var(--ui-wash);
+	color: var(--ui-accent);
+}
+
+/* Page button — pager. */
+.ui-btn--page {
+	min-width: var(--ui-control-h);
+	padding: 0 var(--ui-space-sm);
+	font: var(--ui-type-body);
+}
+
+.ui-btn--page[aria-current="page"] {
+	background: var(--ui-primary);
+	color: var(--ui-on-primary);
+}
+
+
+/* ---------------------------------------------------------------------
+   Segmented control
+   --------------------------------------------------------------------- */
+
+.ui-segment {
+	display: inline-flex;
+	height: var(--ui-control-h);
+}
+
+.ui-segment > .ui-btn {
+	border-color: var(--ui-line-strong);
+	border-radius: 0;
+	background: var(--ui-surface);
+}
+
+.ui-segment > .ui-btn + .ui-btn {
+	margin-left: -1px;
+}
+
+.ui-segment > .ui-btn:first-child {
+	border-radius: var(--ui-radius) 0 0 var(--ui-radius);
+}
+
+.ui-segment > .ui-btn:last-child {
+	border-radius: 0 var(--ui-radius) var(--ui-radius) 0;
+}
+
+.ui-segment > .ui-btn[aria-pressed="true"] {
+	z-index: 1;
+	border-color: var(--ui-primary);
+	background: var(--ui-primary);
+	color: var(--ui-on-primary);
+}
+
+.ui-segment > .ui-btn:focus-visible {
+	z-index: 2;
+}
+
+
+/* ---------------------------------------------------------------------
+   Metric card
+   --------------------------------------------------------------------- */
+
+.ui-card-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: var(--ui-space-lg);
+}
+
+@media (min-width: 960px) {
+	.ui-card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1280px) {
+	.ui-card-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+
+.ui-card {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	min-height: var(--ui-card-min-h);
+	padding: var(--ui-space-xl) var(--ui-space-2xl);
+	border: 1px solid var(--ui-line);
+	border-radius: var(--ui-radius-container);
+	background: var(--ui-surface);
+	box-shadow: var(--ui-shadow-card);
+	color: inherit;
+	font: var(--ui-type-body);
+	text-align: left;
+	cursor: pointer;
+}
+
+.ui-card[aria-pressed="true"] {
+	border-color: var(--ui-accent);
+	background: var(--ui-wash);
+	box-shadow: var(--ui-shadow-card), inset 0 0 0 1px var(--ui-accent);
+}
+
+.ui-card__value {
+	color: var(--ui-accent);
+	font: var(--ui-type-value);
+}
+
+.ui-card__value--alert {
+	color: var(--ui-alert);
+}
+
+.ui-card__label {
+	color: var(--ui-text-body);
+	font: var(--ui-type-body);
+}
+
+.ui-card__sub {
+	color: var(--ui-text-muted);
+	font: var(--ui-type-meta);
+}
+
+
+/* ---------------------------------------------------------------------
+   Form item: label + control + message
+   --------------------------------------------------------------------- */
+
+.ui-form-item {
+	display: inline-flex;
+	flex-direction: column;
+	gap: var(--ui-space-xs);
+}
+
+.ui-label {
+	color: var(--ui-text-label);
+	font: var(--ui-type-label);
+}
+
+.ui-field-msg {
+	color: var(--ui-text-muted);
+	font: var(--ui-type-meta);
+}
+
+.ui-field-msg--error {
+	color: var(--ui-danger);
+}
+
+
+/* ---------------------------------------------------------------------
+   Text field
+   Focus = bottom line 2px. Drawn as 1px border + 1px inset shadow so
+   the box stays 32px tall.
+   --------------------------------------------------------------------- */
+
+.ui-field {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	gap: var(--ui-space-sm);
+	height: var(--ui-control-h);
+	padding: 0 var(--ui-field-px);
+	border: 1px solid var(--ui-line-strong);
+	border-bottom-color: var(--ui-text-label);
+	border-radius: var(--ui-radius);
+	background: var(--ui-surface);
+	color: var(--ui-text);
+	font: var(--ui-type-body);
+}
+
+.ui-field:focus-within {
+	border-bottom-color: var(--ui-focus);
+	box-shadow: inset 0 -1px 0 var(--ui-focus);
+}
+
+.ui-field--invalid,
+.ui-field:has(.ui-field__input[aria-invalid="true"]) {
+	border-bottom-color: var(--ui-danger);
+	box-shadow: inset 0 -1px 0 var(--ui-danger);
+}
+
+.ui-field--disabled,
+.ui-field:has(.ui-field__input:disabled) {
+	color: var(--ui-text-disabled);
+	cursor: default;
+}
+
+.ui-field__input {
+	min-width: 0;
+	flex: 1;
+	padding: 0;
+	border: 0;
+	outline: none;
+	background: transparent;
+	color: inherit;
+	font: var(--ui-type-body);
+}
+
+.ui-field__input::placeholder {
+	color: var(--ui-text-muted);
+	opacity: 1;
+}
+
+.ui-field__input:disabled {
+	cursor: default;
+}
+
+.ui-field__icon {
+	flex: none;
+	color: var(--ui-text-body);
+}
+
+.ui-field--search {
+	width: var(--ui-search-w);
+}
+
+
+/* ---------------------------------------------------------------------
+   Dropdown (select)
+   Markup: .ui-select > button.ui-field.ui-select__face + .ui-menu
+   --------------------------------------------------------------------- */
+
+.ui-select {
+	position: relative;
+	width: var(--ui-select-w, 220px);
+}
+
+.ui-select--short { --ui-select-w: 160px; }
+.ui-select--year { --ui-select-w: 120px; }
+.ui-select--page-size { --ui-select-w: 80px; }
+
+.ui-select__face {
+	width: 100%;
+	text-align: left;
+	cursor: pointer;
+}
+
+.ui-select__face[aria-expanded="true"] {
+	border-bottom-color: var(--ui-focus);
+	box-shadow: inset 0 -1px 0 var(--ui-focus);
+}
+
+.ui-select__face:is(:disabled, [aria-disabled="true"]) {
+	color: var(--ui-text-disabled);
+	cursor: default;
+}
+
+.ui-select__value {
+	min-width: 0;
+	flex: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.ui-select__chevron {
+	flex: none;
+	color: var(--ui-text-body);
+	transition: transform 0.15s ease;
+}
+
+.ui-select__face[aria-expanded="true"] .ui-select__chevron {
+	transform: rotate(180deg);
+}
+
+/* Plain-HTML placement. In Angular, prefer CDK Overlay (see docs/dropdown.md). */
+.ui-select > .ui-menu {
+	position: absolute;
+	top: calc(100% + var(--ui-space-xs));
+	left: 0;
+}
+
+.ui-select--up > .ui-menu {
+	top: auto;
+	bottom: calc(100% + var(--ui-space-xs));
+}
+
+
+/* ---------------------------------------------------------------------
+   Menu and menu item (dropdown list, popup actions)
+   --------------------------------------------------------------------- */
+
+.ui-menu {
+	box-sizing: border-box;
+	z-index: var(--ui-z-menu);
+	min-width: 100%;
+	padding: var(--ui-space-xs) 0;
+	border: 1px solid var(--ui-overlay-border);
+	border-radius: var(--ui-radius-container);
+	background: var(--ui-surface);
+	box-shadow: var(--ui-shadow-menu);
+}
+
+.ui-menu-item {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	height: var(--ui-control-h);
+	padding: 0 var(--ui-space-lg);
+	border: 0;
+	border-radius: 0;
+	background: transparent;
+	color: var(--ui-text);
+	font: var(--ui-type-body);
+	text-align: left;
+	cursor: pointer;
+}
+
+.ui-menu-item:hover:not(:disabled, [aria-disabled="true"], [aria-selected="true"], [aria-pressed="true"]) {
+	background: var(--ui-hover);
+}
+
+.ui-menu-item:is([aria-selected="true"], [aria-pressed="true"]) {
+	background: var(--ui-wash);
+	color: var(--ui-accent);
+	font-weight: 600;
+}
+
+.ui-menu-item:is(:disabled, [aria-disabled="true"]) {
+	color: var(--ui-text-disabled);
+	cursor: default;
+}
+
+.ui-menu-item:focus-visible {
+	outline: var(--ui-focus-ring) solid var(--ui-focus);
+	outline-offset: -2px;
+}
+
+.ui-divider {
+	height: 0;
+	margin: var(--ui-space-sm) 0;
+	border: 0;
+	border-top: 1px solid var(--ui-line);
+}
+
+
+/* ---------------------------------------------------------------------
+   Data table: panel > toolbar + scroll > table + pager
+   Table parts use structural tags (th/td) on purpose: a table's children
+   are fixed by HTML, so the selectors cannot catch stray elements.
+   --------------------------------------------------------------------- */
+
+.ui-panel {
+	border: 1px solid var(--ui-line);
+	border-radius: var(--ui-radius-container);
+	background: var(--ui-surface);
+	color: var(--ui-text);
+}
+
+.ui-toolbar {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	gap: var(--ui-space-md);
+	min-height: var(--ui-toolbar-h);
+	padding: 0 var(--ui-space-md);
+	border-bottom: 1px solid var(--ui-line);
+	user-select: none;
+}
+
+.ui-toolbar .ui-field__input {
+	user-select: text;
+}
+
+.ui-spacer {
+	flex: 1;
+}
+
+.ui-table-scroll {
+	max-height: var(--ui-table-max-h);
+	overflow: auto;
+}
+
+.ui-table {
+	width: max-content;
+	min-width: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+	color: var(--ui-text);
+	font: var(--ui-type-body);
+}
+
+.ui-table th {
+	position: sticky;
+	top: 0;
+	z-index: var(--ui-z-sticky);
+	height: var(--ui-row-h);
+	padding: 0 var(--ui-space-md) 0 var(--ui-space-lg);
+	border-bottom: 1px solid var(--ui-line);
+	background-color: var(--ui-surface); /* solid: body must not show through */
+	font: var(--ui-type-control);
+	text-align: left;
+	white-space: nowrap;
+	user-select: none;
+}
+
+.ui-table__th {
+	display: flex;
+	align-items: center;
+	gap: var(--ui-space-sm);
+}
+
+.ui-table td {
+	height: var(--ui-row-h);
+	padding: 0 var(--ui-space-lg);
+	border-bottom: 1px solid var(--ui-line);
+	white-space: nowrap;
+	user-select: text;
+}
+
+.ui-table tbody tr:hover > td {
+	background-color: var(--ui-hover);
+}
+
+.ui-table .ui-table__num {
+	text-align: right;
+}
+
+.ui-table .ui-table__num > .ui-table__th {
+	justify-content: flex-end;
+}
+
+/* Truncation lives on an inner block: max-width on a <td> is ignored by
+   auto table layout. Put the full value in title="" for the tooltip. */
+.ui-truncate {
+	display: block;
+	max-width: var(--ui-cell-max-w);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.ui-table__empty > td {
+	height: 80px;
+	color: var(--ui-text-muted);
+	text-align: center;
+}
+
+.ui-table__sort {
+	width: 10px;
+	color: var(--ui-text-body);
+	font: var(--ui-type-sort);
+}
+
+
+/* ---------------------------------------------------------------------
+   Cell content
+   --------------------------------------------------------------------- */
+
+.ui-link {
+	border-radius: var(--ui-radius-sm);
+	color: var(--ui-accent);
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.ui-link:hover {
+	text-decoration: underline;
+}
+
+/* Data color comes from the row: style="--ui-dot-color: #c2530e" */
+.ui-dot {
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	margin-right: var(--ui-space-sm);
+	border-radius: var(--ui-radius-pill);
+	background: var(--ui-dot-color, var(--ui-text-muted));
+	vertical-align: 1px;
+}
+
+/* Data color comes from the row: style="--ui-badge-bg: #0f6cbd" */
+.ui-badge {
+	display: inline-block;
+	padding: 1px var(--ui-space-md);
+	border-radius: var(--ui-radius-sm);
+	background: var(--ui-badge-bg, var(--ui-text-body));
+	color: var(--ui-on-data);
+	font: var(--ui-type-badge);
+}
+
+.ui-text-alert {
+	color: var(--ui-alert);
+	font-weight: 600;
+}
+
+.ui-text-muted {
+	color: var(--ui-text-muted);
+	font-weight: 400;
+}
+
+
+/* ---------------------------------------------------------------------
+   Pager
+   min-height + vertical padding: when it wraps on a narrow screen the
+   bar grows instead of overflowing.
+   --------------------------------------------------------------------- */
+
+.ui-pager {
+	box-sizing: border-box;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--ui-space-xs);
+	min-height: var(--ui-pager-h);
+	padding: 9px var(--ui-space-lg);
+	border-top: 1px solid var(--ui-line);
+	color: var(--ui-text-body);
+	font: var(--ui-type-body);
+	user-select: none;
+}
+
+.ui-pager__label {
+	margin-left: var(--ui-space-xs);
+}
+
+
+/* ---------------------------------------------------------------------
+   Filter popup
+   --------------------------------------------------------------------- */
+
+.ui-popup {
+	box-sizing: border-box;
+	width: var(--ui-popup-w);
+	padding: var(--ui-space-md) 0;
+	border: 1px solid var(--ui-overlay-border);
+	border-radius: var(--ui-radius-container);
+	background: var(--ui-surface);
+	box-shadow: var(--ui-shadow-popup);
+	color: var(--ui-text);
+}
+
+.ui-popup__search {
+	margin: var(--ui-space-xs) var(--ui-space-lg);
+}
+
+.ui-popup__list {
+	max-height: var(--ui-popup-list-max-h);
+	overflow-y: auto;
+}
+
+.ui-popup__actions {
+	display: flex;
+	justify-content: flex-end;
+	gap: var(--ui-space-md);
+	padding: var(--ui-space-md) var(--ui-space-lg) var(--ui-space-2xs);
+}
+
+
+/* ---------------------------------------------------------------------
+   Checkbox, radio, switch
+   Native inputs with appearance: none, so the look follows the theme in
+   every browser and in dark mode. The mark is a CSS mask, filled with a
+   token (a data-URI SVG cannot read currentColor or CSS variables).
+   --------------------------------------------------------------------- */
+
+.ui-checkbox,
+.ui-check__box,
+.ui-radio {
+	-webkit-appearance: none;
+	appearance: none;
+	box-sizing: border-box;
+	flex: none;
+	display: inline-grid;
+	place-content: center;
+	width: var(--ui-choice-size);
+	height: var(--ui-choice-size);
+	margin: 0;
+	border: 1px solid var(--ui-text-label);
+	border-radius: var(--ui-radius-sm);
+	background: var(--ui-surface);
+	vertical-align: -3px;
+	cursor: pointer;
+	transition: background-color var(--ui-duration), border-color var(--ui-duration);
+}
+
+.ui-radio {
+	border-radius: var(--ui-radius-pill);
+}
+
+.ui-checkbox::before,
+.ui-check__box::before,
+.ui-radio::before {
+	content: "";
+	width: 10px;
+	height: 10px;
+	background: var(--ui-on-primary);
+	transform: scale(0);
+	transition: transform var(--ui-duration);
+}
+
+.ui-checkbox::before,
+.ui-check__box::before {
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1.5 5.2 4 7.6 8.6 2.6' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1.5 5.2 4 7.6 8.6 2.6' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.ui-checkbox:indeterminate::before,
+.ui-check__box:indeterminate::before {
+	-webkit-mask: none;
+	mask: none;
+	height: 2px;
+	border-radius: 1px;
+}
+
+.ui-radio::before {
+	width: 6px;
+	height: 6px;
+	border-radius: var(--ui-radius-pill);
+}
+
+.ui-checkbox:hover,
+.ui-check__box:hover,
+.ui-radio:hover {
+	border-color: var(--ui-text-body);
+}
+
+.ui-checkbox:is(:checked, :indeterminate),
+.ui-check__box:is(:checked, :indeterminate),
+.ui-radio:checked {
+	border-color: var(--ui-primary);
+	background: var(--ui-primary);
+}
+
+.ui-checkbox:is(:checked, :indeterminate)::before,
+.ui-check__box:is(:checked, :indeterminate)::before,
+.ui-radio:checked::before {
+	transform: scale(1);
+}
+
+.ui-checkbox:focus-visible,
+.ui-check__box:focus-visible,
+.ui-radio:focus-visible,
+.ui-switch:focus-visible {
+	outline: var(--ui-focus-ring) solid var(--ui-focus);
+	outline-offset: 2px;
+}
+
+.ui-checkbox[aria-invalid="true"],
+.ui-radio[aria-invalid="true"],
+.ui-switch[aria-invalid="true"] {
+	border-color: var(--ui-danger);
+}
+
+.ui-checkbox:disabled,
+.ui-check__box:disabled,
+.ui-radio:disabled {
+	border-color: var(--ui-text-disabled);
+	background: var(--ui-hover);
+	cursor: default;
+}
+
+.ui-checkbox:disabled:is(:checked, :indeterminate),
+.ui-check__box:disabled:is(:checked, :indeterminate),
+.ui-radio:disabled:checked {
+	background: var(--ui-text-disabled);
+}
+
+/* Switch: <input type="checkbox" role="switch" class="ui-switch">.
+   Off = outlined track + grey thumb (3:1 against the surface).
+   On  = primary track + on-primary thumb. */
+.ui-switch {
+	-webkit-appearance: none;
+	appearance: none;
+	box-sizing: border-box;
+	position: relative;
+	flex: none;
+	width: var(--ui-switch-w);
+	height: var(--ui-switch-h);
+	margin: 0;
+	border: 1px solid var(--ui-text-label);
+	border-radius: var(--ui-radius-pill);
+	background: var(--ui-surface);
+	vertical-align: -4px;
+	cursor: pointer;
+	transition: background-color var(--ui-duration), border-color var(--ui-duration);
+}
+
+.ui-switch::before {
+	content: "";
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	width: calc(var(--ui-switch-h) - 6px);
+	height: calc(var(--ui-switch-h) - 6px);
+	border-radius: var(--ui-radius-pill);
+	background: var(--ui-text-label);
+	transition: transform var(--ui-duration), background-color var(--ui-duration);
+}
+
+.ui-switch:checked {
+	border-color: var(--ui-primary);
+	background: var(--ui-primary);
+}
+
+.ui-switch:checked::before {
+	background: var(--ui-on-primary);
+	transform: translateX(calc(var(--ui-switch-w) - var(--ui-switch-h)));
+}
+
+.ui-switch:disabled {
+	border-color: var(--ui-text-disabled);
+	background: var(--ui-hover);
+	cursor: default;
+}
+
+.ui-switch:disabled::before {
+	background: var(--ui-text-disabled);
+}
+
+.ui-switch:disabled:checked {
+	background: var(--ui-text-disabled);
+}
+
+.ui-switch:disabled:checked::before {
+	background: var(--ui-surface);
+}
+
+/* Windows high contrast: masks and backgrounds are dropped, so fall back
+   to the native controls. */
+@media (forced-colors: active) {
+	.ui-checkbox,
+	.ui-check__box,
+	.ui-radio,
+	.ui-switch {
+		-webkit-appearance: auto;
+		appearance: auto;
+	}
+
+	.ui-checkbox::before,
+	.ui-check__box::before,
+	.ui-radio::before,
+	.ui-switch::before {
+		display: none;
+	}
+}
+
+/* Labelled choice in a form: <label class="ui-choice"> input + text. */
+.ui-choice {
+	display: inline-flex;
+	align-items: flex-start;
+	gap: var(--ui-space-md);
+	padding: var(--ui-space-sm) 0;
+	color: var(--ui-text);
+	font: var(--ui-type-body);
+	cursor: pointer;
+}
+
+/* Line the 16px box up with the first 20px text line. */
+.ui-choice > .ui-checkbox,
+.ui-choice > .ui-radio {
+	margin-top: var(--ui-space-2xs);
+}
+
+.ui-choice > .ui-switch {
+	margin-top: 1px;
+}
+
+.ui-choice__text {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+}
+
+.ui-choice__hint {
+	color: var(--ui-text-muted);
+	font: var(--ui-type-meta);
+}
+
+.ui-choice:has(:disabled) {
+	color: var(--ui-text-disabled);
+	cursor: default;
+}
+
+.ui-choice:has(:disabled) .ui-choice__hint {
+	color: var(--ui-text-disabled);
+}
+
+/* Group: <fieldset class="ui-choice-group"><legend class="ui-label">… */
+.ui-choice-group {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.ui-choice-group > legend {
+	margin-bottom: var(--ui-space-xs);
+	padding: 0;
+}
+
+.ui-choice-group--inline {
+	flex-direction: row;
+	flex-wrap: wrap;
+	column-gap: var(--ui-space-xl);
+}
+
+/* A fieldset ignores flex on itself in some engines; legend stays on top. */
+.ui-choice-group--inline > legend {
+	width: 100%;
+}
+
+
+/* ---------------------------------------------------------------------
+   Checkbox row
+   --------------------------------------------------------------------- */
+
+.ui-check {
+	box-sizing: border-box;
+	display: flex;
+	align-items: flex-start;
+	gap: var(--ui-space-md);
+	min-height: var(--ui-control-h);
+	margin: 0 var(--ui-space-xs);
+	padding: var(--ui-space-sm) var(--ui-space-md);
+	border-radius: var(--ui-radius);
+	color: var(--ui-text);
+	font: var(--ui-type-body);
+	cursor: pointer;
+}
+
+.ui-check:hover {
+	background: var(--ui-hover);
+}
+
+.ui-check:has(.ui-check__box:focus-visible) {
+	outline: var(--ui-focus-ring) solid var(--ui-focus);
+	outline-offset: -2px;
+}
+
+/* Look comes from .ui-checkbox (shared rule above); this only aligns it
+   with the first text line. */
+.ui-check__box {
+	margin-top: var(--ui-space-2xs);
+}
+
+/* The row draws the focus ring; the native one would double it. */
+.ui-check__box:focus-visible {
+	outline: none;
+}
+
+.ui-check__label {
+	min-width: 0;
+	flex: 1;
+	overflow-wrap: anywhere;
+}
+
+
+/* ---------------------------------------------------------------------
+   Chip
+   --------------------------------------------------------------------- */
+
+.ui-chip {
+	box-sizing: border-box;
+	display: inline-flex;
+	align-items: center;
+	gap: var(--ui-space-sm);
+	height: var(--ui-control-h-sm);
+	padding: 0 var(--ui-space-xs) 0 10px;
+	border: 1px solid var(--ui-accent);
+	border-radius: var(--ui-radius-pill);
+	background: var(--ui-wash);
+	color: var(--ui-accent);
+	font: var(--ui-type-label);
+}
+
+/* 18px circle; ::before widens the hit area to 24px. */
+.ui-chip__dismiss {
+	position: relative;
+	display: grid;
+	width: 18px;
+	height: 18px;
+	place-items: center;
+	padding: 0;
+	border: 0;
+	border-radius: var(--ui-radius-pill);
+	background: transparent;
+	color: inherit;
+	font: inherit;
+	cursor: pointer;
+}
+
+.ui-chip__dismiss::before {
+	content: "";
+	position: absolute;
+	inset: -3px;
+}
+
+.ui-chip__dismiss:hover {
+	background: color-mix(in srgb, var(--ui-accent) 15%, transparent);
+}
+
+
+/* ---------------------------------------------------------------------
+   Tooltip
+   --------------------------------------------------------------------- */
+
+.ui-tip {
+	box-sizing: border-box;
+	max-width: var(--ui-tip-max-w);
+	padding: var(--ui-space-sm) 10px;
+	border: 1px solid var(--ui-overlay-border);
+	border-radius: var(--ui-radius);
+	background: var(--ui-surface);
+	box-shadow: var(--ui-shadow-tip);
+	color: var(--ui-text);
+	font: var(--ui-type-meta);
+	pointer-events: none;
+}
+
+.ui-tip__value {
+	font-weight: 600;
+}
+
+
+/* ---------------------------------------------------------------------
+   Note banner
+   --------------------------------------------------------------------- */
+
+.ui-note {
+	margin: 0;
+	padding: var(--ui-space-md) var(--ui-space-3xl);
+	background: var(--ui-note-bg);
+	color: var(--ui-note-text);
+	font: var(--ui-type-body);
+}
+
+
+/* ---------------------------------------------------------------------
+   Date and time fields
+   Native <input type="date|time"> inside .ui-field. color-scheme makes the
+   browser's own picker and its icon follow light / dark mode.
+   --------------------------------------------------------------------- */
+
+.ui-field,
+.ui-menu,
+.ui-popup,
+.ui-table-scroll,
+.ui-dialog {
+	color-scheme: var(--ui-color-scheme);
+}
+
+.ui-field--time {
+	width: var(--ui-time-w);
+}
+
+.ui-field--date {
+	width: var(--ui-date-w);
+}
+
+.ui-field__input:is([type="time"], [type="date"], [type="datetime-local"]) {
+	font-variant-numeric: tabular-nums;
+}
+
+.ui-field__input::-webkit-calendar-picker-indicator {
+	margin: 0;
+	padding: 0;
+	opacity: 0.75;
+	cursor: pointer;
+}
+
+.ui-field__input::-webkit-calendar-picker-indicator:hover {
+	opacity: 1;
+}
+
+/* Long option lists (time slots, years): the menu scrolls. */
+.ui-menu--scroll {
+	max-height: var(--ui-menu-max-h);
+	overflow-y: auto;
+}
+
+
+/* ---------------------------------------------------------------------
+   Spinner (loading icon)
+   <span class="ui-spinner" role="status"><span class="ui-sr-only">Loading</span></span>
+   --------------------------------------------------------------------- */
+
+.ui-spinner {
+	box-sizing: border-box;
+	display: inline-block;
+	flex: none;
+	width: 16px;
+	height: 16px;
+	border: 2px solid color-mix(in srgb, currentColor 20%, transparent);
+	border-top-color: currentColor;
+	border-radius: var(--ui-radius-pill);
+	color: var(--ui-accent);
+	vertical-align: -3px;
+	animation: ui-spin 0.7s linear infinite;
+}
+
+.ui-spinner--sm {
+	width: 12px;
+	height: 12px;
+	border-width: 2px;
+	vertical-align: -1px;
+}
+
+.ui-spinner--lg {
+	width: 32px;
+	height: 32px;
+	border-width: 3px;
+}
+
+/* Inherit the text color, e.g. inside a primary button label. */
+.ui-spinner--current {
+	color: inherit;
+}
+
+
+/* ---------------------------------------------------------------------
+   Dots loader — three dots that bounce in a wave, gather into an orbit,
+   turn once, and fall back into the wave (3.6s cycle).
+   <span class="ui-loader" role="status" aria-label="Loading">
+     <span class="ui-loader__dot"></span><span class="ui-loader__dot"></span><span class="ui-loader__dot"></span>
+   </span>
+   Angle, radius and lift are registered custom properties, so the browser
+   interpolates them smoothly and the motion stays on transform (GPU).
+   --------------------------------------------------------------------- */
+
+@property --ui-loader-a {
+	syntax: '<angle>';
+	inherits: false;
+	initial-value: 0deg;
+}
+
+@property --ui-loader-r {
+	syntax: '<length>';
+	inherits: false;
+	initial-value: 0px;
+}
+
+@property --ui-loader-y {
+	syntax: '<length>';
+	inherits: false;
+	initial-value: 0px;
+}
+
+.ui-loader {
+	position: relative;
+	display: inline-block;
+	flex: none;
+	width: 40px;
+	height: 40px;
+	color: var(--ui-accent);
+	vertical-align: middle;
+}
+
+.ui-loader--sm {
+	width: 30px;
+	height: 30px;
+	scale: 0.75;
+}
+
+.ui-loader--lg {
+	width: 50px;
+	height: 50px;
+	scale: 1.25;
+}
+
+.ui-loader__dot {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 8px;
+	height: 8px;
+	/* Centered with margins so transform stays free for the motion. */
+	margin: -4px 0 0 -4px;
+	border-radius: var(--ui-radius-pill);
+	background: currentColor;
+	transform: translate3d(0, var(--ui-loader-y), 0) rotate(var(--ui-loader-a)) translateX(var(--ui-loader-r)) rotate(calc(var(--ui-loader-a) * -1));
+	will-change: transform;
+	backface-visibility: hidden;
+	contain: layout style;
+	animation: 3.6s infinite;
+}
+
+.ui-loader__dot:nth-child(1) { animation-name: ui-loader-1; }
+.ui-loader__dot:nth-child(2) { animation-name: ui-loader-2; }
+.ui-loader__dot:nth-child(3) { animation-name: ui-loader-3; }
+
+/* Cycle 3.6s:
+    0–30%  wave        30–36%  gather into orbit
+   36–70%  one turn    70–76%  back to wave      76–100%  wave */
+@keyframes ui-loader-1 {
+	0% { --ui-loader-a: 180deg; --ui-loader-r: 13px; --ui-loader-y: 0px; animation-timing-function: ease-in-out; }
+	5% { --ui-loader-a: 180deg; --ui-loader-r: 13px; --ui-loader-y: -7px; animation-timing-function: ease-in-out; }
+	10% { --ui-loader-a: 180deg; --ui-loader-r: 13px; --ui-loader-y: 0px; animation-timing-function: ease-in-out; }
+	15% { --ui-loader-a: 180deg; --ui-loader-r: 13px; --ui-loader-y: -7px; animation-timing-function: ease-in-out; }
+	20%, 30% { --ui-loader-a: 180deg; --ui-loader-r: 13px; --ui-loader-y: 0px; animation-timing-function: ease-in-out; }
+	33% { --ui-loader-a: 180deg; --ui-loader-r: 0px; --ui-loader-y: 0px; animation-timing-function: ease-in-out; }
+	36% { --ui-loader-a: 180deg; --ui-loader-r: 11px; --ui-loader-y: 0px; animation-timing-function: linear; }
+	70% { --ui-loader-a: 540deg; --ui-loader-r: 11px; --ui-loader-y: 0px; animation-timing-function: ease-in-out; }
+	/* Collapse to the center to hide the jump from 540deg back to 180deg. */
+	73% { --ui-loader-a: 540deg; --ui-loader-r: 0px; --ui-loader-y: 0px; animation-timing-function: step-start; }
+	73.1% { --ui-loader-a: 180deg; --ui-loader-r: 0px; --ui-loader-y: 0px; animation-timing-function: ease-in-out; }
+	76% { --ui-loader-a: 180deg; --ui-loader-r: 13px; --ui-loader-y: 0px; animation-timing-function: ease-in-out; }
+	85% { --ui-loader-a: 180deg; --ui-loader-r: 13px; --ui-loader-y: -7px; animation-timing-function: ease-in-out; }
+	92%, 100% { --ui-loader-a: 180deg; --ui-loader-r: 13px; --ui-loader-y: 0px; animation-timing-function: ease-in-out; }
+}
+
+@keyframes ui-loader-2 {
+	0%, 3% { --ui-loader-a: 300deg; --ui-loader-r: 0px; --ui-loader-y: 0px; animation-timing-function: ease-in-out; }
+	8% { --ui-loader-a: 300deg; --ui-loader-r: 0px; --ui-loader-y: -7px; animation-timing-function: ease-in-out; }
+	13% { --ui-loader-a: 300deg; --ui-loader-r: 0px; --ui-loader-y: 0px; animation-timing-function: ease-in-out; }
+	18% { --ui-loader-a: 300deg; --ui-loader-r: 0px; --ui-loader-y: -7px; animation-timing-function: ease-in-out; }
+	23%, 30% { --ui-loader-a: 300deg; --ui-loader-r: 0px; --ui-loader-y: 0px; animation-timing-function: ease-in-out; }
+	36% { --ui-loader-a: 300deg; --ui-loader-r: 11px; --ui-loader-y: 0px; animation-timing-function: linear; }
+	70% { --ui-loader-a: 660deg; --ui-loader-r: 11px; --ui-loader-y: 0px; animation-timing-function: ease-in-out; }
+	73% { --ui-loader-a: 660deg; --ui-loader-r: 0px; --ui-loader-y: 0px; animation-timing-function: step-start; }
+	73.1% { --ui-loader-a: 300deg; --ui-loader-r: 0px; --ui-loader-y: 0px; animation-timing-function: ease-in-out; }
+	76%, 82% { --ui-loader-a: 300deg; --ui-loader-r: 0px; --ui-loader-y: 0px; animation-timing-function: ease-in-out; }
+	88% { --ui-loader-a: 300deg; --ui-loader-r: 0px; --ui-loader-y: -7px; animation-timing-function: ease-in-out; }
+	94%, 100% { --ui-loader-a: 300deg; --ui-loader-r: 0px; --ui-loader-y: 0px; animation-timing-function: ease-in-out; }
+}
+
+@keyframes ui-loader-3 {
+	0%, 6% { --ui-loader-a: 0deg; --ui-loader-r: 13px; --ui-loader-y: 0px; animation-timing-function: ease-in-out; }
+	11% { --ui-loader-a: 0deg; --ui-loader-r: 13px; --ui-loader-y: -7px; animation-timing-function: ease-in-out; }
+	16% { --ui-loader-a: 0deg; --ui-loader-r: 13px; --ui-loader-y: 0px; animation-timing-function: ease-in-out; }
+	21% { --ui-loader-a: 0deg; --ui-loader-r: 13px; --ui-loader-y: -7px; animation-timing-function: ease-in-out; }
+	26%, 30% { --ui-loader-a: 0deg; --ui-loader-r: 13px; --ui-loader-y: 0px; animation-timing-function: ease-in-out; }
+	33% { --ui-loader-a: 0deg; --ui-loader-r: 0px; --ui-loader-y: 0px; animation-timing-function: step-start; }
+	33.1% { --ui-loader-a: 60deg; --ui-loader-r: 0px; --ui-loader-y: 0px; animation-timing-function: ease-in-out; }
+	36% { --ui-loader-a: 60deg; --ui-loader-r: 11px; --ui-loader-y: 0px; animation-timing-function: linear; }
+	70% { --ui-loader-a: 420deg; --ui-loader-r: 11px; --ui-loader-y: 0px; animation-timing-function: ease-in-out; }
+	73% { --ui-loader-a: 420deg; --ui-loader-r: 0px; --ui-loader-y: 0px; animation-timing-function: step-start; }
+	73.1% { --ui-loader-a: 0deg; --ui-loader-r: 0px; --ui-loader-y: 0px; animation-timing-function: ease-in-out; }
+	76% { --ui-loader-a: 0deg; --ui-loader-r: 13px; --ui-loader-y: 0px; animation-timing-function: ease-in-out; }
+	90% { --ui-loader-a: 0deg; --ui-loader-r: 13px; --ui-loader-y: -7px; animation-timing-function: ease-in-out; }
+	96%, 100% { --ui-loader-a: 0deg; --ui-loader-r: 13px; --ui-loader-y: 0px; animation-timing-function: ease-in-out; }
+}
+
+/* Reduced motion: three still dots in a row that pulse in turn. */
+@media (prefers-reduced-motion: reduce) {
+	.ui-loader__dot {
+		--ui-loader-a: 0deg;
+		--ui-loader-r: 0px;
+		--ui-loader-y: 0px;
+		animation: ui-loader-pulse 1.2s ease-in-out infinite;
+	}
+
+	/* Same specificity as the animation-name rules above, so these win. */
+	.ui-loader__dot:nth-child(1) { animation-name: ui-loader-pulse; transform: translate3d(-13px, 0, 0); animation-delay: 0s; }
+	.ui-loader__dot:nth-child(2) { animation-name: ui-loader-pulse; transform: translate3d(0, 0, 0); animation-delay: 0.15s; }
+	.ui-loader__dot:nth-child(3) { animation-name: ui-loader-pulse; transform: translate3d(13px, 0, 0); animation-delay: 0.3s; }
+}
+
+@keyframes ui-loader-pulse {
+	0%, 100% { opacity: 0.4; }
+	50% { opacity: 1; }
+}
+
+
+/* ---------------------------------------------------------------------
+   Loading overlay
+   Covers its parent while that area loads. The parent becomes the
+   containing block automatically (:has below); .ui-loading-host does the
+   same for browsers without :has(). Set aria-busy="true" on the parent.
+   --------------------------------------------------------------------- */
+
+/* Zero specificity: a parent that is already absolute / fixed / sticky
+   through any class keeps its own position. */
+:where(:has(> .ui-loading-overlay:not(.ui-loading-overlay--fixed))) {
+	position: relative;
+}
+
+.ui-loading-host {
+	position: relative;
+}
+
+.ui-loading-overlay {
+	position: absolute;
+	inset: 0;
+	z-index: var(--ui-z-overlay);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: var(--ui-space-lg);
+	border-radius: inherit;
+	background: var(--ui-veil);
+	-webkit-backdrop-filter: blur(2px);
+	backdrop-filter: blur(2px);
+	color: var(--ui-text-muted);
+	font: var(--ui-type-status);
+	letter-spacing: 0.025em;
+	/* Promote to its own layer so it keeps painting while the main thread
+	   is busy with light work. */
+	transform: translateZ(0);
+}
+
+/* Opt-in: appear after 200ms so fast loads do not flash. Do not use it
+   when the next step blocks the main thread (large document open, big
+   parse): a blocked thread cannot run the fade, and nothing would show. */
+.ui-loading-overlay--delay {
+	animation: ui-fade-in var(--ui-duration) ease-out 200ms both;
+}
+
+.ui-loading-overlay--fixed {
+	position: fixed;
+	z-index: calc(var(--ui-z-menu) + 10);
+	border-radius: 0;
+}
+
+.ui-loading-overlay__text {
+	margin: 0;
+}
+
+@keyframes ui-fade-in {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+
+/* ---------------------------------------------------------------------
+   Progress bar
+   Native <progress class="ui-progress" value="40" max="100">.
+   No value attribute = indeterminate.
+   --------------------------------------------------------------------- */
+
+.ui-progress {
+	-webkit-appearance: none;
+	appearance: none;
+	display: block;
+	width: 100%;
+	height: var(--ui-progress-h);
+	border: 0;
+	border-radius: var(--ui-radius-pill);
+	overflow: hidden;
+	background: var(--ui-line);
+	/* Fill uses the accent: on dark surfaces it is lightened, a dark brand
+	   fill would vanish into the track. */
+	color: var(--ui-accent);
+}
+
+.ui-progress::-webkit-progress-bar {
+	border-radius: inherit;
+	background: var(--ui-line);
+}
+
+.ui-progress::-webkit-progress-value {
+	border-radius: inherit;
+	background: var(--ui-accent);
+	transition: width 0.3s ease;
+}
+
+.ui-progress::-moz-progress-bar {
+	border-radius: inherit;
+	background: var(--ui-accent);
+}
+
+.ui-progress--lg {
+	--ui-progress-h: 8px;
+}
+
+.ui-progress--alert::-webkit-progress-value { background: var(--ui-alert); }
+.ui-progress--alert::-moz-progress-bar { background: var(--ui-alert); }
+.ui-progress--danger::-webkit-progress-value { background: var(--ui-danger); }
+.ui-progress--danger::-moz-progress-bar { background: var(--ui-danger); }
+
+/* Indeterminate: a 40% segment sliding across the track. */
+.ui-progress:indeterminate {
+	background:
+		linear-gradient(var(--ui-accent), var(--ui-accent)) no-repeat,
+		var(--ui-line);
+	background-size: 40% 100%, auto;
+	animation: ui-progress-slide 1.2s ease-in-out infinite;
+}
+
+.ui-progress:indeterminate::-webkit-progress-bar {
+	background: transparent;
+}
+
+.ui-progress:indeterminate::-moz-progress-bar {
+	background: transparent;
+}
+
+@keyframes ui-progress-slide {
+	from { background-position: -70% 0, 0 0; }
+	to { background-position: 170% 0, 0 0; }
+}
+
+/* Label + value above the bar. */
+.ui-progress-group {
+	display: flex;
+	flex-direction: column;
+	gap: var(--ui-space-xs);
+	min-width: 0;
+}
+
+.ui-progress-group__head {
+	display: flex;
+	justify-content: space-between;
+	gap: var(--ui-space-md);
+	color: var(--ui-text-label);
+	font: var(--ui-type-label);
+}
+
+.ui-progress-group__value {
+	color: var(--ui-text-body);
+	font: var(--ui-type-meta);
+	font-variant-numeric: tabular-nums;
+}
+
+
+/* ---------------------------------------------------------------------
+   Dialog
+   Native <dialog class="ui-dialog"> opened with showModal(), or any
+   element (e.g. an Angular MatDialog component root) with .ui-dialog.
+   --------------------------------------------------------------------- */
+
+.ui-dialog {
+	box-sizing: border-box;
+	flex-direction: column;
+	width: min(var(--ui-dialog-w), calc(100vw - 32px));
+	max-width: none;
+	max-height: calc(100vh - 64px);
+	margin: auto;
+	padding: 0;
+	border: 1px solid var(--ui-overlay-border);
+	border-radius: var(--ui-radius-container);
+	background: var(--ui-surface);
+	box-shadow: var(--ui-shadow-popup);
+	color: var(--ui-text);
+	font: var(--ui-type-body);
+}
+
+/* Do not set display on a closed <dialog>: it would show it. */
+.ui-dialog:not(dialog),
+dialog.ui-dialog[open] {
+	display: flex;
+}
+
+/* ::backdrop does not inherit custom properties in older Chromium,
+   hence the fallback. */
+.ui-dialog::backdrop {
+	background: var(--ui-scrim, rgb(0 0 0 / 0.4));
+}
+
+.ui-dialog--sm { --ui-dialog-w: 400px; }
+.ui-dialog--lg { --ui-dialog-w: 800px; }
+
+.ui-dialog__header {
+	display: flex;
+	align-items: center;
+	gap: var(--ui-space-lg);
+	padding: var(--ui-space-xl) var(--ui-space-2xl) var(--ui-space-lg);
+}
+
+.ui-dialog__title {
+	min-width: 0;
+	flex: 1;
+	margin: 0;
+	color: var(--ui-text-title);
+	font: var(--ui-type-title);
+}
+
+.ui-dialog__close {
+	display: grid;
+	flex: none;
+	width: var(--ui-control-h);
+	height: var(--ui-control-h);
+	place-items: center;
+	margin: -4px -8px -4px 0;
+	padding: 0;
+	border: 0;
+	border-radius: var(--ui-radius);
+	background: transparent;
+	color: var(--ui-text-body);
+	font: inherit;
+	cursor: pointer;
+}
+
+.ui-dialog__close:hover {
+	background: var(--ui-hover);
+}
+
+.ui-dialog__close:focus-visible {
+	outline: var(--ui-focus-ring) solid var(--ui-focus);
+	outline-offset: -2px;
+}
+
+.ui-dialog__body {
+	flex: 1;
+	min-height: 0;
+	overflow: auto;
+	padding: 0 var(--ui-space-2xl) var(--ui-space-xl);
+}
+
+.ui-dialog__footer {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	gap: var(--ui-space-md);
+	padding: var(--ui-space-lg) var(--ui-space-2xl);
+	border-top: 1px solid var(--ui-line);
+}
+
+
+/* ---------------------------------------------------------------------
+   Tabs
+   Markup: .ui-tabs[role=tablist] > button.ui-tab[role=tab][aria-selected]
+   + .ui-tabpanel[role=tabpanel]. Route tabs: nav.ui-tabs > a.ui-tab
+   with aria-current="page".
+   The baseline is an inset shadow, not a border, so the indicator of the
+   selected tab paints over it while the list can still scroll sideways.
+   --------------------------------------------------------------------- */
+
+.ui-tabs {
+	box-sizing: border-box;
+	display: flex;
+	align-items: stretch;
+	gap: var(--ui-space-xs);
+	min-width: 0;
+	overflow-x: auto;
+	overflow-y: hidden;
+	scrollbar-width: thin;
+	box-shadow: inset 0 -1px 0 var(--ui-line);
+	user-select: none;
+}
+
+.ui-tabs--sm {
+	--ui-tab-h: var(--ui-control-h);
+}
+
+/* Inside a panel the tabs line up with the toolbar padding. */
+.ui-panel > .ui-tabs {
+	padding: 0 var(--ui-space-md);
+}
+
+.ui-tab {
+	box-sizing: border-box;
+	position: relative;
+	display: inline-flex;
+	flex: none;
+	align-items: center;
+	gap: var(--ui-space-sm);
+	height: var(--ui-tab-h);
+	padding: 0 var(--ui-space-lg);
+	border: 0;
+	border-radius: var(--ui-radius) var(--ui-radius) 0 0;
+	background: transparent;
+	/* Same weight in every state, so selecting a tab never shifts the row. */
+	color: var(--ui-text-label);
+	font: var(--ui-type-control);
+	text-decoration: none;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.ui-tab::after {
+	content: "";
+	position: absolute;
+	right: var(--ui-space-lg);
+	bottom: 0;
+	left: var(--ui-space-lg);
+	height: var(--ui-tab-indicator);
+	border-radius: var(--ui-radius-pill) var(--ui-radius-pill) 0 0;
+	background: transparent;
+}
+
+.ui-tab__icon {
+	flex: none;
+}
+
+.ui-tab:hover:not(:disabled, [aria-disabled="true"], [aria-selected="true"], [aria-current="page"]) {
+	background: var(--ui-hover);
+	color: var(--ui-text);
+}
+
+.ui-tab:hover:not(:disabled, [aria-disabled="true"], [aria-selected="true"], [aria-current="page"])::after {
+	background: var(--ui-line-strong);
+}
+
+.ui-tab:is([aria-selected="true"], [aria-current="page"]) {
+	color: var(--ui-accent);
+}
+
+.ui-tab:is([aria-selected="true"], [aria-current="page"])::after {
+	background: var(--ui-accent);
+}
+
+.ui-tab:is(:disabled, [aria-disabled="true"]) {
+	color: var(--ui-text-disabled);
+	cursor: default;
+}
+
+.ui-tab:focus-visible {
+	outline: var(--ui-focus-ring) solid var(--ui-focus);
+	outline-offset: -2px;
+}
+
+/* Count after the label: "Open 12". */
+.ui-tab__count {
+	box-sizing: border-box;
+	min-width: 20px;
+	height: 18px;
+	padding: 0 var(--ui-space-sm);
+	border-radius: var(--ui-radius-pill);
+	background: var(--ui-pressed);
+	color: var(--ui-text-label);
+	font: var(--ui-type-badge);
+	text-align: center;
+}
+
+.ui-tab:is([aria-selected="true"], [aria-current="page"]) .ui-tab__count {
+	background: var(--ui-wash);
+	color: var(--ui-accent);
+}
+
+.ui-tabpanel:focus-visible {
+	outline: var(--ui-focus-ring) solid var(--ui-focus);
+	outline-offset: 2px;
+}
+
+
+/* ---------------------------------------------------------------------
+   Side navigation
+   Markup: nav.ui-sidenav > __header + __body (headings, lists of
+   __link) + __footer. Current page = aria-current="page" on the link.
+   Group = button.ui-sidenav__link.ui-sidenav__group[aria-expanded]
+   followed by ul.ui-sidenav__list--sub.
+   Rail (icons only): .ui-sidenav--rail, or aria-expanded="false" on the
+   .ui-sidenav__toggle — the toggle's state is the single source of truth.
+   --------------------------------------------------------------------- */
+
+.ui-shell {
+	display: flex;
+	height: 100vh;
+	height: 100dvh;
+	background: var(--ui-canvas);
+}
+
+.ui-shell__main {
+	flex: 1;
+	min-width: 0;
+	overflow: auto;
+}
+
+.ui-sidenav {
+	box-sizing: border-box;
+	display: flex;
+	flex: none;
+	flex-direction: column;
+	width: var(--ui-sidenav-w);
+	height: 100%;
+	min-height: 0;
+	overflow: hidden;
+	border-right: 1px solid var(--ui-line);
+	background: var(--ui-surface);
+	color: var(--ui-text);
+	font: var(--ui-type-body);
+	transition: width var(--ui-duration) ease;
+}
+
+.ui-sidenav__header {
+	box-sizing: border-box;
+	display: flex;
+	flex: none;
+	align-items: center;
+	gap: var(--ui-space-md);
+	min-height: var(--ui-toolbar-h);
+	padding: 0 var(--ui-space-md) 0 var(--ui-space-lg);
+	border-bottom: 1px solid var(--ui-line);
+}
+
+.ui-sidenav__title {
+	flex: 1;
+	min-width: 0;
+	margin: 0;
+	overflow: hidden;
+	color: var(--ui-text-title);
+	font: var(--ui-type-title);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.ui-sidenav__toggle {
+	display: grid;
+	flex: none;
+	width: var(--ui-control-h);
+	height: var(--ui-control-h);
+	place-items: center;
+	padding: 0;
+	border: 0;
+	border-radius: var(--ui-radius);
+	background: transparent;
+	color: var(--ui-text-body);
+	font: inherit;
+	cursor: pointer;
+}
+
+.ui-sidenav__toggle:hover {
+	background: var(--ui-hover);
+}
+
+.ui-sidenav__body {
+	flex: 1;
+	min-height: 0;
+	overflow-x: hidden;
+	overflow-y: auto;
+	padding: var(--ui-space-md);
+}
+
+.ui-sidenav__footer {
+	flex: none;
+	padding: var(--ui-space-md);
+	border-top: 1px solid var(--ui-line);
+}
+
+.ui-sidenav__heading {
+	margin: var(--ui-space-xl) 0 var(--ui-space-xs);
+	padding: 0 var(--ui-space-lg);
+	overflow: hidden;
+	color: var(--ui-text-muted);
+	font: var(--ui-type-label);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	user-select: none;
+}
+
+.ui-sidenav__heading:first-child {
+	margin-top: var(--ui-space-xs);
+}
+
+.ui-sidenav__list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--ui-space-2xs);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.ui-sidenav__list[hidden] {
+	display: none;
+}
+
+.ui-sidenav__list--sub {
+	margin-top: var(--ui-space-2xs);
+}
+
+.ui-sidenav__link {
+	box-sizing: border-box;
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: var(--ui-space-md);
+	width: 100%;
+	height: var(--ui-control-h);
+	padding: 0 var(--ui-space-lg);
+	border: 0;
+	border-radius: var(--ui-radius);
+	background: transparent;
+	color: var(--ui-text-body);
+	font: var(--ui-type-body);
+	text-align: left;
+	text-decoration: none;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+/* Sub-item labels line up with the parent label: padding + icon + gap. */
+.ui-sidenav__list--sub .ui-sidenav__link {
+	padding-left: calc(var(--ui-space-lg) + 16px + var(--ui-space-md));
+}
+
+.ui-sidenav__icon {
+	flex: none;
+	width: 16px;
+	height: 16px;
+}
+
+.ui-sidenav__label {
+	flex: 1;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.ui-sidenav__count {
+	box-sizing: border-box;
+	flex: none;
+	min-width: 20px;
+	height: 18px;
+	padding: 0 var(--ui-space-sm);
+	border-radius: var(--ui-radius-pill);
+	background: var(--ui-pressed);
+	color: var(--ui-text-label);
+	font: var(--ui-type-badge);
+	text-align: center;
+}
+
+.ui-sidenav__chevron {
+	flex: none;
+	color: var(--ui-text-muted);
+	transition: transform var(--ui-duration) ease;
+}
+
+.ui-sidenav__group[aria-expanded="false"] .ui-sidenav__chevron {
+	transform: rotate(-90deg);
+}
+
+.ui-sidenav__link:hover:not(:disabled, [aria-disabled="true"], [aria-current="page"]) {
+	background: var(--ui-hover);
+	color: var(--ui-text);
+}
+
+/* Current page: wash, accent label, 3px bar on the leading edge. */
+.ui-sidenav__link[aria-current="page"],
+.ui-sidenav__group[aria-expanded="false"]:has(+ .ui-sidenav__list [aria-current="page"]) {
+	background: var(--ui-wash);
+	color: var(--ui-accent);
+	font-weight: 600;
+}
+
+.ui-sidenav__link[aria-current="page"]::before,
+.ui-sidenav__group[aria-expanded="false"]:has(+ .ui-sidenav__list [aria-current="page"])::before {
+	content: "";
+	position: absolute;
+	top: var(--ui-space-md);
+	bottom: var(--ui-space-md);
+	left: 0;
+	width: 3px;
+	border-radius: var(--ui-radius-pill);
+	background: var(--ui-accent);
+}
+
+/* An open group whose child is current: stronger label only. */
+.ui-sidenav__group:has(+ .ui-sidenav__list [aria-current="page"]) {
+	color: var(--ui-text-title);
+	font-weight: 600;
+}
+
+.ui-sidenav__link[aria-current="page"] .ui-sidenav__count {
+	background: var(--ui-surface);
+	color: var(--ui-accent);
+}
+
+.ui-sidenav__link:is(:disabled, [aria-disabled="true"]) {
+	color: var(--ui-text-disabled);
+	cursor: default;
+}
+
+.ui-sidenav__link:focus-visible,
+.ui-sidenav__toggle:focus-visible {
+	outline: var(--ui-focus-ring) solid var(--ui-focus);
+	outline-offset: -2px;
+}
+
+/* Rail: icons only. Labels stay in the accessibility tree. */
+.ui-sidenav:is(.ui-sidenav--rail, :has(.ui-sidenav__toggle[aria-expanded="false"])) {
+	width: var(--ui-sidenav-w-rail);
+}
+
+.ui-sidenav:is(.ui-sidenav--rail, :has(.ui-sidenav__toggle[aria-expanded="false"])) .ui-sidenav__header {
+	justify-content: center;
+	padding: 0;
+}
+
+.ui-sidenav:is(.ui-sidenav--rail, :has(.ui-sidenav__toggle[aria-expanded="false"])) :is(.ui-sidenav__title, .ui-sidenav__label) {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+}
+
+.ui-sidenav:is(.ui-sidenav--rail, :has(.ui-sidenav__toggle[aria-expanded="false"])) .ui-sidenav__heading {
+	height: 0;
+	margin: var(--ui-space-md) var(--ui-space-xs);
+	padding: 0;
+	border-top: 1px solid var(--ui-line);
+	color: transparent;
+}
+
+.ui-sidenav:is(.ui-sidenav--rail, :has(.ui-sidenav__toggle[aria-expanded="false"])) .ui-sidenav__heading:first-child {
+	margin-top: 0;
+	border-top-color: transparent;
+}
+
+.ui-sidenav:is(.ui-sidenav--rail, :has(.ui-sidenav__toggle[aria-expanded="false"])) .ui-sidenav__link {
+	justify-content: center;
+	padding: 0;
+}
+
+.ui-sidenav:is(.ui-sidenav--rail, :has(.ui-sidenav__toggle[aria-expanded="false"])) :is(.ui-sidenav__chevron, .ui-sidenav__list--sub) {
+	display: none;
+}
+
+/* A count becomes an 8px dot on the icon. */
+.ui-sidenav:is(.ui-sidenav--rail, :has(.ui-sidenav__toggle[aria-expanded="false"])) .ui-sidenav__count {
+	position: absolute;
+	top: 6px;
+	right: 8px;
+	min-width: 0;
+	width: 8px;
+	height: 8px;
+	padding: 0;
+	overflow: hidden;
+	background: var(--ui-accent);
+	color: transparent;
+}
+
+/* In the rail a group with the current child looks current. */
+.ui-sidenav:is(.ui-sidenav--rail, :has(.ui-sidenav__toggle[aria-expanded="false"])) .ui-sidenav__group:has(+ .ui-sidenav__list [aria-current="page"]) {
+	background: var(--ui-wash);
+	color: var(--ui-accent);
+}
+
+.ui-sidenav:is(.ui-sidenav--rail, :has(.ui-sidenav__toggle[aria-expanded="false"])) .ui-sidenav__group:has(+ .ui-sidenav__list [aria-current="page"])::before {
+	content: "";
+	position: absolute;
+	top: var(--ui-space-md);
+	bottom: var(--ui-space-md);
+	left: 0;
+	width: 3px;
+	border-radius: var(--ui-radius-pill);
+	background: var(--ui-accent);
+}
+
+
+/* ---------------------------------------------------------------------
+   Utilities
+   --------------------------------------------------------------------- */
+
+/* Visible to screen readers only. */
+.ui-sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+
+/* ---------------------------------------------------------------------
+   Reduced motion
+   --------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+	.ui-select__chevron,
+	.ui-checkbox,
+	.ui-checkbox::before,
+	.ui-check__box,
+	.ui-check__box::before,
+	.ui-radio,
+	.ui-radio::before,
+	.ui-switch,
+	.ui-switch::before,
+	.ui-progress::-webkit-progress-value,
+	.ui-sidenav,
+	.ui-sidenav__chevron {
+		transition: none;
+	}
+
+	.ui-btn[aria-busy="true"]::after,
+	.ui-spinner {
+		animation-duration: 2s;
+	}
+
+	.ui-progress:indeterminate {
+		animation-duration: 3s;
+	}
+
+	.ui-loading-overlay--delay {
+		animation: none;
+	}
+}

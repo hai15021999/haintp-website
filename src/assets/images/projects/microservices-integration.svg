@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" font-family="Inter, Segoe UI, sans-serif">
+  <rect width="640" height="360" fill="#0f172a"/>
+  <g stroke="#1e293b" stroke-width="1">
+    <path d="M0 60h640M0 120h640M0 180h640M0 240h640M0 300h640M80 0v360M160 0v360M240 0v360M320 0v360M400 0v360M480 0v360M560 0v360"/>
+  </g>
+  <!-- connections -->
+  <g fill="none" stroke-width="2.5">
+    <path d="M200 92 C260 92 260 180 290 180" stroke="#38bdf8"/>
+    <path d="M200 268 C260 268 260 180 290 180" stroke="#f59e0b"/>
+    <path d="M350 180 C390 180 400 92 440 92" stroke="#a78bfa" stroke-dasharray="7 5"/>
+    <path d="M350 180 C390 180 400 268 440 268" stroke="#34d399"/>
+  </g>
+  <!-- protocol labels -->
+  <g font-size="11" font-weight="700" text-anchor="middle">
+    <rect x="222" y="112" width="48" height="20" rx="10" fill="#0c4a6e"/><text x="246" y="126" fill="#7dd3fc">REST</text>
+    <rect x="222" y="228" width="50" height="20" rx="10" fill="#78350f"/><text x="247" y="242" fill="#fcd34d">SOAP</text>
+    <rect x="372" y="112" width="48" height="20" rx="10" fill="#3b0764"/><text x="396" y="126" fill="#c4b5fd">gRPC</text>
+    <rect x="374" y="228" width="44" height="20" rx="10" fill="#064e3b"/><text x="396" y="242" fill="#6ee7b7">MCP</text>
+  </g>
+  <!-- left clients -->
+  <g transform="translate(64 60)">
+    <rect width="136" height="64" rx="10" fill="#1e293b" stroke="#334155"/>
+    <rect x="14" y="16" width="28" height="22" rx="4" fill="none" stroke="#7dd3fc" stroke-width="2"/>
+    <rect x="52" y="18" width="66" height="8" rx="3" fill="#e2e8f0"/><rect x="52" y="32" width="50" height="6" rx="3" fill="#64748b"/>
+    <text x="14" y="56" font-size="9" fill="#64748b">web · mobile</text>
+  </g>
+  <g transform="translate(64 236)">
+    <rect width="136" height="64" rx="10" fill="#1e293b" stroke="#334155"/>
+    <rect x="14" y="14" width="26" height="30" rx="3" fill="none" stroke="#fcd34d" stroke-width="2"/>
+    <path d="M18 22h18M18 28h18M18 34h12" stroke="#fcd34d" stroke-width="1.5"/>
+    <rect x="52" y="18" width="62" height="8" rx="3" fill="#e2e8f0"/><rect x="52" y="32" width="46" height="6" rx="3" fill="#64748b"/>
+    <text x="14" y="56" font-size="9" fill="#64748b">enterprise / legacy</text>
+  </g>
+  <!-- gateway hub -->
+  <g transform="translate(290 148)">
+    <rect width="60" height="64" rx="12" fill="#1e293b" stroke="#e2e8f0" stroke-width="2"/>
+    <circle cx="30" cy="26" r="10" fill="none" stroke="#e2e8f0" stroke-width="2"/>
+    <path d="M30 12v4M30 36v4M16 26h4M40 26h4" stroke="#e2e8f0" stroke-width="2"/>
+    <rect x="12" y="46" width="36" height="6" rx="3" fill="#64748b"/>
+  </g>
+  <!-- right services -->
+  <g transform="translate(440 60)">
+    <rect width="136" height="64" rx="10" fill="#1e293b" stroke="#334155"/>
+    <g fill="#c4b5fd"><rect x="14" y="14" width="10" height="10" rx="2"/><rect x="28" y="14" width="10" height="10" rx="2"/><rect x="14" y="28" width="10" height="10" rx="2"/><rect x="28" y="28" width="10" height="10" rx="2"/></g>
+    <rect x="52" y="18" width="62" height="8" rx="3" fill="#e2e8f0"/><rect x="52" y="32" width="44" height="6" rx="3" fill="#64748b"/>
+    <text x="14" y="56" font-size="9" fill="#64748b">internal services</text>
+  </g>
+  <g transform="translate(440 236)">
+    <rect width="136" height="64" rx="10" fill="#1e293b" stroke="#334155"/>
+    <path d="M28 16l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#6ee7b7"/>
+    <rect x="52" y="18" width="62" height="8" rx="3" fill="#e2e8f0"/><rect x="52" y="32" width="54" height="6" rx="3" fill="#64748b"/>
+    <text x="14" y="56" font-size="9" fill="#64748b">AI agent tools</text>
+  </g>
+</svg>

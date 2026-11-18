@@ -1,0 +1,158 @@
+.summary {
+    margin: 0;
+    color: var(--ui-text-body);
+    font: 400 15px/24px var(--ui-font);
+}
+
+.timeline {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.job {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--ui-space-md);
+    padding: var(--ui-space-xl) var(--ui-space-xl) var(--ui-space-xl) 36px;
+    border-top: 1px solid var(--ui-line);
+}
+
+.job:first-child {
+    border-top: 0;
+}
+
+/* Timeline marker. */
+.job::before {
+    content: '';
+    position: absolute;
+    top: 24px;
+    left: var(--ui-space-xl);
+    width: 9px;
+    height: 9px;
+    border: 2px solid var(--ui-accent);
+    border-radius: var(--ui-radius-pill);
+    background: var(--ui-surface);
+}
+
+.job__head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--ui-space-xs) var(--ui-space-lg);
+}
+
+.job__title {
+    margin: 0;
+    color: var(--ui-text-title);
+    font: var(--ui-type-title);
+}
+
+.job__company {
+    margin: 0;
+    color: var(--ui-accent);
+    font-weight: 600;
+}
+
+.job__when {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ui-space-md);
+    color: var(--ui-text-muted);
+    font: var(--ui-type-meta);
+}
+
+.job__loc::before {
+    content: '·';
+    margin-right: var(--ui-space-md);
+}
+
+.job__summary {
+    margin: 0;
+    color: var(--ui-text-body);
+}
+
+.job__projects {
+    margin: 0;
+    color: var(--ui-text-muted);
+    font: var(--ui-type-meta);
+}
+
+.card-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--ui-space-3xl) var(--ui-space-xl);
+    text-align: center;
+}
+
+.card-profile__avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--ui-radius-pill);
+    object-fit: cover;
+    box-shadow: 0 0 0 1px var(--ui-line);
+}
+
+.card-profile__name {
+    margin: var(--ui-space-md) 0 0;
+    color: var(--ui-text-title);
+    font: var(--ui-type-title);
+}
+
+.card-profile__role {
+    margin: 0;
+    color: var(--ui-text-muted);
+}
+
+.contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ui-space-sm);
+    align-self: stretch;
+    margin: var(--ui-space-xl) 0 0;
+    padding: var(--ui-space-lg) 0 0;
+    border-top: 1px solid var(--ui-line);
+    list-style: none;
+    text-align: left;
+}
+
+.contact-list li {
+    display: flex;
+    align-items: center;
+    gap: var(--ui-space-md);
+    min-width: 0;
+    color: var(--ui-text-body);
+    overflow-wrap: anywhere;
+}
+
+.skill-groups {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ui-space-lg);
+}
+
+.edu__degree {
+    margin: 0;
+    color: var(--ui-text-title);
+    font-weight: 600;
+}
+
+.edu__meta {
+    margin: var(--ui-space-2xs) 0 0;
+    color: var(--ui-text-muted);
+}
+
+/* Print keeps the two columns on A4 width. */
+@media print {
+    .resume {
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+        gap: var(--ui-space-lg);
+    }
+
+    .job {
+        break-inside: avoid;
+    }
+}

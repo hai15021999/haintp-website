@@ -1,13 +1,120 @@
-::ng-deep {
-    .__app-snackbar-container {
-        .mat-mdc-snack-bar-label {
-            padding: 4px;
-            padding-left: 8px;
-            background-color: var(--Grayscale300);
-            border-radius: 4px;
-        }
-        .mdc-snackbar__surface {
-            padding: 0px;
-        }
+/* Shell glue around the kit sidenav (docs: D:\report-page-design\docs\sidenav.md).
+   Only brand row, top bar and mobile drawer live here. */
+
+.site-sidenav__brand {
+    display: flex;
+    align-items: center;
+    gap: var(--ui-space-md);
+    min-width: 0;
+}
+
+.site-sidenav__avatar {
+    flex: none;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--ui-radius-pill);
+    object-fit: cover;
+    box-shadow: 0 0 0 1px var(--ui-line);
+}
+
+.site-sidenav__name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.site-sidenav__ext {
+    color: var(--ui-text-muted);
+}
+
+.site-sidenav__meta {
+    margin: var(--ui-space-xs) 0 0;
+    overflow: hidden;
+    color: var(--ui-text-muted);
+    font: 400 11px/14px var(--ui-font);
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Rail: the brand row keeps only the toggle (kit hides the title). */
+.ui-sidenav:has(.ui-sidenav__toggle[aria-expanded='false']) .site-sidenav__ext {
+    display: none;
+}
+
+/* Below 768px the full navigation slides in over the page. */
+.site-sidenav--mobile {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: var(--ui-z-menu);
+    box-shadow: var(--ui-shadow-popup);
+    transition: transform var(--ui-duration) ease;
+}
+
+.site-sidenav--hidden {
+    transform: translateX(-100%);
+    box-shadow: none;
+}
+
+.site-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: var(--ui-z-overlay);
+    background: var(--ui-scrim);
+}
+
+.site-main {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+    outline: none;
+}
+
+/* Top bar: 48px, same height as the sidenav header so the two lines meet. */
+.site-topbar {
+    position: sticky;
+    top: 0;
+    z-index: var(--ui-z-sticky);
+    box-sizing: border-box;
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: var(--ui-space-md);
+    min-height: var(--ui-toolbar-h);
+    padding: 0 var(--ui-space-3xl);
+    border-bottom: 1px solid var(--ui-line);
+    background: var(--ui-surface);
+}
+
+.site-topbar__crumb {
+    display: flex;
+    align-items: center;
+    gap: var(--ui-space-sm);
+    min-width: 0;
+    margin: 0;
+    font: var(--ui-type-body);
+}
+
+.site-topbar__site,
+.site-topbar__sep {
+    color: var(--ui-text-muted);
+}
+
+.site-topbar__current {
+    color: var(--ui-text-title);
+    font-weight: 600;
+}
+
+@media (max-width: 767px) {
+    .site-topbar {
+        padding: 0 var(--ui-space-md);
+    }
+
+    .site-topbar__site,
+    .site-topbar__sep,
+    .site-topbar__optional {
+        display: none;
     }
 }
