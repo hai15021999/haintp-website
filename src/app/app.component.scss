@@ -26,16 +26,6 @@
     color: var(--ui-text-muted);
 }
 
-.site-sidenav__meta {
-    margin: var(--ui-space-xs) 0 0;
-    overflow: hidden;
-    color: var(--ui-text-muted);
-    font: 400 11px/14px var(--ui-font);
-    text-align: center;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
 /* Rail: the brand row keeps only the toggle (kit hides the title). */
 .ui-sidenav:has(.ui-sidenav__toggle[aria-expanded='false']) .site-sidenav__ext {
     display: none;

@@ -30,7 +30,6 @@ export class AppComponent {
     readonly #router = inject(Router);
 
     readonly profile = PROFILE;
-    readonly year = new Date().getFullYear();
 
     readonly nav: NavItem[] = [
         { path: '/about', label: 'About', icon: 'user' },

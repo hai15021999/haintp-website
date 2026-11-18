@@ -68,9 +68,6 @@
                 <app-icon class="ui-sidenav__icon" [name]="themeIcon()" />
                 <span class="ui-sidenav__label">{{ themeLabel() }}</span>
             </button>
-            @if (navExpanded()) {
-                <p class="site-sidenav__meta">© {{ year }} {{ profile.displayName }}</p>
-            }
         </div>
     </nav>
 
