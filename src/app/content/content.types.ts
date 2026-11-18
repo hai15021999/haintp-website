@@ -27,6 +27,9 @@ export interface Profile {
     careerStart: YearMonth;
     headline: string;
     summary: string;
+    /** Public contact details, published at the owner's request (2026-11-18). */
+    email: string;
+    phone: { display: string; tel: string };
     avatar: string;
     portrait: string;
     socials: SocialLink[];
@@ -148,4 +151,5 @@ export type IconName =
     | 'download'
     | 'lock'
     | 'sparkles'
-    | 'network';
+    | 'network'
+    | 'phone';

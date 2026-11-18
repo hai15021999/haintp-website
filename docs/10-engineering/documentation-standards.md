@@ -44,5 +44,5 @@
 |---|---|---|
 | Code change alters documented behavior | Author of the change (human or agent) | Affected docs, same PR |
 | New decision | Decider | New ADR + SSoT files |
-| Release | Owner | `environment*.ts` version, deployment log in [deployment.md](../20-operations/deployment.md) |
+| Release | Owner | Deployment log in [deployment.md](../20-operations/deployment.md) |
 | Quarterly review | Owner | Check `Last updated` > 6 months; mark stale docs `Deprecated` or refresh |

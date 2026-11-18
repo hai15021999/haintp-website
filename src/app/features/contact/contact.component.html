@@ -2,7 +2,7 @@
     <header class="page-header">
         <div>
             <h1 class="page-header__title">Contact</h1>
-            <p class="page-header__desc">A project, a role or a question about something on this site — send a message and I will reply by email.</p>
+            <p class="page-header__desc">A project, a role or a question about something on this site — send a message, email or call me.</p>
         </div>
     </header>
 
@@ -103,6 +103,25 @@
         </section>
 
         <aside class="split__aside">
+            <section class="ui-panel" aria-labelledby="h-direct">
+                <div class="panel-header">
+                    <h2 class="panel-title" id="h-direct">Direct contact</h2>
+                </div>
+                <ul class="links" role="list">
+                    <li>
+                        <a class="links__item" [href]="'mailto:' + profile.email">
+                            <app-icon name="mail" />
+                            <span class="links__label">{{ profile.email }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="links__item" [href]="'tel:' + profile.phone.tel">
+                            <app-icon name="phone" />
+                            <span class="links__label">{{ profile.phone.display }} <span class="ui-text-muted">(VN)</span></span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
             <section class="ui-panel" aria-labelledby="h-other">
                 <div class="panel-header">
                     <h2 class="panel-title" id="h-other">Elsewhere</h2>

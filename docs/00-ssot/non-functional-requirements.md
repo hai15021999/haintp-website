@@ -50,7 +50,7 @@ A change that breaks a "Must" row is not done. "Should" rows need a TODO entry w
 | SEC-2 | No `bypassSecurityTrust*` on content that is not a static constant | Must |
 | SEC-3 | External links: `target="_blank" rel="noopener noreferrer"` | Must |
 | SEC-4 | No third-party trackers/analytics without an ADR | Must |
-| SEC-5 | No owner email/phone in page source (contact via form) | Must |
+| SEC-5 | Only owner-approved contact details are published (`PROFILE.email`, `PROFILE.phone`, approved 2026-11-18); no other personal data (address, ID, private accounts) | Must |
 
 Details: [security.md](../20-operations/security.md).
 

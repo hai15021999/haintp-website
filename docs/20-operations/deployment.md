@@ -45,7 +45,6 @@ GitHub Pages has no rewrite: copy `dist/index.html` to `dist/404.html` after bui
 ## Release checklist
 
 - [ ] `master` is green: `npx ng build` without errors
-- [ ] Bump `version` in both `src/environments/environment*.ts` (shown in the sidenav footer)
 - [ ] Manual smoke on the build output (`npx serve -s dist` — `-s` enables the SPA fallback — or the host preview)
 - [ ] Deploy `dist/`
 - [ ] Post-deploy smoke (runbook.md § Smoke test)
@@ -53,6 +52,6 @@ GitHub Pages has no rewrite: copy `dist/index.html` to `dist/404.html` after bui
 
 ## Deployment log
 
-| Date | Version | Commit | Notes |
-|---|---|---|---|
-| TODO | 2.0.0 | TODO | Restructure: UI kit, content layer, resume, new projects |
+| Date | Commit | Notes |
+|---|---|---|
+| TODO | TODO | Restructure: UI kit, content layer, resume, new projects |

@@ -16,7 +16,6 @@ Both files must have the same keys (prod replaces dev at build time).
 | Key | Dev | Prod | Notes |
 |---|---|---|---|
 | `production` | `false` | `true` | — |
-| `version` | `2.0.0` | `2.0.0` | Sidenav footer; bump on release |
 | `siteUrl` | `http://localhost:4200` | TODO | For future canonical/OG URLs |
 | `emailjs.serviceId` | `service_casber` | same | Public identifier |
 | `emailjs.templateId` | `template_contact` | same | Must match `api-contracts.md § EmailJS` params |

@@ -10,6 +10,8 @@ export const PROFILE: Profile = {
     summary:
         'Front-end developer focused on enterprise web apps: Microsoft 365 add-ins, helpdesk and admin portals, and a real-estate valuation platform. ' +
         'I care about clear UI systems, accessible controls and code that the next developer — human or AI — can change safely.',
+    email: 'hai15021999@gmail.com',
+    phone: { display: '+84 911 384 048', tel: '+84911384048' },
     avatar: 'assets/images/avatar.png',
     portrait: 'assets/images/avatar_about_me.jpg',
     socials: [

@@ -57,7 +57,7 @@ Types: `src/app/content/content.types.ts` (the authoritative schema). Summary:
 
 | Type | File | Key rules |
 |---|---|---|
-| `Profile` | `profile.ts` | `careerStart` drives "years of experience" everywhere; no private email/phone |
+| `Profile` | `profile.ts` | `careerStart` drives "years of experience" everywhere; `email` and `phone` are the only published contact details (owner-approved 2026-11-18) — add no others |
 | `Resume` | `resume.ts` | `experience[].projects` must be existing slugs; unverified facts carry a `// VERIFY:` comment |
 | `SkillGroup` | `skills.ts` | `icon` must be an `IconName`; `logo` must exist under `assets/logos/` |
 

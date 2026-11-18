@@ -12,7 +12,7 @@
 | Key abuse | EmailJS public key in bundle | Public by design; restrict allowed origins in EmailJS dashboard (TODO(owner): confirm) |
 | Reverse tabnabbing | External links | `rel="noopener noreferrer"` on all `target="_blank"` |
 | Supply chain | npm packages | Allow-list in dependency-management.md, `npm ci`, `npm audit` monthly |
-| Personal data exposure | Email/phone in source | Not published (NFR SEC-5); contact via form only |
+| Personal data exposure | Email/phone in source | Owner chose to publish email and phone (2026-11-18, NFR SEC-5). Accepted risk: spam/scraping of both; nothing else personal is published. Mitigation if spam grows: show them only after a click, or remove and keep the form |
 
 ## Secrets
 

@@ -94,7 +94,11 @@
                     }
                     <li>
                         <app-icon name="mail" [size]="14" />
-                        <a class="ui-link" routerLink="/contact">Contact form on this site</a>
+                        <a class="ui-link" [href]="'mailto:' + profile.email">{{ profile.email }}</a>
+                    </li>
+                    <li>
+                        <app-icon name="phone" [size]="14" />
+                        <a class="ui-link" [href]="'tel:' + profile.phone.tel">{{ profile.phone.display }}</a>
                     </li>
                 </ul>
             </section>

@@ -17,8 +17,10 @@
 ## Source tree
 
 ```
+public/                     Copied to dist/ root: favicon.svg (source mark), favicon.ico, apple-touch-icon.png
+scripts/generate-favicon.js Re-renders favicon.ico + apple-touch-icon.png from the "</>" mark in favicon.svg (no deps)
 src/
-├── index.html              Meta, fonts, pre-boot theme script
+├── index.html              Meta, fonts, icons, pre-boot theme script
 ├── main.ts                 bootstrapApplication(AppComponent, appConfig)
 ├── styles.scss             Site styles (imports styles/site/*)
 ├── styles/

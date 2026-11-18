@@ -6,7 +6,6 @@ import { IconName, PROFILE } from '@content';
 import { LayoutService } from '@core/layout.service';
 import { ColorMode, ThemeService } from '@core/theme.service';
 import { IconComponent } from '@shared/icon/icon.component';
-import { environment } from '@environment';
 
 const THEME_LABEL: Record<ColorMode, string> = { system: 'Theme: System', light: 'Theme: Light', dark: 'Theme: Dark' };
 const THEME_ICON: Record<ColorMode, IconName> = { system: 'monitor', light: 'sun', dark: 'moon' };
@@ -31,7 +30,6 @@ export class AppComponent {
     readonly #router = inject(Router);
 
     readonly profile = PROFILE;
-    readonly version = environment.version;
     readonly year = new Date().getFullYear();
 
     readonly nav: NavItem[] = [
