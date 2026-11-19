@@ -37,11 +37,13 @@
 | `caseStudy` | true → `assets/case-studies/<slug>.md` (start with `##`) |
 | `links` | public URLs only |
 | `featured` | max 3 shown on About |
+| Case-study sections | optional: `metrics`, `problem`, `flow`, `techStack`, `decisions`, `codeSamples`, `gallery`, `outcomes`, `retrospective` — see api-contracts § Optional case-study sections |
 
 ### Checklist
 
 - [ ] No confidential client information; owner approved wording
 - [ ] Company policy forbids details? Set `confidential: true`, keep only title + summary + generic cover
 - [ ] Cover image added and < 200 kB
+- [ ] Case-study sections only with owner-supplied facts; screenshots masked
 - [ ] Resume `experience[].projects` updated if professional
 - [ ] Opened `/portfolio/<slug>` and the card in both themes

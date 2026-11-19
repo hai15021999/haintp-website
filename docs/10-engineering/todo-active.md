@@ -1,6 +1,6 @@
 # Active TODOs
 
-> Status: Active · Last updated: 2026-11-18 · Owner: Hai Nguyen
+> Status: Active · Last updated: 2026-11-19 · Owner: Hai Nguyen
 
 Single list of open work. Agents add rows for anything they could not finish or verify; the owner prioritizes.
 
@@ -13,10 +13,14 @@ Single list of open work. Agents add rows for anything they could not finish or 
 | V-3 | Valuation Platform role wording "Front-end Developer · UI system owner" and highlights are publishable (client confidentiality) | `projects.ts`, `assets/case-studies/valuation-platform.md` | High |
 | V-4 | FPT University start 2019-09 | `resume.ts` (`fptu`) | Medium |
 | V-5 | Language levels (Vietnamese native, English professional working) | `resume.ts` | Medium |
-| V-6 | Periods for Excel add-in, Helpdesk, Admin portal, Bingo, Bonsai (omitted, not guessed) | `projects.ts` | Low |
+| V-6 | Periods for Excel add-in, Helpdesk, Admin portal, Bonsai (omitted, not guessed). Bingo (2024-01 → 2024-03) and Moonlight taken from repo activity — confirm | `projects.ts` | Low |
 | V-7 | Location "Ho Chi Minh City, Vietnam" | `profile.ts` | Low |
-| V-9 | AI Chatbot with RAG and Microservices & Integration APIs (Appvity, confirmed): role, period and exact stack still unknown | `projects.ts` (`rag-chatbot`, `microservices-integration`) | High |
+| V-9 | AI Chatbot with RAG and Microservices & Integration APIs (Appvity, confirmed): role and period still unknown. RAG chatbot stack/highlights now from repo `openai-chat` (2026-11-19) | `projects.ts` (`rag-chatbot`, `microservices-integration`) | High |
 | V-10 | Confirm the client names Vinamilk, Prudential, Viags may be shown as titles (only details are withheld). Employer = Appvity (confirmed) | `projects.ts` (`*-approval-workflow`), `resume.ts` | High |
+| V-11 | Project detail case-study sections: confirm Valuation Platform metrics/problem/flow/decisions wording; supply outcomes and masked screenshots (`gallery`); Bingo, Moonlight, RAG chatbot sections written from their repos (2026-11-19) — confirm decision rationales; Excel add-in sections written from the owner’s description (no repo access, company product). Tech stack purposes: confirm Valuation "Tailwind CSS v4" and website "Tailwind CSS v3" wording; add the Azure DevOps purpose for the Excel add-in; Moonlight Gemini calls are commented out in the repo, so the site says "built, switched off" | `projects.ts` | Medium |
+| V-12 | **Security:** public repo `LotoAppBackEnd` contains an RSA private key (`config/casber_vm_key.pem`), `utils/.env` with `JWT_SECRET`, and manager credentials in `data/manager.mjs`. Revoke/rotate them, purge from git history, then add the backend link to `bingo-game` | GitHub repo | High |
+| V-13 | RAG chatbot shows a code excerpt from private repo `openai-chat` (Appvity work). Confirm it may be published, else remove `codeSamples` | `projects.ts` (`rag-chatbot`) | High |
+| V-14 | Owner details added 2026-11-19 for Bonsai, Helpdesk, Admin portal, Microservices. Still open: Bonsai role — keep "project lead · design"?; Bonsai period; what numbering-service and webhook-service do; Helpdesk/Admin portal periods and the purpose of each technology (sidebar tags kept until then) | `projects.ts` | Medium |
 | V-8 | Add LinkedIn URL if any (`SocialLink.id = 'linkedin'` already supported) | `profile.ts` | Low |
 
 ## Engineering

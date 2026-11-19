@@ -1,6 +1,6 @@
 # Service Scope
 
-> Status: Active · Last updated: 2026-11-18 · Owner: Hai Nguyen
+> Status: Active · Last updated: 2026-11-19 · Owner: Hai Nguyen
 
 ## Purpose
 
@@ -12,7 +12,7 @@ A static, client-rendered personal website that presents Hai Nguyen as a front-e
 |---|---|---|---|
 | About | `/about` | Intro, key numbers, featured work, skills, education | `content/profile.ts`, `skills.ts`, `projects.ts`, `resume.ts` |
 | Portfolio | `/portfolio` | Project grid, type filter (`?type=`), text search | `content/projects.ts` |
-| Project detail | `/portfolio/:slug` | Facts, highlights, stack, optional Markdown case study | `projects.ts` + `assets/case-studies/<slug>.md` |
+| Project detail | `/portfolio/:slug` | Facts, highlights, stack, optional structured case-study sections (problem, flow, decisions, code, screens, outcomes) and Markdown case study | `projects.ts` + `assets/case-studies/<slug>.md` |
 | Resume | `/resume` | Experience, skills, education, languages; print to PDF | `content/resume.ts`, `profile.ts` |
 | Contact | `/contact` | Validated form sent through EmailJS | `features/contact` + EmailJS template |
 | Shell | all | Side navigation (rail / drawer), top bar, color mode | `app.component.*`, `core/*` |

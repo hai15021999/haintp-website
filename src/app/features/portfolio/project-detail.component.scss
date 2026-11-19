@@ -156,3 +156,81 @@
         padding: var(--ui-space-xl);
     }
 }
+
+/* ── Case-study sections (optional content fields; see api-contracts § Project) ── */
+
+[id^='h-'] {
+    scroll-margin-top: calc(var(--ui-toolbar-h) + var(--ui-space-xl));
+}
+
+[id^='h-']:focus {
+    outline: none;
+}
+
+/* Headline facts under the hero summary. */
+.metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ui-space-md) var(--ui-space-3xl);
+    margin: 0;
+    padding-top: var(--ui-space-md);
+    border-top: 1px solid var(--ui-line);
+}
+
+.metrics__item {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.metrics__value {
+    margin: 0;
+    color: var(--ui-text-title);
+    font: 600 20px/28px var(--ui-font);
+}
+
+.metrics__label {
+    color: var(--ui-text-muted);
+    font: var(--ui-type-meta);
+}
+
+/* Aside: stretch to the row so the TOC can stick while the main column scrolls. */
+.aside {
+    align-self: stretch;
+}
+
+.toc {
+    position: sticky;
+    top: calc(var(--ui-toolbar-h) + var(--ui-space-xl));
+}
+
+.toc__list {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: var(--ui-space-sm);
+    list-style: none;
+}
+
+.toc__link {
+    display: block;
+    padding: var(--ui-space-xs) var(--ui-space-md);
+    border-radius: var(--ui-radius);
+    color: var(--ui-text-body);
+    text-decoration: none;
+}
+
+.toc__link:hover {
+    background: var(--ui-hover);
+    color: var(--ui-accent);
+}
+
+.toc__link:focus-visible {
+    outline: 2px solid var(--ui-accent);
+    outline-offset: -2px;
+}
+
+@media (max-width: 959px) {
+    .toc {
+        display: none;
+    }
+}

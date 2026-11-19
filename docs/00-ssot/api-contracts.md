@@ -1,6 +1,6 @@
 # API & Content Contracts
 
-> Status: Active · Last updated: 2026-11-18 · Owner: Hai Nguyen
+> Status: Active · Last updated: 2026-11-19 · Owner: Hai Nguyen
 
 The site has no own backend. Its "APIs" are: public **routes**, the **content schema**, the **case-study asset path**, and the **EmailJS** call. Each is a contract — change the doc first, then the code, in one PR.
 
@@ -51,7 +51,23 @@ Types: `src/app/content/content.types.ts` (the authoritative schema). Summary:
 | `caseStudy` | boolean | no | `true` ⇒ `assets/case-studies/<slug>.md` must exist |
 | `links` | `{ label, url, kind: 'source'\|'live'\|'docs' }[]` | no | Public URLs only |
 | `featured` | boolean | no | About page shows the first 3 featured |
-| `confidential` | boolean | no | Company policy forbids details. Set `stack: []`, `highlights: []`; no `role`, `period`, `context`, `caseStudy`, `links`. Card shows a lock pill; detail page shows a policy notice instead of details |
+| `confidential` | boolean | no | Company policy forbids details. Set `stack: []`, `highlights: []`; no `role`, `period`, `context`, `caseStudy`, `links`. Card shows a lock pill; detail page shows a policy notice instead of details. None of the case-study fields below may be set |
+
+#### Optional case-study sections (`Project`)
+
+Each renders on `/portfolio/:slug` only when present, in this order: problem → flow → tech stack → highlights → decisions → code → gallery → outcomes → Markdown case study → retrospective. The sidebar shows "On this page" when 3+ sections exist. All facts must come from the owner (R1).
+
+| Field | Type | Rule |
+|---|---|---|
+| `metrics` | `{ value, label }[]` | 2–4 headline facts in the hero. Real counts only, no estimates |
+| `problem` | string | Business problem, 1–3 sentences. Do not repeat it as `## The problem` in the Markdown |
+| `flow` | `{ summary, steps: string[] }` | Business flow as numbered steps (themeable, no image) |
+| `techStack` | `{ layer, items: { name, purpose? }[] }[]` | What each technology does, grouped by layer. Omit `purpose` when unknown. When set, the sidebar "Stack" tags are hidden (`stack` is still required for cards) |
+| `decisions` | `{ title, context, decision, rationale }[]` | 2–3 engineering decisions: situation → choice → why |
+| `codeSamples` | `{ title, language, code, note }[]` | Real excerpts, 10–25 lines, plain `<pre>` (no highlighter). No client code unless the owner cleared it |
+| `gallery` | `{ src, alt, caption }[]` | `assets/images/projects/<slug>/*`, client data masked, < 300 kB each |
+| `outcomes` | string[] | Results the owner can state; numbers only when measured |
+| `retrospective` | string[] | "Looking back": lessons and next steps |
 
 ### `Profile`, `Resume`, `SkillGroup`
 

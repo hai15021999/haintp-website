@@ -1,0 +1,157 @@
+@let p = project();
+
+@if (p.problem) {
+    <section class="ui-panel" aria-labelledby="h-problem">
+        <div class="panel-header">
+            <app-icon class="panel-icon" name="alert" />
+            <h2 class="panel-title" id="h-problem" tabindex="-1">The problem</h2>
+        </div>
+        <div class="panel-body">
+            <p class="lead">{{ p.problem }}</p>
+        </div>
+    </section>
+}
+
+@if (p.flow?.steps?.length) {
+    <section class="ui-panel" aria-labelledby="h-flow">
+        <div class="panel-header">
+            <app-icon class="panel-icon" name="network" />
+            <h2 class="panel-title" id="h-flow" tabindex="-1">How it works</h2>
+        </div>
+        <div class="panel-body flow">
+            <p class="flow__summary">{{ p.flow!.summary }}</p>
+            <ol class="flow__steps">
+                @for (step of p.flow!.steps; track step; let i = $index) {
+                    <li class="flow__step">
+                        <span class="flow__pill">
+                            <span class="flow__num" aria-hidden="true">{{ i + 1 }}</span>
+                            {{ step }}
+                        </span>
+                    </li>
+                }
+            </ol>
+        </div>
+    </section>
+}
+
+@if (p.techStack?.length) {
+    <section class="ui-panel" aria-labelledby="h-tech">
+        <div class="panel-header">
+            <app-icon class="panel-icon" name="layers" />
+            <h2 class="panel-title" id="h-tech" tabindex="-1">Tech stack</h2>
+        </div>
+        <div class="panel-body tech">
+            @for (g of p.techStack; track g.layer) {
+                <div class="tech__group">
+                    <h3 class="tech__layer">{{ g.layer }}</h3>
+                    <dl class="tech__items">
+                        @for (t of g.items; track t.name) {
+                            <div class="tech__item">
+                                <dt class="tech__name">{{ t.name }}</dt>
+                                @if (t.purpose) {
+                                    <dd class="tech__purpose">{{ t.purpose }}</dd>
+                                }
+                            </div>
+                        }
+                    </dl>
+                </div>
+            }
+        </div>
+    </section>
+}
+
+@if (p.highlights.length) {
+    <section class="ui-panel" aria-labelledby="h-highlights">
+        <div class="panel-header">
+            <app-icon class="panel-icon" name="check" />
+            <h2 class="panel-title" id="h-highlights" tabindex="-1">What I built</h2>
+        </div>
+        <div class="panel-body">
+            <ul class="bullet-list">
+                @for (item of p.highlights; track item) {
+                    <li>{{ item }}</li>
+                }
+            </ul>
+        </div>
+    </section>
+}
+
+@if (p.decisions?.length) {
+    <section class="ui-panel" aria-labelledby="h-decisions">
+        <div class="panel-header">
+            <app-icon class="panel-icon" name="git-branch" />
+            <h2 class="panel-title" id="h-decisions" tabindex="-1">Key decisions</h2>
+        </div>
+        <div class="panel-body decisions">
+            @for (d of p.decisions; track d.title) {
+                <article class="decision">
+                    <h3 class="decision__title">{{ d.title }}</h3>
+                    <dl class="decision__body">
+                        <dt>Situation</dt>
+                        <dd>{{ d.context }}</dd>
+                        <dt>Decision</dt>
+                        <dd>{{ d.decision }}</dd>
+                        <dt>Why</dt>
+                        <dd>{{ d.rationale }}</dd>
+                    </dl>
+                </article>
+            }
+        </div>
+    </section>
+}
+
+@if (p.codeSamples?.length) {
+    <section class="ui-panel" aria-labelledby="h-code">
+        <div class="panel-header">
+            <app-icon class="panel-icon" name="code" />
+            <h2 class="panel-title" id="h-code" tabindex="-1">Code highlights</h2>
+        </div>
+        <div class="panel-body samples">
+            @for (c of p.codeSamples; track c.title) {
+                <figure class="sample">
+                    <figcaption class="sample__head">
+                        <span class="sample__title">{{ c.title }}</span>
+                        <span class="tag">{{ c.language }}</span>
+                    </figcaption>
+                    <pre class="sample__code" tabindex="0"><code>{{ c.code }}</code></pre>
+                    <p class="sample__note">{{ c.note }}</p>
+                </figure>
+            }
+        </div>
+    </section>
+}
+
+@if (p.gallery?.length) {
+    <section class="ui-panel" aria-labelledby="h-gallery">
+        <div class="panel-header">
+            <app-icon class="panel-icon" name="monitor" />
+            <h2 class="panel-title" id="h-gallery" tabindex="-1">Screens</h2>
+        </div>
+        <div class="panel-body gallery">
+            @for (g of p.gallery; track g.src) {
+                <figure class="gallery__item">
+                    <a [href]="g.src" target="_blank" rel="noopener">
+                        <img [src]="g.src" [alt]="g.alt" loading="lazy" />
+                    </a>
+                    <figcaption>{{ g.caption }}</figcaption>
+                </figure>
+            }
+        </div>
+    </section>
+}
+
+@if (p.outcomes?.length) {
+    <section class="ui-panel" aria-labelledby="h-outcomes">
+        <div class="panel-header">
+            <app-icon class="panel-icon" name="sparkles" />
+            <h2 class="panel-title" id="h-outcomes" tabindex="-1">Outcomes</h2>
+        </div>
+        <div class="panel-body">
+            <ul class="bullet-list">
+                @for (item of p.outcomes; track item) {
+                    <li>{{ item }}</li>
+                }
+            </ul>
+        </div>
+    </section>
+}

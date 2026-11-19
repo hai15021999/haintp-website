@@ -25,6 +25,16 @@
                 </div>
                 <h1 class="page-header__title">{{ project.title }}</h1>
                 <p class="hero__summary">{{ project.summary }}</p>
+                @if (!project.confidential && project.metrics?.length) {
+                    <dl class="metrics">
+                        @for (m of project.metrics; track m.label) {
+                            <div class="metrics__item">
+                                <dt class="metrics__label">{{ m.label }}</dt>
+                                <dd class="metrics__value">{{ m.value }}</dd>
+                            </div>
+                        }
+                    </dl>
+                }
                 @if (project.links?.length) {
                     <div class="page-header__actions">
                         @for (link of project.links; track link.url) {
@@ -60,25 +70,13 @@
         } @else {
         <div class="split">
             <div class="split__main">
-                <section class="ui-panel" aria-labelledby="h-highlights">
-                    <div class="panel-header">
-                        <app-icon class="panel-icon" name="check" />
-                        <h2 class="panel-title" id="h-highlights">What I built</h2>
-                    </div>
-                    <div class="panel-body">
-                        <ul class="bullet-list">
-                            @for (item of project.highlights; track item) {
-                                <li>{{ item }}</li>
-                            }
-                        </ul>
-                    </div>
-                </section>
+                <app-project-story [project]="project" />
 
                 @if (project.caseStudy) {
                     <section class="ui-panel" aria-labelledby="h-case" [attr.aria-busy]="caseStudy.isLoading()">
                         <div class="panel-header">
                             <app-icon class="panel-icon" name="file-text" />
-                            <h2 class="panel-title" id="h-case">Case study</h2>
+                            <h2 class="panel-title" id="h-case" tabindex="-1">Case study</h2>
                         </div>
                         <div class="panel-body case">
                             @if (caseStudy.isLoading()) {
@@ -95,9 +93,25 @@
                         </div>
                     </section>
                 }
+
+                @if (project.retrospective?.length) {
+                    <section class="ui-panel" aria-labelledby="h-retro">
+                        <div class="panel-header">
+                            <app-icon class="panel-icon" name="arrow-right" />
+                            <h2 class="panel-title" id="h-retro" tabindex="-1">Looking back</h2>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="bullet-list">
+                                @for (item of project.retrospective; track item) {
+                                    <li>{{ item }}</li>
+                                }
+                            </ul>
+                        </div>
+                    </section>
+                }
             </div>
 
-            <aside class="split__aside">
+            <aside class="split__aside aside">
                 <section class="ui-panel" aria-labelledby="h-details">
                     <div class="panel-header">
                         <h2 class="panel-title" id="h-details">Details</h2>
@@ -122,18 +136,35 @@
                     </div>
                 </section>
 
-                <section class="ui-panel" aria-labelledby="h-stack">
-                    <div class="panel-header">
-                        <h2 class="panel-title" id="h-stack">Stack</h2>
-                    </div>
-                    <div class="panel-body">
-                        <ul class="tag-list">
-                            @for (tech of project.stack; track tech) {
-                                <li class="tag">{{ tech }}</li>
+                @if (!project.techStack?.length) {
+                    <section class="ui-panel" aria-labelledby="h-stack">
+                        <div class="panel-header">
+                            <h2 class="panel-title" id="h-stack">Stack</h2>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="tag-list">
+                                @for (tech of project.stack; track tech) {
+                                    <li class="tag">{{ tech }}</li>
+                                }
+                            </ul>
+                        </div>
+                    </section>
+                }
+
+                @if (sections().length >= 3) {
+                    <nav class="ui-panel toc" aria-labelledby="h-toc">
+                        <div class="panel-header">
+                            <h2 class="panel-title" id="h-toc">On this page</h2>
+                        </div>
+                        <ol class="toc__list">
+                            @for (s of sections(); track s.id) {
+                                <li>
+                                    <a class="toc__link" [href]="'#' + s.id" (click)="jumpTo($event, s.id)">{{ s.label }}</a>
+                                </li>
                             }
-                        </ul>
-                    </div>
-                </section>
+                        </ol>
+                    </nav>
+                }
             </aside>
         </div>
         }

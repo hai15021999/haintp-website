@@ -6,11 +6,12 @@ import { marked } from 'marked';
 import { catchError, map, of } from 'rxjs';
 import { PROJECTS, findProject, formatPeriod } from '@content';
 import { IconComponent } from '@shared/icon/icon.component';
+import { ProjectStoryComponent } from './project-story.component';
 
-/** /portfolio/:slug — project facts from content/projects.ts + optional Markdown case study. */
+/** /portfolio/:slug — project facts from content/projects.ts, structured case-study sections + optional Markdown case study. */
 @Component({
     selector: 'app-project-detail',
-    imports: [RouterLink, IconComponent],
+    imports: [RouterLink, IconComponent, ProjectStoryComponent],
     templateUrl: './project-detail.component.html',
     styleUrl: './project-detail.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -51,4 +52,30 @@ export class ProjectDetailComponent {
 
     readonly typeLabel = computed(() => (this.project()?.type === 'professional' ? 'Professional' : 'Personal'));
 
+    /** Sections present for this project, in page order. Drives the "On this page" list. */
+    readonly sections = computed(() => {
+        const p = this.project();
+        if (!p || p.confidential) return [];
+        const all: { id: string; label: string; show: boolean }[] = [
+            { id: 'h-problem', label: 'The problem', show: !!p.problem },
+            { id: 'h-flow', label: 'How it works', show: !!p.flow?.steps.length },
+            { id: 'h-tech', label: 'Tech stack', show: !!p.techStack?.length },
+            { id: 'h-highlights', label: 'What I built', show: p.highlights.length > 0 },
+            { id: 'h-decisions', label: 'Key decisions', show: !!p.decisions?.length },
+            { id: 'h-code', label: 'Code highlights', show: !!p.codeSamples?.length },
+            { id: 'h-gallery', label: 'Screens', show: !!p.gallery?.length },
+            { id: 'h-outcomes', label: 'Outcomes', show: !!p.outcomes?.length },
+            { id: 'h-case', label: 'Case study', show: !!p.caseStudy },
+            { id: 'h-retro', label: 'Looking back', show: !!p.retrospective?.length },
+        ];
+        return all.filter((s) => s.show);
+    });
+
+    /** In-page jump without touching the URL (the SPA base href would turn '#id' into a route). */
+    jumpTo(event: Event, id: string): void {
+        event.preventDefault();
+        const el = document.getElementById(id);
+        el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        el?.focus({ preventScroll: true });
+    }
 }

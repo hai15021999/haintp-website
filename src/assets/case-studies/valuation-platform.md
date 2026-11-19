@@ -1,7 +1,3 @@
-## The problem
-
-An appraisal company ran its work across spreadsheets, Word templates and email. Every valuation goes through the same chain — intake, site survey, asset records, valuation method, review, report, certificate, invoice — and each step belongs to a different department. The goal was one system where each role sees only its step, and where the documents the company signs come out of the data instead of being retyped.
-
 ## What I worked on
 
 ### Dossier workflow
@@ -34,8 +30,3 @@ The repository has an **SSoT documentation system** (`docs/00-ssot` … `docs/99
 ## Stack
 
 Angular 21 (standalone, signals) · TypeScript · Tailwind CSS v4 · Compact UI kit · Angular Material (overlays only) · Syncfusion DocumentEditor · docxtemplater · pdfmake · ApexCharts · OData · Playwright
-
-## What I would do next
-
-- Move the remaining Material form fields to native kit fields to drop one styling layer.
-- Add visual regression snapshots per theme to the Playwright suite.

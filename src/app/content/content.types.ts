@@ -59,6 +59,51 @@ export interface ProjectLink {
     kind: 'source' | 'live' | 'docs';
 }
 
+/** A headline fact shown in the detail hero, e.g. { value: '2', label: 'Angular apps' }. Facts only, never estimates. */
+export interface ProjectMetric {
+    value: string;
+    label: string;
+}
+
+/** Ordered steps of the business flow, rendered as a themeable step diagram ("How it works"). */
+export interface ProjectFlow {
+    /** One or two sentences that explain the flow. */
+    summary: string;
+    steps: string[];
+}
+
+/** Technologies of one layer (e.g. 'Front-end', 'Realtime') and what each is used for. */
+export interface ProjectTechGroup {
+    layer: string;
+    /** `purpose` omitted when the owner has not stated it — never guess. */
+    items: { name: string; purpose?: string }[];
+}
+
+/** One engineering decision: the situation, what was chosen, and why. */
+export interface ProjectDecision {
+    title: string;
+    context: string;
+    decision: string;
+    rationale: string;
+}
+
+/** Short, real code excerpt (10–25 lines). Never client code unless the owner cleared it. */
+export interface ProjectCodeSample {
+    title: string;
+    /** Display label, e.g. 'CSS', 'TypeScript'. */
+    language: string;
+    code: string;
+    /** Why this excerpt is worth reading. */
+    note: string;
+}
+
+/** Screenshot or diagram under assets/images/projects/<slug>/. Client data must be masked. */
+export interface ProjectMedia {
+    src: string;
+    alt: string;
+    caption: string;
+}
+
 export interface Project {
     /** URL slug: /portfolio/:slug. Lowercase kebab-case, never reused. */
     slug: string;
@@ -79,6 +124,22 @@ export interface Project {
     caseStudy?: boolean;
     links?: ProjectLink[];
     featured?: boolean;
+
+    // ── Optional case-study sections. Each renders only when present. ──
+    /** 2–4 headline facts under the hero summary. */
+    metrics?: ProjectMetric[];
+    /** The business problem, in 1–3 sentences. */
+    problem?: string;
+    flow?: ProjectFlow;
+    /** "Tech stack" section: what each technology does. When set, the sidebar tag list is hidden. */
+    techStack?: ProjectTechGroup[];
+    decisions?: ProjectDecision[];
+    codeSamples?: ProjectCodeSample[];
+    gallery?: ProjectMedia[];
+    /** Results the owner can state (no invented numbers). */
+    outcomes?: string[];
+    /** Lessons and next steps ("Looking back"). */
+    retrospective?: string[];
     /**
      * Company policy forbids details. Only title, summary and cover are shown; the detail page shows a
      * confidentiality notice instead of role, period, stack, highlights or case study. Keep those fields empty.
