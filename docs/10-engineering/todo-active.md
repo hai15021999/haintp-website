@@ -11,7 +11,6 @@ Single list of open work. Agents add rows for anything they could not finish or 
 | V-1 | Appvity: company name, title, start 2020-06, still current? | `content/resume.ts` (`appvity`) | High |
 | V-2 | Valuation Platform engagement: "Casber Solution — appraisal company client", freelance, start 2026-01 | `resume.ts`, `projects.ts` (`valuation-platform`) | High |
 | V-3 | Valuation Platform role wording "Front-end Developer · UI system owner" and highlights are publishable (client confidentiality) | `projects.ts`, `assets/case-studies/valuation-platform.md` | High |
-| V-4 | FPT University start 2019-09 | `resume.ts` (`fptu`) | Medium |
 | V-5 | Language levels (Vietnamese native, English professional working) | `resume.ts` | Medium |
 | V-6 | Periods for Excel add-in, Helpdesk, Admin portal, Bonsai (omitted, not guessed). Bingo (2024-01 → 2024-03) and Moonlight taken from repo activity — confirm | `projects.ts` | Low |
 | V-7 | Location "Ho Chi Minh City, Vietnam" | `profile.ts` | Low |
@@ -36,6 +35,8 @@ Single list of open work. Agents add rows for anything they could not finish or 
 | E-8 | Lighthouse run in CI (PERF-4) | Low |
 
 ## Done (2026-11-18 restructure)
+
+- 2026-11-19: Education shows only the graduation date (owner request); V-4 (start year) closed — no longer shown.
 
 - SSoT docs created (`docs/`).
 - UI kit adopted, Plum theme, dark mode, sidenav rail/drawer (ADR-002).

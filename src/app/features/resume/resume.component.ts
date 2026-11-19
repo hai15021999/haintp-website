@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { PROFILE, RESUME, findProject, formatPeriod, yearsSince } from '@content';
+import { PROFILE, RESUME, findProject, formatEducationDate, formatPeriod, yearsSince } from '@content';
 import { IconComponent } from '@shared/icon/icon.component';
 
 /** Resume. Screen layout = two columns; print layout (Print / Save PDF) = same content, no shell. */
@@ -27,7 +27,7 @@ export class ResumeComponent {
         projectLinks: (item.projects ?? []).map((slug) => findProject(slug)).filter((p) => !!p),
     }));
 
-    readonly education = RESUME.education.map((e) => ({ ...e, periodLabel: formatPeriod(e.period) }));
+    readonly education = RESUME.education.map((e) => ({ ...e, periodLabel: formatEducationDate(e) }));
 
     print(): void {
         this.#doc.defaultView?.print();

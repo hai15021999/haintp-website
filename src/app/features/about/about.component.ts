@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { PROFILE, PROJECTS, RESUME, SKILL_GROUPS, formatPeriod, yearsSince } from '@content';
+import { PROFILE, PROJECTS, RESUME, SKILL_GROUPS, formatEducationDate, yearsSince } from '@content';
 import { IconComponent } from '@shared/icon/icon.component';
 import { ProjectCardComponent } from '../portfolio/project-card.component';
 
@@ -16,7 +16,7 @@ export class AboutComponent {
     readonly profile = PROFILE;
     readonly skills = SKILL_GROUPS;
     readonly featured = PROJECTS.filter((p) => p.featured).slice(0, 3);
-    readonly education = RESUME.education.map((e) => ({ ...e, periodLabel: formatPeriod(e.period) }));
+    readonly education = RESUME.education.map((e) => ({ ...e, periodLabel: formatEducationDate(e) }));
 
     readonly stats = [
         { value: `${yearsSince(PROFILE.careerStart)}+`, label: 'Years in front-end', sub: `Since ${PROFILE.careerStart.slice(0, 4)}` },

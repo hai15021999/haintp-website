@@ -111,12 +111,22 @@
     font: var(--ui-type-label);
 }
 
+/* max-width: the --next link aligns items to the end, so without it the title sizes to its text and overflows. */
 .pager-nav__title {
+    max-width: 100%;
     overflow: hidden;
     color: var(--ui-text-title);
     font: var(--ui-type-control);
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+/* Narrow screens: let long project titles wrap instead of cutting them off. */
+@media (max-width: 599px) {
+    .pager-nav__title {
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
 }
 
 /* Confidential project: policy notice replaces details (content flag `confidential`). */

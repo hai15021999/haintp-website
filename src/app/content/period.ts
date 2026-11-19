@@ -18,6 +18,12 @@ export function formatPeriod(period: Period): string {
     return `${formatYearMonth(period.start)} – ${period.end ? formatYearMonth(period.end) : 'Present'}`;
 }
 
+/** Education date: 'Graduated Apr 2024', else the study period, else ''. */
+export function formatEducationDate(item: { graduated?: YearMonth; period?: Period }): string {
+    if (item.graduated) return `Graduated ${formatYearMonth(item.graduated)}`;
+    return item.period ? formatPeriod(item.period) : '';
+}
+
 /** Whole years between a start month and today (floored). */
 export function yearsSince(start: YearMonth, today = new Date()): number {
     const { year, month } = parse(start);

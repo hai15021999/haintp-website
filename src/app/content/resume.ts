@@ -62,8 +62,8 @@ export const RESUME: Resume = {
             id: 'fptu',
             school: 'FPT University, Ho Chi Minh City',
             degree: 'Bachelor of Software Engineering',
-            // VERIFY: start year.
-            period: { start: '2019-09', end: '2024-04' },
+            // Owner (2026-11-19): show only the graduation date, not the study span.
+            graduated: '2024-04',
             logo: 'assets/logos/logo_fptu.svg',
         },
     ],

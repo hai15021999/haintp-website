@@ -164,7 +164,10 @@ export interface EducationItem {
     id: string;
     school: string;
     degree: string;
-    period: Period;
+    /** Graduation month. Preferred: the owner shows only when they graduated, not the study span. */
+    graduated?: YearMonth;
+    /** Study span. Only when the owner wants it shown; `graduated` wins when both are set. */
+    period?: Period;
     logo?: string;
 }
 

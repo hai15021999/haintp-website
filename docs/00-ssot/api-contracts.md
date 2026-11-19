@@ -75,6 +75,7 @@ Each renders on `/portfolio/:slug` only when present, in this order: problem →
 |---|---|---|
 | `Profile` | `profile.ts` | `careerStart` drives "years of experience" everywhere; `email` and `phone` are the only published contact details (owner-approved 2026-11-18) — add no others |
 | `Resume` | `resume.ts` | `experience[].projects` must be existing slugs; unverified facts carry a `// VERIFY:` comment |
+| `Resume.education` | `resume.ts` | Set `graduated` (YYYY-MM) only; the owner does not publish the study span. `period` stays optional for other entries |
 | `SkillGroup` | `skills.ts` | `icon` must be an `IconName`; `logo` must exist under `assets/logos/` |
 
 ### Case-study Markdown
