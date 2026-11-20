@@ -378,6 +378,178 @@ const summary = await this.openai.chat.completions.create({
     },
 
     // ── Personal ──────────────────────────────────────────────────
+    // VERIFY: copied from plan-werewolf-discord-portfolio.md using the §1 defaults. Owner has not
+    // line-reviewed the wording. Omitted: source link (private repo), featured, gallery, Markdown
+    // case study, outcomes (no confirmed live game). ADR-004 is still Proposed — see V-15.
+    {
+        slug: 'werewolf-discord',
+        title: 'Werewolf Discord Bot',
+        type: 'personal',
+        summary:
+            'A Discord bot that moderates Werewolf games in a channel: lobby, secret roles, night actions, votes and win checks.',
+        context:
+            'Personal project. Where Moonlight helps a human game master, this bot replaces one: the whole game runs inside a Discord channel.',
+        role: 'Author',
+        period: { start: '2026-11' },
+        stack: [
+            'Node.js 24',
+            'TypeScript',
+            'discord.js 14',
+            'MongoDB 8',
+            'Redis 8',
+            'BullMQ',
+            'zod',
+            'Vitest',
+            'Testcontainers',
+            'Docker Compose',
+        ],
+        highlights: [
+            'The bot is the moderator: it runs lobby, role reveal, night, day discussion, vote and win check without a human game master.',
+            'Private information stays private: roles, Seer results and Witch choices go through ephemeral messages, never the public channel.',
+            'Game logic is a pure TypeScript domain (state machine, roles, rules) with no Discord or database imports, so a full game plays in a unit test.',
+            'Phase timers are BullMQ delayed jobs with idempotent ids; live state sits in Redis behind a per-game lock and version check, with MongoDB snapshots for recovery.',
+            'An owner console tunes player limits, phase durations and the role deck at runtime, validated against the written rules before saving.',
+            'Built with AI coding agents under an SSoT doc system: 14 numbered business rules, ADRs and a test named after every rule.',
+        ],
+        cover: cover('werewolf-discord'),
+        metrics: [
+            { value: '7', label: 'Roles, 5–12 players' },
+            { value: '14', label: 'Business rules, each with a test' },
+            { value: '9', label: 'Game states in one state machine' },
+            { value: '2', label: 'Languages: English, Vietnamese' },
+        ],
+        problem:
+            'Werewolf needs a moderator who cannot play, has to keep every role and night action secret, and has to time phases and count votes without mistakes. On Discord the group also shares one public channel, so secrets are easy to leak.',
+        flow: {
+            summary:
+                'One game per channel. Each phase ends early when everyone has acted, otherwise on its timer; the win check runs after every night and every vote.',
+            steps: [
+                'Create lobby',
+                'Players join',
+                'Roles dealt in private',
+                'Night actions',
+                'Witch / Hunter turn',
+                'Dawn report',
+                'Discussion',
+                'Lynch vote',
+                'Win check',
+            ],
+        },
+        techStack: [
+            {
+                layer: 'Bot',
+                items: [
+                    {
+                        name: 'Node.js 24 · TypeScript (strict, ESM)',
+                        purpose: 'One bot service: Discord gateway, use cases, workers and HTTP',
+                    },
+                    {
+                        name: 'discord.js 14',
+                        purpose: 'Slash commands, buttons, select menus and ephemeral replies',
+                    },
+                    { name: 'zod', purpose: 'Validates environment config and owner console input' },
+                ],
+            },
+            {
+                layer: 'State & timers',
+                items: [
+                    {
+                        name: 'Redis 8 · ioredis',
+                        purpose: 'Live game state with a version number, per-game lock, rate limits',
+                    },
+                    {
+                        name: 'BullMQ',
+                        purpose: 'Phase timers as delayed jobs that survive restarts and never fire twice',
+                    },
+                    {
+                        name: 'MongoDB 8 · Mongoose',
+                        purpose: 'Game snapshots, history, player stats and the tunable rule set',
+                    },
+                ],
+            },
+            {
+                layer: 'Operations',
+                items: [
+                    {
+                        name: 'Docker Compose',
+                        purpose: 'Bot, MongoDB and Redis on one machine; separate dev and prod projects',
+                    },
+                    { name: 'pino · prom-client', purpose: 'JSON logs, /healthz, /readyz and /metrics' },
+                ],
+            },
+            {
+                layer: 'Testing',
+                items: [
+                    { name: 'Vitest', purpose: 'Unit tests for the domain, one per business rule' },
+                    {
+                        name: 'Testcontainers',
+                        purpose: 'Integration tests against real MongoDB and Redis in CI',
+                    },
+                    {
+                        name: 'GitHub Actions',
+                        purpose: 'Typecheck, lint, format, tests and build on every pull request',
+                    },
+                ],
+            },
+        ],
+        decisions: [
+            {
+                title: 'Pure domain, injected time and randomness',
+                context:
+                    'Werewolf rules have many interactions (Guard, Witch, Elder, Hunter) and must be tested without Discord or databases.',
+                decision:
+                    'Hexagonal layering: the domain is a state machine with no I/O; clock and random numbers come in through ports, and adapters depend on the domain, never the reverse.',
+                rationale:
+                    'A seeded random port replays the same game in tests, and every business rule has a test named after its id.',
+            },
+            {
+                title: 'One writer per game',
+                context: 'Several players click vote or night-action buttons at the same moment.',
+                decision:
+                    'Every change goes through one path: take a Redis lock for the game, load, apply the pure domain step, save with a version check, then schedule timers and post messages.',
+                rationale:
+                    'Concurrent clicks cannot overwrite each other, and a failed side effect (timer, message) never turns a valid action into an error.',
+            },
+            {
+                title: 'Timers as idempotent jobs',
+                context: 'Phases end on timers that must survive a restart and must not fire twice.',
+                decision:
+                    'Each phase end is a BullMQ delayed job with id game:round:phase. The worker re-checks the current phase before advancing; on boot the bot restores missing state and timers from MongoDB.',
+                rationale: 'Stale or duplicate jobs do nothing, and a restart mid-game does not lose the timer.',
+            },
+            {
+                // VERIFY: ADR-004 status is Proposed in the source repo. V-15.
+                title: 'Rules in code, numbers in a console',
+                context: 'The owner wanted to tune games without code changes, but role abilities are logic, not data.',
+                decision:
+                    'Split rules in two: abilities, night order, voting and win conditions stay in code; player limits, durations and the role deck are stored in MongoDB and edited in a small server-rendered console on localhost, validated against the written ranges.',
+                rationale:
+                    'No rule engine to maintain, and a bad value cannot be saved. Changes apply only to games created afterwards.',
+            },
+        ],
+        codeSamples: [
+            {
+                title: 'The single write path',
+                language: 'TypeScript',
+                // Verbatim excerpt from werewolf-discord/src/application/services/game-runner.ts (mutateGame).
+                code: `  return deps.lock.runExclusive(\`game:\${gameId}\`, async () => {
+    const stored = await deps.games.findById(gameId);
+    if (!stored) return err({ code: 'GAME_NOT_FOUND' });
+    const now = deps.clock.now();
+    const result = mutation(stored.state, now);
+    if (!result.ok) return result;
+    const update = advanceIfComplete(deps, result.value, now);
+    await commit(deps, stored.state, stored.version, update);
+    return ok(update);
+  });`,
+                note: 'Every action and every timer goes through this function: lock, load, pure domain step, version-checked save. Timers, stats and Discord messages run after the save and only log on failure.',
+            },
+        ],
+        retrospective: [
+            'Next: crash recovery tested end to end, backups and observability targets (phase P3), then a v1.0.0 release in a real guild.',
+            'Later: automatic mute for dead players (needs extra Discord permissions), per-guild settings through a slash command, and more roles.',
+        ],
+    },
     {
         slug: 'compact-ui-kit',
         title: 'Compact UI Kit',

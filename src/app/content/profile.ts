@@ -16,6 +16,7 @@ export const PROFILE: Profile = {
     portrait: 'assets/images/avatar_about_me.jpg',
     socials: [
         { id: 'github', label: 'GitHub', url: 'https://github.com/hai15021999' },
+        { id: 'linkedin', label: 'LinkedIn', url: 'https://www.linkedin.com/in/casbersolution/' },
         { id: 'facebook', label: 'Facebook', url: 'https://fb.com/cabsapphire' },
         { id: 'instagram', label: 'Instagram', url: 'https://www.instagram.com/hiamcasber' },
     ],

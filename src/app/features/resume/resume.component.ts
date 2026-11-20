@@ -19,6 +19,8 @@ export class ResumeComponent {
     readonly resume = RESUME;
     readonly years = yearsSince(PROFILE.careerStart);
     readonly github = PROFILE.socials.find((s) => s.id === 'github');
+    readonly linkedin = PROFILE.socials.find((s) => s.id === 'linkedin');
+    readonly linkedinLabel = this.linkedin?.url.replace(/^https:\/\/(www\.)?/, '').replace(/\/$/, '');
 
     readonly experience = RESUME.experience.map((item) => ({
         ...item,

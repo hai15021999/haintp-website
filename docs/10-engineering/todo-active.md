@@ -1,6 +1,6 @@
 # Active TODOs
 
-> Status: Active · Last updated: 2026-11-19 · Owner: Hai Nguyen
+> Status: Active · Last updated: 2026-11-20 · Owner: Hai Nguyen
 
 Single list of open work. Agents add rows for anything they could not finish or verify; the owner prioritizes.
 
@@ -20,7 +20,7 @@ Single list of open work. Agents add rows for anything they could not finish or 
 | V-12 | **Security:** public repo `LotoAppBackEnd` contains an RSA private key (`config/casber_vm_key.pem`), `utils/.env` with `JWT_SECRET`, and manager credentials in `data/manager.mjs`. Revoke/rotate them, purge from git history, then add the backend link to `bingo-game` | GitHub repo | High |
 | V-13 | RAG chatbot shows a code excerpt from private repo `openai-chat` (Appvity work). Confirm it may be published, else remove `codeSamples` | `projects.ts` (`rag-chatbot`) | High |
 | V-14 | Owner details added 2026-11-19 for Bonsai, Helpdesk, Admin portal, Microservices. Still open: Bonsai role — keep "project lead · design"?; Bonsai period; what numbering-service and webhook-service do; Helpdesk/Admin portal periods and the purpose of each technology (sidebar tags kept until then) | `projects.ts` | Medium |
-| V-8 | Add LinkedIn URL if any (`SocialLink.id = 'linkedin'` already supported) | `profile.ts` | Low |
+| V-15 | Werewolf Discord Bot entry used plan defaults (2026-11-20) because Q1–Q10 were not answered. Confirm wording. Still open: public source link (omitted; repo private); `featured` (off, so About stays valuation-platform, excel-taskpane-addin, compact-ui-kit); outcomes (omitted — no confirmed live game or player counts); gallery (omitted); Markdown case study (omitted); skills/resume (untouched). Decision "Rules in code, numbers in a console" is published while ADR-004 is still Proposed. Q5 asked for one decision like Valuation Platform, but the plan did not supply that sentence, so only the highlight was added. | `projects.ts` (`werewolf-discord`) | Medium |
 
 ## Engineering
 
@@ -36,6 +36,8 @@ Single list of open work. Agents add rows for anything they could not finish or 
 
 ## Done (2026-11-18 restructure)
 
+- 2026-11-20: LinkedIn added to `PROFILE.socials` (owner-supplied URL) and shown on the resume; V-8 closed.
+- 2026-11-20: Werewolf Discord Bot added to the portfolio (`werewolf-discord`), first in the Personal group, with cover SVG. Open owner checks are V-15.
 - 2026-11-19: Education shows only the graduation date (owner request); V-4 (start year) closed — no longer shown.
 
 - SSoT docs created (`docs/`).

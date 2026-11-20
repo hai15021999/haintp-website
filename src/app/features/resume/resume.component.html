@@ -92,6 +92,12 @@
                             <a class="ui-link" [href]="github.url" target="_blank" rel="noopener noreferrer">{{ github.url.replace('https://', '') }}</a>
                         </li>
                     }
+                    @if (linkedin) {
+                        <li>
+                            <app-icon name="linkedin" [size]="14" />
+                            <a class="ui-link" [href]="linkedin.url" target="_blank" rel="noopener noreferrer">{{ linkedinLabel }}</a>
+                        </li>
+                    }
                     <li>
                         <app-icon name="mail" [size]="14" />
                         <a class="ui-link" [href]="'mailto:' + profile.email">{{ profile.email }}</a>
